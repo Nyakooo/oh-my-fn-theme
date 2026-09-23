@@ -59,6 +59,11 @@ html.omf-login-page .omf-login-panel {
   -webkit-backdrop-filter: blur(25px) saturate(125%) !important;
 }
 
+html.omf-login-page .omf-login-panel > img,
+html.omf-login-page .omf-login-panel > p.mt-5.select-none {
+  display: none !important;
+}
+
 html.omf-login-page .omf-brand-intro {
   margin: 0 0 1.8rem !important;
   color: #f4f7fc !important;
