@@ -33,7 +33,8 @@ h1 { margin-bottom: 5px; font-size: 24px; font-weight: 650; letter-spacing: -.03
 h2 { margin: 0; font-size: 18px; font-weight: 620; letter-spacing: -.02em; }
 .section-copy { max-width: 660px; margin-bottom: 18px; color: #a1aec1; font-size: 13px; line-height: 1.7; }
 .status-dot, .preview-tag { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid rgb(255 255 255 / 8%); border-radius: 999px; color: #aab5c5; font-size: 11px; white-space: nowrap; }
-.status-dot span { width: 6px; height: 6px; border-radius: 50%; background: #86daca; box-shadow: 0 0 10px rgb(134 218 202 / 55%); }
+.status-indicator { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: #86daca; box-shadow: 0 0 10px rgb(134 218 202 / 55%); }
+.status-dot #site-access-state { width: auto; height: auto; border-radius: 0; background: none; box-shadow: none; }
 .preview-tag { color: #8f9db2; }
 .theme-toggle { position: relative; display: flex; align-items: center; gap: 12px; margin: 19px 0 3px; padding: 13px 14px; border: 1px solid rgb(130 223 207 / 16%); border-radius: 12px; background: rgb(130 223 207 / 4%); cursor: pointer; }
 .theme-toggle input { position: absolute; width: 1px; height: 1px; opacity: 0; }
