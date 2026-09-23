@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Oh My fnOS Theme",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "为你手动确认的 fnOS 地址自动应用轻量登录主题。",
   "permissions": ["scripting", "storage"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],

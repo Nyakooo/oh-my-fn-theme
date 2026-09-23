@@ -145,13 +145,23 @@
 
   const beginObserving = () => {
     if (observer) return;
-    observer = new MutationObserver(queueRefresh);
+    observer = new MutationObserver((records) => {
+      const pageChanged = records.some((record) => {
+        const ownPanelStyle =
+          record.type === "attributes" &&
+          record.attributeName === "style" &&
+          record.target instanceof Element &&
+          record.target.classList.contains("omf-login-panel");
+        return !ownPanelStyle;
+      });
+      if (pageChanged) queueRefresh();
+    });
     observer.observe(document.documentElement, {
       childList: true,
       subtree: true,
       characterData: true,
       attributes: true,
-      attributeFilter: ["href", "rel"]
+      attributeFilter: ["class", "style", "href", "rel"]
     });
   };
 
