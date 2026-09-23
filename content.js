@@ -37,6 +37,10 @@
   const getPasswordField = () =>
     document.querySelector('input[type="password"], input[autocomplete="current-password"]');
 
+  const updateTextIfChanged = (element, value) => {
+    if (element && element.textContent !== value) element.textContent = value;
+  };
+
   const findLoginPanel = (passwordField) => {
     const form = passwordField.closest("form") || passwordField.parentElement;
     if (!form) return null;
@@ -90,9 +94,9 @@
       panel.insertBefore(intro, panel.firstChild);
     } else {
       const intro = panel.querySelector(":scope > .omf-brand-intro");
-      intro.querySelector(".omf-brand-name").textContent = currentBrand.title;
-      intro.querySelector("h1").textContent = currentBrand.heading;
-      intro.querySelector("p").textContent = currentBrand.subtitle;
+      updateTextIfChanged(intro.querySelector(".omf-brand-name"), currentBrand.title);
+      updateTextIfChanged(intro.querySelector("h1"), currentBrand.heading);
+      updateTextIfChanged(intro.querySelector("p"), currentBrand.subtitle);
     }
   };
 
