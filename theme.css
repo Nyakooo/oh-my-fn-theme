@@ -15,6 +15,11 @@ html.omf-login-page body {
   font-family: Inter, "SF Pro Display", "Segoe UI", "PingFang SC", sans-serif !important;
 }
 
+/* fnOS renders its login wallpaper as an inline background on this full-screen wrapper. */
+html.omf-login-page .login-form {
+  background: transparent !important;
+}
+
 html.omf-login-page body::before,
 html.omf-login-page body::after {
   position: fixed;
