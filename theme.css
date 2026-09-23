@@ -36,7 +36,7 @@ html.omf-login-page body::after {
 html.omf-login-page body::before {
   top: -16rem;
   left: -8rem;
-  background: var(--omf-accent, #82dfcf);
+  background: #82dfcf;
 }
 
 html.omf-login-page body::after {
@@ -64,37 +64,6 @@ html.omf-login-page .omf-login-panel > p.mt-5.select-none {
   display: none !important;
 }
 
-html.omf-login-page .omf-brand-intro {
-  margin: 0 0 1.8rem !important;
-  color: #f4f7fc !important;
-}
-
-html.omf-login-page .omf-brand-name {
-  display: inline-block;
-  margin-bottom: 1.35rem;
-  color: var(--omf-accent, #82dfcf) !important;
-  font-size: 0.76rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase;
-}
-
-html.omf-login-page .omf-brand-intro h1 {
-  margin: 0 0 0.55rem !important;
-  color: #f7f9ff !important;
-  font-size: clamp(1.65rem, 4vw, 2.15rem) !important;
-  font-weight: 620 !important;
-  letter-spacing: -0.035em !important;
-  line-height: 1.2 !important;
-}
-
-html.omf-login-page .omf-brand-intro p {
-  margin: 0 !important;
-  color: #aebbd0 !important;
-  font-size: 0.92rem !important;
-  line-height: 1.5 !important;
-}
-
 html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]) {
   box-sizing: border-box !important;
   min-height: 46px !important;
@@ -106,8 +75,8 @@ html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="rad
 }
 
 html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):focus {
-  border-color: var(--omf-accent, #82dfcf) !important;
-  outline: 3px solid color-mix(in srgb, var(--omf-accent, #82dfcf) 22%, transparent) !important;
+  border-color: #82dfcf !important;
+  outline: 3px solid rgb(130 223 207 / 22%) !important;
 }
 
 html.omf-login-page .omf-login-panel button[type="submit"],
@@ -115,7 +84,7 @@ html.omf-login-page .omf-login-panel input[type="submit"] {
   min-height: 46px !important;
   border: 0 !important;
   border-radius: 11px !important;
-  background: linear-gradient(110deg, var(--omf-accent, #82dfcf), #91a9ff) !important;
+  background: linear-gradient(110deg, #82dfcf, #91a9ff) !important;
   color: #101d2b !important;
   font: inherit !important;
   font-weight: 700 !important;

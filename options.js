@@ -4,9 +4,6 @@ const SITE_KEY = "fnosSites";
 const BRAND_KEY = "fnosBrand";
 const DEFAULT_BRAND = {
   title: "我的 NAS",
-  heading: "欢迎回来",
-  subtitle: "登录你的私人空间",
-  accent: "#82dfcf",
   favicon: "",
   enabled: true
 };
@@ -17,10 +14,6 @@ const siteMessage = document.getElementById("site-message");
 const siteList = document.getElementById("site-list");
 const siteAccessState = document.getElementById("site-access-state");
 const titleInput = document.getElementById("brand-title");
-const headingInput = document.getElementById("brand-heading");
-const subtitleInput = document.getElementById("brand-subtitle");
-const accentInput = document.getElementById("brand-accent");
-const accentValue = document.getElementById("accent-value");
 const faviconInput = document.getElementById("brand-favicon");
 const faviconName = document.getElementById("favicon-name");
 const faviconPreview = document.getElementById("favicon-preview");
@@ -65,6 +58,27 @@ async function getSites() {
 
 async function saveSites(sites) {
   await chrome.storage.local.set({ [SITE_KEY]: sites });
+}
+
+function normalizeBrand(brand = {}) {
+  return {
+    title: typeof brand.title === "string" ? brand.title : DEFAULT_BRAND.title,
+    favicon: typeof brand.favicon === "string" ? brand.favicon : "",
+    enabled: brand.enabled !== false
+  };
+}
+
+async function getBrand() {
+  const { [BRAND_KEY]: stored = {} } = await chrome.storage.local.get(BRAND_KEY);
+  const brand = normalizeBrand(stored);
+  if (stored.heading !== undefined || stored.subtitle !== undefined || stored.accent !== undefined) {
+    await chrome.storage.local.set({ [BRAND_KEY]: brand });
+  }
+  return brand;
+}
+
+async function saveBrand(brand) {
+  await chrome.storage.local.set({ [BRAND_KEY]: normalizeBrand(brand) });
 }
 
 async function registerSiteScript(site) {
@@ -175,21 +189,12 @@ siteInput.addEventListener("input", () => {
 });
 
 async function loadBrand() {
-  const { [BRAND_KEY]: stored = {} } = await chrome.storage.local.get(BRAND_KEY);
-  const brand = { ...DEFAULT_BRAND, ...stored };
+  const brand = await getBrand();
   titleInput.value = brand.title;
-  headingInput.value = brand.heading;
-  subtitleInput.value = brand.subtitle;
-  accentInput.value = /^#[\da-f]{6}$/i.test(brand.accent) ? brand.accent : DEFAULT_BRAND.accent;
-  accentValue.textContent = accentInput.value.toUpperCase();
   faviconName.textContent = brand.favicon ? "已使用自定义图标" : "使用默认图标";
   faviconPreview.src = brand.favicon || "assets/icon.svg";
   themeEnabled.checked = brand.enabled !== false;
 }
-
-accentInput.addEventListener("input", () => {
-  accentValue.textContent = accentInput.value.toUpperCase();
-});
 
 faviconInput.addEventListener("change", async () => {
   const file = faviconInput.files?.[0];
@@ -212,8 +217,8 @@ faviconInput.addEventListener("change", async () => {
     reader.onerror = () => reject(new Error("读取图标失败"));
     reader.readAsDataURL(file);
   });
-  const { [BRAND_KEY]: oldBrand = {} } = await chrome.storage.local.get(BRAND_KEY);
-  await chrome.storage.local.set({ [BRAND_KEY]: { ...DEFAULT_BRAND, ...oldBrand, favicon: dataUrl } });
+  const brand = await getBrand();
+  await saveBrand({ ...brand, favicon: dataUrl });
   faviconName.textContent = file.name;
   faviconPreview.src = dataUrl;
   setMessage(brandMessage, "图标已保存。");
@@ -222,8 +227,8 @@ faviconInput.addEventListener("change", async () => {
 document.getElementById("choose-favicon").addEventListener("click", () => faviconInput.click());
 
 document.getElementById("reset-favicon").addEventListener("click", async () => {
-  const { [BRAND_KEY]: oldBrand = {} } = await chrome.storage.local.get(BRAND_KEY);
-  await chrome.storage.local.set({ [BRAND_KEY]: { ...DEFAULT_BRAND, ...oldBrand, favicon: "" } });
+  const brand = await getBrand();
+  await saveBrand({ ...brand, favicon: "" });
   faviconInput.value = "";
   faviconName.textContent = "使用默认图标";
   faviconPreview.src = "assets/icon.svg";
@@ -231,23 +236,17 @@ document.getElementById("reset-favicon").addEventListener("click", async () => {
 });
 
 document.getElementById("save-brand").addEventListener("click", async () => {
-  const { [BRAND_KEY]: oldBrand = {} } = await chrome.storage.local.get(BRAND_KEY);
-  await chrome.storage.local.set({
-    [BRAND_KEY]: {
-      ...DEFAULT_BRAND,
-      ...oldBrand,
-      title: titleInput.value.trim() || DEFAULT_BRAND.title,
-      heading: headingInput.value.trim() || DEFAULT_BRAND.heading,
-      subtitle: subtitleInput.value.trim() || DEFAULT_BRAND.subtitle,
-      accent: accentInput.value,
-      enabled: themeEnabled.checked
-    }
+  const brand = await getBrand();
+  await saveBrand({
+    ...brand,
+    title: titleInput.value.trim() || DEFAULT_BRAND.title,
+    enabled: themeEnabled.checked
   });
   setMessage(brandMessage, "外观设置已保存，已打开的 fnOS 页面会自动更新。");
 });
 
 document.getElementById("reset-brand").addEventListener("click", async () => {
-  await chrome.storage.local.set({ [BRAND_KEY]: { ...DEFAULT_BRAND } });
+  await saveBrand(DEFAULT_BRAND);
   await loadBrand();
   setMessage(brandMessage, "外观设置已恢复默认。");
 });

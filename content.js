@@ -3,9 +3,6 @@
 
   const DEFAULT_BRAND = {
     title: "我的 NAS",
-    heading: "欢迎回来",
-    subtitle: "登录你的私人空间",
-    accent: "#82dfcf",
     favicon: "",
     enabled: true
   };
@@ -21,15 +18,8 @@
   let originalIconHref;
   let iconCreatedByTheme = false;
 
-  const normalizeAccent = (value) =>
-    typeof value === "string" && /^#[\da-f]{6}$/i.test(value) ? value : DEFAULT_BRAND.accent;
-
   const getPasswordField = () =>
     document.querySelector('input[type="password"], input[autocomplete="current-password"]');
-
-  const updateTextIfChanged = (element, value) => {
-    if (element && element.textContent !== value) element.textContent = value;
-  };
 
   const findLoginPanel = (passwordField) => {
     const form = passwordField.closest("form") || passwordField.parentElement;
@@ -56,7 +46,6 @@
       document.body?.classList.remove("omf-login-page");
       document.querySelectorAll(".omf-login-panel").forEach((node) => {
         node.classList.remove("omf-login-panel");
-        node.style.removeProperty("--omf-accent");
       });
       document.querySelectorAll(".omf-brand-intro").forEach((node) => node.remove());
       return;
@@ -68,26 +57,7 @@
     document.documentElement.classList.add("omf-login-page");
     document.body?.classList.add("omf-login-page");
     panel.classList.add("omf-login-panel");
-    panel.style.setProperty("--omf-accent", currentBrand.accent);
-
-    if (!panel.querySelector(":scope > .omf-brand-intro")) {
-      const intro = document.createElement("header");
-      intro.className = "omf-brand-intro";
-      const eyebrow = document.createElement("span");
-      eyebrow.className = "omf-brand-name";
-      eyebrow.textContent = currentBrand.title;
-      const heading = document.createElement("h1");
-      heading.textContent = currentBrand.heading;
-      const subtitle = document.createElement("p");
-      subtitle.textContent = currentBrand.subtitle;
-      intro.append(eyebrow, heading, subtitle);
-      panel.insertBefore(intro, panel.firstChild);
-    } else {
-      const intro = panel.querySelector(":scope > .omf-brand-intro");
-      updateTextIfChanged(intro.querySelector(".omf-brand-name"), currentBrand.title);
-      updateTextIfChanged(intro.querySelector("h1"), currentBrand.heading);
-      updateTextIfChanged(intro.querySelector("p"), currentBrand.subtitle);
-    }
+    document.querySelectorAll(".omf-brand-intro").forEach((node) => node.remove());
   };
 
   const applyBranding = () => {
@@ -113,7 +83,6 @@
     document.body?.classList.remove("omf-login-page");
     document.querySelectorAll(".omf-login-panel").forEach((node) => {
       node.classList.remove("omf-login-panel");
-      node.style.removeProperty("--omf-accent");
     });
     document.querySelectorAll(".omf-brand-intro").forEach((node) => node.remove());
     if (originalTitle !== null) document.title = originalTitle;
@@ -161,8 +130,7 @@
     if (!Array.isArray(fnosSites) || !fnosSites.some((site) => site.origin === location.origin)) return;
     currentBrand = {
       ...DEFAULT_BRAND,
-      ...fnosBrand,
-      accent: normalizeAccent(fnosBrand.accent)
+      ...fnosBrand
     };
 
     if (currentBrand.enabled) {
@@ -184,7 +152,6 @@
       }
       if (changes.fnosBrand) {
         currentBrand = { ...DEFAULT_BRAND, ...changes.fnosBrand.newValue };
-        currentBrand.accent = normalizeAccent(currentBrand.accent);
         if (!currentBrand.enabled) {
           stop();
           return;

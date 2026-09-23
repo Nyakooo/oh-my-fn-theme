@@ -43,8 +43,8 @@
       <section class="panel theme-panel" aria-labelledby="theme-heading">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">LOGIN BRANDING</p>
-            <h2 id="theme-heading">登录页品牌</h2>
+            <p class="eyebrow">LOGIN THEME</p>
+            <h2 id="theme-heading">登录页主题与标签</h2>
           </div>
           <span class="preview-tag">预览设置</span>
         </div>
@@ -52,15 +52,7 @@
         <div class="fields">
           <label>浏览器标签标题
             <input id="brand-title" maxlength="40" value="我的 NAS">
-          </label>
-          <label>登录页问候语
-            <input id="brand-heading" maxlength="40" value="欢迎回来">
-          </label>
-          <label class="wide">辅助文案
-            <input id="brand-subtitle" maxlength="80" value="登录你的私人空间">
-          </label>
-          <label>主题强调色
-            <span class="color-field"><input id="brand-accent" type="color" value="#82dfcf"><code id="accent-value">#82DFCF</code></span>
+            <small class="field-hint">只修改浏览器标签，不会显示在登录表单上方。</small>
           </label>
           <label>Favicon 图标
             <span class="file-field"><img id="favicon-preview" src="assets/icon.svg" alt="图标预览"><input id="brand-favicon" type="file" accept="image/png,image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/webp"><span id="favicon-name">使用默认图标</span><button id="choose-favicon" class="text-button" type="button">选择文件</button><button id="reset-favicon" class="text-button" type="button">恢复默认</button></span>
@@ -71,7 +63,7 @@
           <button id="reset-brand" class="button secondary" type="button">恢复默认</button>
           <span id="brand-message" class="message" role="status" aria-live="polite"></span>
         </div>
-        <p class="fine-print">Beta 仅调整登录页视觉与浏览器标签品牌，登录表单和认证请求保持 fnOS 原样。</p>
+        <p class="fine-print">仅调整登录页视觉、浏览器标签标题与 favicon；不在表单上方添加额外文案，登录表单和认证请求保持 fnOS 原样。</p>
       </section>
 
       <footer>Oh My fnOS Theme <span>·</span> 本地运行，不连接外部服务</footer>
