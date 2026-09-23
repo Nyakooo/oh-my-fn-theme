@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN" class="omf-login-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="fnOS">
+    <title>fnOS · 登录页视觉预览</title>
+    <link rel="icon" href="assets/icon.svg">
+    <link rel="stylesheet" href="theme.css">
+    <style>
+      body { margin: 0; }
+      .preview-shell { display: grid; min-height: 100vh; place-items: center; padding: 32px 18px; }
+      .preview-card { width: min(100%, 410px); }
+      .demo-logo { display: grid; width: 46px; height: 46px; place-items: center; margin-bottom: 25px; border: 1px solid rgb(255 255 255 / 12%); border-radius: 15px; background: linear-gradient(145deg, #17263a, #101827); color: #91e1d4; font-size: 19px; font-weight: 750; }
+      .demo-fields { display: grid; gap: 15px; }
+      .demo-fields label { display: grid; gap: 7px; color: #b9c5d6; font-size: 12px; }
+      .demo-fields input { width: 100%; padding: 0 13px; }
+      .demo-options { display: flex; align-items: center; justify-content: space-between; color: #9fadc0; font-size: 11px; }
+      .demo-options label { display: flex; align-items: center; gap: 7px; }
+      .demo-options input { accent-color: #82dfcf; }
+      .demo-fields button { margin-top: 3px; }
+      .demo-caption { margin-top: 18px; color: #8190a6; font-size: 11px; text-align: center; }
+      .preview-note { position: fixed; right: 18px; bottom: 16px; color: #76849a; font: 11px/1.5 Inter, "Segoe UI", sans-serif; }
+    </style>
+  </head>
+  <body class="omf-login-page">
+    <main class="preview-shell">
+      <section class="omf-login-panel preview-card" style="--omf-accent:#82dfcf">
+        <div class="demo-logo" aria-hidden="true">M</div>
+        <header class="omf-brand-intro">
+          <span class="omf-brand-name">MY PRIVATE CLOUD</span>
+          <h1>欢迎回来</h1>
+          <p>登录你的私人空间</p>
+        </header>
+        <form class="demo-fields">
+          <label>账号
+            <input type="text" autocomplete="username" placeholder="输入用户名">
+          </label>
+          <label>密码
+            <input type="password" autocomplete="current-password" placeholder="输入密码">
+          </label>
+          <div class="demo-options">
+            <label><input type="checkbox"> 保持登录</label>
+            <a href="#help">需要帮助？</a>
+          </div>
+          <button type="submit">登录 fnOS</button>
+        </form>
+        <p class="demo-caption">私人文件 · 设备 · 服务</p>
+      </section>
+    </main>
+    <div class="preview-note">概念预览 · 此页面不会连接或登录 NAS</div>
+  </body>
+</html>

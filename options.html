@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oh My fnOS Theme</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div class="brand-mark" aria-hidden="true">M</div>
+        <div>
+          <p class="eyebrow">BETA · LOCAL BROWSER THEME</p>
+          <h1>Oh My fnOS</h1>
+          <p class="lede">只在你确认的 fnOS 地址上运行，不修改 NAS 系统。</p>
+        </div>
+      </header>
+
+      <section class="panel site-panel" aria-labelledby="site-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SITE ACCESS</p>
+            <h2 id="site-heading">确认 NAS 地址</h2>
+          </div>
+          <span class="status-dot"><span></span><span id="site-access-state">默认无站点权限</span></span>
+        </div>
+        <p class="section-copy">手动填写 fnOS 的完整访问地址。添加后，插件只会在已授权地址自动识别 fnOS 页面。</p>
+        <form id="site-form" class="site-form">
+          <label class="sr-only" for="site-input">fnOS 地址</label>
+          <input id="site-input" name="site" type="url" placeholder="http://192.168.1.20:5666" autocomplete="url" required>
+          <button class="button primary" type="submit">确认地址并授权</button>
+        </form>
+        <p id="site-preview" class="site-preview" aria-live="polite">支持 http / https、域名或局域网 IP，可包含端口。</p>
+        <p id="site-message" class="message" role="status" aria-live="polite"></p>
+        <div id="site-list" class="site-list" aria-label="已确认地址"></div>
+        <details class="permission-note">
+          <summary>此站点权限允许什么？</summary>
+          <p>安装时不授予任何 NAS 站点权限。确认地址后，浏览器会询问是否允许插件访问该地址；拒绝后不会注入。插件只读取页面标题和可见页面结构来识别 fnOS，不读取或传输登录信息。</p>
+        </details>
+      </section>
+
+      <section class="panel theme-panel" aria-labelledby="theme-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LOGIN BRANDING</p>
+            <h2 id="theme-heading">登录页品牌</h2>
+          </div>
+          <span class="preview-tag">预览设置</span>
+        </div>
+        <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用登录主题</strong><small>在已确认地址自动应用，关闭后恢复原始页面</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
+        <div class="fields">
+          <label>浏览器标签标题
+            <input id="brand-title" maxlength="40" value="我的 NAS">
+          </label>
+          <label>登录页问候语
+            <input id="brand-heading" maxlength="40" value="欢迎回来">
+          </label>
+          <label class="wide">辅助文案
+            <input id="brand-subtitle" maxlength="80" value="登录你的私人空间">
+          </label>
+          <label>主题强调色
+            <span class="color-field"><input id="brand-accent" type="color" value="#82dfcf"><code id="accent-value">#82DFCF</code></span>
+          </label>
+          <label>Favicon 图标
+            <span class="file-field"><img id="favicon-preview" src="assets/icon.svg" alt="图标预览"><input id="brand-favicon" type="file" accept="image/png,image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/webp"><span id="favicon-name">使用默认图标</span><button id="choose-favicon" class="text-button" type="button">选择文件</button><button id="reset-favicon" class="text-button" type="button">恢复默认</button></span>
+          </label>
+        </div>
+        <div class="actions">
+          <button id="save-brand" class="button primary" type="button">保存外观</button>
+          <button id="reset-brand" class="button secondary" type="button">恢复默认</button>
+          <span id="brand-message" class="message" role="status" aria-live="polite"></span>
+        </div>
+        <p class="fine-print">Beta 仅调整登录页视觉与浏览器标签品牌，登录表单和认证请求保持 fnOS 原样。</p>
+      </section>
+
+      <footer>Oh My fnOS Theme <span>·</span> 本地运行，不连接外部服务</footer>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

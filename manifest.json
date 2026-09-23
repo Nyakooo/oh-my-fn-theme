@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Oh My fnOS Theme",
+  "version": "0.1.0",
+  "description": "为你手动确认的 fnOS 地址自动应用轻量登录主题。",
+  "permissions": ["scripting", "storage"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Oh My fnOS Theme",
+    "default_popup": "options.html"
+  }
+}

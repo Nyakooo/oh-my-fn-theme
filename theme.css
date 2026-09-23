@@ -1,0 +1,139 @@
+html.omf-login-page,
+html.omf-login-page body {
+  min-height: 100% !important;
+}
+
+html.omf-login-page body {
+  position: relative !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+  background:
+    radial-gradient(ellipse at 14% 16%, rgb(62 166 157 / 24%), transparent 35%),
+    radial-gradient(ellipse at 88% 84%, rgb(89 109 190 / 24%), transparent 34%),
+    linear-gradient(138deg, #0b1320 0%, #111d2d 52%, #12182a 100%) !important;
+  color: #f4f7fc !important;
+  font-family: Inter, "SF Pro Display", "Segoe UI", "PingFang SC", sans-serif !important;
+}
+
+html.omf-login-page body::before,
+html.omf-login-page body::after {
+  position: fixed;
+  z-index: 0;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.18;
+}
+
+html.omf-login-page body::before {
+  top: -16rem;
+  left: -8rem;
+  background: var(--omf-accent, #82dfcf);
+}
+
+html.omf-login-page body::after {
+  right: -14rem;
+  bottom: -17rem;
+  background: #7b91f4;
+}
+
+html.omf-login-page .omf-login-panel {
+  position: relative !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+  padding: clamp(2rem, 5vw, 3.1rem) !important;
+  border: 1px solid rgb(255 255 255 / 12%) !important;
+  border-radius: 26px !important;
+  background: rgb(17 28 44 / 80%) !important;
+  box-shadow: 0 28px 90px rgb(0 0 0 / 34%), inset 0 1px rgb(255 255 255 / 7%) !important;
+  color: #f4f7fc !important;
+  backdrop-filter: blur(25px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(125%) !important;
+}
+
+html.omf-login-page .omf-brand-intro {
+  margin: 0 0 1.8rem !important;
+  color: #f4f7fc !important;
+}
+
+html.omf-login-page .omf-brand-name {
+  display: inline-block;
+  margin-bottom: 1.35rem;
+  color: var(--omf-accent, #82dfcf) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase;
+}
+
+html.omf-login-page .omf-brand-intro h1 {
+  margin: 0 0 0.55rem !important;
+  color: #f7f9ff !important;
+  font-size: clamp(1.65rem, 4vw, 2.15rem) !important;
+  font-weight: 620 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.2 !important;
+}
+
+html.omf-login-page .omf-brand-intro p {
+  margin: 0 !important;
+  color: #aebbd0 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.5 !important;
+}
+
+html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]) {
+  box-sizing: border-box !important;
+  min-height: 46px !important;
+  border: 1px solid rgb(255 255 255 / 14%) !important;
+  border-radius: 11px !important;
+  background: rgb(7 14 25 / 45%) !important;
+  color: #f7f9ff !important;
+  font: inherit !important;
+}
+
+html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):focus {
+  border-color: var(--omf-accent, #82dfcf) !important;
+  outline: 3px solid color-mix(in srgb, var(--omf-accent, #82dfcf) 22%, transparent) !important;
+}
+
+html.omf-login-page .omf-login-panel button[type="submit"],
+html.omf-login-page .omf-login-panel input[type="submit"] {
+  min-height: 46px !important;
+  border: 0 !important;
+  border-radius: 11px !important;
+  background: linear-gradient(110deg, var(--omf-accent, #82dfcf), #91a9ff) !important;
+  color: #101d2b !important;
+  font: inherit !important;
+  font-weight: 700 !important;
+  box-shadow: 0 9px 24px rgb(70 153 151 / 20%) !important;
+  cursor: pointer !important;
+}
+
+html.omf-login-page .omf-login-panel label,
+html.omf-login-page .omf-login-panel a {
+  color: #c2ccdc !important;
+}
+
+@media (max-width: 600px) {
+  html.omf-login-page .omf-login-panel {
+    width: min(100% - 1.5rem, 28rem) !important;
+    margin: 0.75rem auto !important;
+    padding: 1.65rem !important;
+    border-radius: 21px !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.omf-login-page .omf-login-panel {
+    animation: omf-login-arrive 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+  }
+
+  @keyframes omf-login-arrive {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
