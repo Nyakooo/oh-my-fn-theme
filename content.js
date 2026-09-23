@@ -14,9 +14,6 @@
     encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#82dfcf"/><stop offset="1" stop-color="#7b9dff"/></linearGradient></defs><rect width="64" height="64" rx="19" fill="#111b2b"/><path d="M13 45V19h8l11 14 11-14h8v26h-9V32L32 43 22 32v13z" fill="url(#g)"/></svg>'
     );
-  const BRAND_MARKERS = /fn\s?os|fnnas|飞牛|飞牛私有云/i;
-
-  let fnosConfirmed = false;
   let currentBrand = DEFAULT_BRAND;
   let observerQueued = false;
   let observer = null;
@@ -26,13 +23,6 @@
 
   const normalizeAccent = (value) =>
     typeof value === "string" && /^#[\da-f]{6}$/i.test(value) ? value : DEFAULT_BRAND.accent;
-
-  const getFnOSFingerprint = () => {
-    const title = document.title || "";
-    const metaName = document.querySelector('meta[name="application-name"]')?.content || "";
-    const bodyText = document.body?.innerText?.slice(0, 4000) || "";
-    return BRAND_MARKERS.test(`${title} ${metaName} ${bodyText}`);
-  };
 
   const getPasswordField = () =>
     document.querySelector('input[type="password"], input[autocomplete="current-password"]');
@@ -101,9 +91,6 @@
   };
 
   const applyBranding = () => {
-    if (!fnosConfirmed && getFnOSFingerprint()) fnosConfirmed = true;
-    if (!fnosConfirmed) return;
-
     if (originalTitle === null) originalTitle = document.title;
     if (document.title !== currentBrand.title) document.title = currentBrand.title;
     const iconHref = currentBrand.favicon || DEFAULT_FAVICON;
