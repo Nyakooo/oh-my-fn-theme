@@ -9,10 +9,9 @@ html.omf-login-page body {
   min-height: 100vh !important;
   overflow-x: hidden !important;
   background:
-    radial-gradient(ellipse at 9% 18%, rgb(112 152 130 / 34%), transparent 39%),
-    radial-gradient(ellipse at 88% 81%, rgb(198 143 112 / 24%), transparent 38%),
-    radial-gradient(ellipse at 65% 16%, rgb(104 142 150 / 15%), transparent 34%),
-    linear-gradient(130deg, #1b2b31 0%, #15232a 54%, #202c30 100%) !important;
+    radial-gradient(ellipse at 8% 25%, rgb(112 152 130 / 20%), transparent 35%),
+    radial-gradient(ellipse at 84% 78%, rgb(198 143 112 / 13%), transparent 33%),
+    linear-gradient(130deg, #1b2b31, #15232a 54%, #202c30) !important;
   color: #26353a !important;
   font-family: "Avenir Next", Avenir, Inter, "Segoe UI", "PingFang SC", sans-serif !important;
 }
@@ -27,7 +26,7 @@ html.omf-login-page body::after {
   content: "";
   pointer-events: none;
   filter: blur(82px);
-  opacity: .48;
+  opacity: .34;
 }
 
 html.omf-login-page body::before {
@@ -42,28 +41,221 @@ html.omf-login-page body::after {
   background: radial-gradient(circle, rgb(222 164 127 / 58%), rgb(151 111 101 / 22%) 48%, transparent 72%);
 }
 
-/* fnOS paints its wallpaper on this full-screen wrapper. Keep the page backdrop visible. */
+/* fnOS paints its wallpaper on this full-screen wrapper. Let the theme stage own the composition. */
 html.omf-login-page .login-form {
   position: relative !important;
-  z-index: 1 !important;
   min-height: 100vh !important;
   background: transparent !important;
 }
+
+html.omf-login-page .omf-login-stage,
+html.omf-login-page .omf-login-stage * {
+  box-sizing: border-box !important;
+}
+
+html.omf-login-page .omf-login-stage {
+  position: relative !important;
+  z-index: 1 !important;
+  display: grid !important;
+  width: min(1240px, calc(100% - 88px)) !important;
+  min-height: 100vh !important;
+  grid-template-columns: minmax(0, 1.1fr) minmax(370px, .9fr) !important;
+  align-items: center !important;
+  gap: clamp(38px, 7vw, 104px) !important;
+  margin: 0 auto !important;
+  padding: 44px 0 38px !important;
+  isolation: isolate !important;
+  color: #f8f2e5 !important;
+  font-family: "Avenir Next", Avenir, Inter, "Segoe UI", "PingFang SC", sans-serif !important;
+}
+
+html.omf-login-page .omf-welcome-side {
+  position: relative !important;
+  display: flex !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 10px 0 !important;
+}
+
+html.omf-login-page .omf-brand-lockup {
+  display: inline-flex !important;
+  width: fit-content !important;
+  align-items: center !important;
+  gap: 11px !important;
+  color: #f4ebd7 !important;
+  font-size: 15px !important;
+  font-weight: 720 !important;
+  letter-spacing: .035em !important;
+}
+
+html.omf-login-page .omf-brand-icon {
+  display: grid !important;
+  width: 34px !important;
+  height: 34px !important;
+  place-items: center !important;
+  border: 1px solid rgb(255 255 255 / 10%) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(145deg, #253842, #1d2e34) !important;
+  color: #b7cfac !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+}
+
+html.omf-login-page .omf-brand-lockup i {
+  margin-left: 5px !important;
+  color: #8fac9a !important;
+  font-size: 9px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: .18em !important;
+  vertical-align: 2px !important;
+}
+
+html.omf-login-page .omf-welcome-copy {
+  position: relative !important;
+  z-index: 1 !important;
+  margin: clamp(38px, 6vh, 66px) 0 -5px 16px !important;
+}
+
+html.omf-login-page .omf-eyebrow,
+html.omf-login-page .omf-card-heading > p:first-child {
+  margin: 0 !important;
+  color: #9ab8a5 !important;
+  font-size: 9px !important;
+  font-weight: 760 !important;
+  letter-spacing: .21em !important;
+}
+
+html.omf-login-page .omf-eyebrow {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+}
+
+html.omf-login-page .omf-eyebrow > span {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #bdcc9c !important;
+  box-shadow: 0 0 12px rgb(189 204 156 / 65%) !important;
+}
+
+html.omf-login-page .omf-welcome-copy h1 {
+  margin: 17px 0 12px !important;
+  color: #f5eedf !important;
+  font-family: "Iowan Old Style", "Baskerville", "Noto Serif CJK SC", "Songti SC", serif !important;
+  font-size: clamp(39px, 4.5vw, 59px) !important;
+  font-weight: 520 !important;
+  letter-spacing: .01em !important;
+  line-height: 1.25 !important;
+}
+
+html.omf-login-page .omf-welcome-copy h1 em {
+  color: #d9c39b !important;
+  font-style: normal !important;
+}
+
+html.omf-login-page .omf-welcome-description {
+  margin: 0 !important;
+  color: #9dada7 !important;
+  font-size: 13px !important;
+  line-height: 1.95 !important;
+  letter-spacing: .025em !important;
+}
+
+html.omf-login-page .omf-room-art {
+  position: relative !important;
+  width: min(100%, 680px) !important;
+  margin: -16px 0 -4px -21px !important;
+}
+
+html.omf-login-page .omf-room-svg {
+  display: block !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+html.omf-login-page .omf-room-svg [tabindex="0"] {
+  cursor: pointer !important;
+  outline: none !important;
+  transform-box: fill-box !important;
+  transform-origin: center !important;
+}
+
+html.omf-login-page .omf-rice-hit { transition: transform .24s cubic-bezier(.2,.9,.3,1.4) !important; }
+html.omf-login-page .omf-rice-hit:hover { transform: translateY(-5px) rotate(-2deg) !important; }
+html.omf-login-page .omf-rice-hit.is-bopping { animation: omf-rice-bop .5s cubic-bezier(.3,.8,.3,1.3) !important; }
+html.omf-login-page .omf-plant-hit:hover { transform: rotate(-3deg) !important; }
+html.omf-login-page .omf-moon-halo { transition: opacity .2s !important; }
+html.omf-login-page .omf-moon-hit:hover .omf-moon-halo { opacity: .42 !important; }
+html.omf-login-page .omf-chopsticks-hit.is-wiggling { animation: omf-chopstick-wiggle .35s ease-in-out 2 !important; }
+html.omf-login-page .omf-sparkle { opacity: 0 !important; transform-box: fill-box !important; transform-origin: center !important; }
+html.omf-login-page .omf-room-art.is-sparkling .omf-sparkle { animation: omf-sparkle-in .8s ease both !important; }
+html.omf-login-page .omf-room-art.is-sparkling .omf-sparkle-two { animation-delay: .12s !important; }
+
+html.omf-login-page .omf-art-caption {
+  fill: #a2b0a5 !important;
+  font: 11px "Avenir Next", Avenir, sans-serif !important;
+  letter-spacing: .1em !important;
+  text-anchor: middle !important;
+}
+
+html.omf-login-page .omf-art-message {
+  position: absolute !important;
+  right: 10% !important;
+  bottom: 8% !important;
+  padding: 8px 13px !important;
+  border: 1px solid rgb(224 207 168 / 15%) !important;
+  border-radius: 999px !important;
+  background: rgb(25 39 42 / 82%) !important;
+  color: #cfceb2 !important;
+  font-size: 10px !important;
+  letter-spacing: .035em !important;
+  opacity: 0 !important;
+  transform: translateY(5px) !important;
+  transition: opacity .22s, transform .22s !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+html.omf-login-page .omf-art-message.is-visible { opacity: 1 !important; transform: translateY(0) !important; }
+html.omf-login-page .omf-welcome-footer { display: flex !important; align-items: center !important; gap: 9px !important; margin: 0 0 0 17px !important; color: #83968e !important; font-size: 10px !important; letter-spacing: .08em !important; }
+html.omf-login-page .omf-welcome-footer span,
+html.omf-login-page .omf-welcome-footer b { color: #c1a77f !important; font-weight: 400 !important; }
+
+html.omf-login-page .omf-login-card {
+  width: min(100%, 416px) !important;
+  justify-self: center !important;
+  padding: 31px 34px 21px !important;
+  border: 1px solid rgb(248 242 229 / 75%) !important;
+  border-radius: 25px !important;
+  background: linear-gradient(150deg, #fff9ec 0%, #f5efdf 100%) !important;
+  box-shadow: 0 28px 80px rgb(4 13 16 / 30%), 0 5px 18px rgb(4 13 16 / 12%), inset 0 1px #fff !important;
+  color: #26353a !important;
+}
+
+html.omf-login-page .omf-card-topline { display: flex !important; align-items: center !important; justify-content: space-between !important; }
+html.omf-login-page .omf-status-pill { display: inline-flex !important; min-height: 24px !important; align-items: center !important; gap: 7px !important; padding: 0 9px !important; border: 1px solid #dde5d7 !important; border-radius: 999px !important; background: #f0f4e9 !important; color: #647b69 !important; font-size: 8px !important; font-weight: 760 !important; letter-spacing: .14em !important; }
+html.omf-login-page .omf-status-pill i { width: 5px !important; height: 5px !important; border-radius: 50% !important; background: #81a889 !important; box-shadow: 0 0 6px #91bb94 !important; }
+html.omf-login-page .omf-lock-mark { display: grid !important; width: 27px !important; height: 27px !important; place-items: center !important; border: 1px solid #e5ddcb !important; border-radius: 9px !important; color: #849285 !important; font-size: 17px !important; }
+html.omf-login-page .omf-card-heading { margin: 29px 0 22px !important; }
+html.omf-login-page .omf-card-heading > p:first-child { color: #a4a18b !important; font-size: 8px !important; letter-spacing: .18em !important; }
+html.omf-login-page .omf-card-heading h2 { margin: 8px 0 6px !important; color: #2b3939 !important; font-family: "Iowan Old Style", "Baskerville", "Noto Serif CJK SC", "Songti SC", serif !important; font-size: 27px !important; font-weight: 570 !important; letter-spacing: .015em !important; }
+html.omf-login-page .omf-card-heading > span { color: #8e9689 !important; font-size: 11px !important; letter-spacing: .02em !important; }
+html.omf-login-page .omf-native-slot { min-width: 0 !important; }
 
 html.omf-login-page .omf-login-panel {
   position: relative !important;
   z-index: 1 !important;
   box-sizing: border-box !important;
-  width: min(100% - 2rem, 26rem) !important;
-  margin: auto !important;
-  padding: 31px 34px 24px !important;
-  border: 1px solid rgb(248 242 229 / 78%) !important;
-  border-radius: 25px !important;
-  background: linear-gradient(150deg, #fff9ec 0%, #f5efdf 100%) !important;
-  box-shadow:
-    0 28px 80px rgb(4 13 16 / 32%),
-    0 5px 18px rgb(4 13 16 / 14%),
-    inset 0 1px #fff !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   color: #26353a !important;
 }
 
@@ -71,6 +263,9 @@ html.omf-login-page .omf-login-panel > img,
 html.omf-login-page .omf-login-panel > p.mt-5.select-none {
   display: none !important;
 }
+
+html.omf-login-page .omf-login-panel .semi-form-field,
+html.omf-login-page .omf-login-panel [class*="form-field"] { margin-bottom: 14px !important; }
 
 html.omf-login-page .omf-login-panel .semi-input-wrapper {
   box-sizing: border-box !important;
@@ -102,14 +297,18 @@ html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="rad
 }
 
 html.omf-login-page .omf-login-panel .semi-input::placeholder,
-html.omf-login-page .omf-login-panel input::placeholder {
-  color: #a4a99c !important;
-}
+html.omf-login-page .omf-login-panel input::placeholder { color: #a4a99c !important; }
+html.omf-login-page .omf-login-panel label,
+html.omf-login-page .omf-login-panel a,
+html.omf-login-page .omf-login-panel .semi-form-field-label { color: #68766f !important; }
+html.omf-login-page .omf-login-panel input[type="checkbox"] { accent-color: #819f89 !important; }
 
 html.omf-login-page .omf-login-panel button[type="submit"],
 html.omf-login-page .omf-login-panel input[type="submit"] {
   box-sizing: border-box !important;
+  width: 100% !important;
   min-height: 48px !important;
+  margin-top: 8px !important;
   border: 1px solid #779581 !important;
   border-radius: 12px !important;
   background: linear-gradient(105deg, #88aa91, #809a87) !important;
@@ -122,38 +321,52 @@ html.omf-login-page .omf-login-panel input[type="submit"] {
 }
 
 html.omf-login-page .omf-login-panel button[type="submit"]:not(:disabled):not(.semi-button-disabled):hover,
-html.omf-login-page .omf-login-panel input[type="submit"]:not(:disabled):hover {
-  filter: brightness(1.055) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 10px 20px rgb(93 126 99 / 27%), inset 0 1px rgb(255 255 255 / 36%) !important;
-}
-
+html.omf-login-page .omf-login-panel input[type="submit"]:not(:disabled):hover { filter: brightness(1.055) !important; transform: translateY(-1px) !important; box-shadow: 0 10px 20px rgb(93 126 99 / 27%), inset 0 1px rgb(255 255 255 / 36%) !important; }
 html.omf-login-page .omf-login-panel button[type="submit"]:disabled,
 html.omf-login-page .omf-login-panel button[type="submit"].semi-button-disabled,
-html.omf-login-page .omf-login-panel input[type="submit"]:disabled {
-  border-color: #b9c7b9 !important;
-  background: linear-gradient(105deg, #a9bbaa, #a4b2a5) !important;
-  color: #fffdf4 !important;
-  box-shadow: 0 4px 12px rgb(72 101 77 / 12%), inset 0 1px rgb(255 255 255 / 34%) !important;
-  cursor: not-allowed !important;
+html.omf-login-page .omf-login-panel input[type="submit"]:disabled { border-color: #b9c7b9 !important; background: linear-gradient(105deg, #a9bbaa, #a4b2a5) !important; color: #fffdf4 !important; box-shadow: 0 4px 12px rgb(72 101 77 / 12%), inset 0 1px rgb(255 255 255 / 34%) !important; cursor: not-allowed !important; }
+
+html.omf-login-page .omf-card-bottom { display: flex !important; align-items: center !important; justify-content: center !important; gap: 7px !important; margin-top: 11px !important; padding-top: 17px !important; border-top: 1px solid #e8e3d5 !important; color: #9ca192 !important; font-size: 9px !important; letter-spacing: .03em !important; }
+html.omf-login-page .omf-card-bottom > span,
+html.omf-login-page .omf-card-bottom > b { color: #b0a889 !important; font-size: 11px !important; font-weight: 400 !important; }
+html.omf-login-page .omf-card-bottom > b { color: #c5ae81 !important; font-size: 9px !important; }
+
+@keyframes omf-rice-bop { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-15px) rotate(-7deg); } 68% { transform: translateY(2px) rotate(3deg); } }
+@keyframes omf-chopstick-wiggle { 0%,100% { transform: rotate(0); } 35% { transform: rotate(5deg); } 70% { transform: rotate(-4deg); } }
+@keyframes omf-sparkle-in { 0% { opacity: 0; transform: scale(.4) rotate(-28deg); } 35% { opacity: 1; transform: scale(1.15) rotate(5deg); } 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.75); } }
+
+@media (max-width: 940px) {
+  html.omf-login-page .omf-login-stage { width: min(100% - 48px, 760px) !important; grid-template-columns: minmax(0, 1fr) minmax(320px, .86fr) !important; gap: 26px !important; }
+  html.omf-login-page .omf-welcome-copy { margin-left: 8px !important; }
+  html.omf-login-page .omf-welcome-copy h1 { font-size: clamp(35px, 5vw, 48px) !important; }
+  html.omf-login-page .omf-room-art { width: 112% !important; margin-left: -8% !important; }
+  html.omf-login-page .omf-welcome-footer { margin-left: 8px !important; }
+  html.omf-login-page .omf-login-card { padding-right: 25px !important; padding-left: 25px !important; }
 }
 
-html.omf-login-page .omf-login-panel label,
-html.omf-login-page .omf-login-panel a {
-  color: #68766f !important;
+@media (max-width: 700px) {
+  html.omf-login-page body { overflow-y: auto !important; }
+  html.omf-login-page .login-form { min-height: auto !important; }
+  html.omf-login-page .omf-login-stage { display: flex !important; width: min(100% - 38px, 460px) !important; min-height: 100vh !important; flex-direction: column !important; align-items: stretch !important; gap: 2px !important; padding: 26px 0 22px !important; }
+  html.omf-login-page .omf-welcome-copy { margin: 29px 0 -3px 4px !important; }
+  html.omf-login-page .omf-welcome-copy h1 { margin-top: 12px !important; font-size: 38px !important; }
+  html.omf-login-page .omf-welcome-description { font-size: 11px !important; line-height: 1.65 !important; }
+  html.omf-login-page .omf-room-art { width: min(100%, 460px) !important; align-self: center !important; margin: -3px 0 -13px !important; }
+  html.omf-login-page .omf-art-caption { font-size: 14px !important; }
+  html.omf-login-page .omf-art-message { right: 3% !important; bottom: 6% !important; font-size: 9px !important; }
+  html.omf-login-page .omf-welcome-footer { display: none !important; }
+  html.omf-login-page .omf-login-card { width: 100% !important; padding: 24px 22px 17px !important; border-radius: 22px !important; }
+  html.omf-login-page .omf-card-heading { margin: 22px 0 20px !important; }
+  html.omf-login-page .omf-card-heading h2 { font-size: 24px !important; }
+  html.omf-login-page .omf-card-bottom { margin-top: 6px !important; padding-top: 13px !important; }
 }
 
-html.omf-login-page .omf-login-panel input[type="checkbox"] {
-  accent-color: #819f89 !important;
-}
-
-@media (max-width: 600px) {
-  html.omf-login-page .omf-login-panel {
-    width: min(100% - 1.5rem, 28rem) !important;
-    margin: .75rem auto !important;
-    padding: 24px 22px 20px !important;
-    border-radius: 22px !important;
-  }
+@media (max-width: 380px) {
+  html.omf-login-page .omf-login-stage { width: calc(100% - 28px) !important; padding-top: 22px !important; }
+  html.omf-login-page .omf-welcome-copy { margin-top: 25px !important; }
+  html.omf-login-page .omf-welcome-copy h1 { font-size: 33px !important; }
+  html.omf-login-page .omf-room-art { width: 108% !important; margin-left: -4% !important; }
+  html.omf-login-page .omf-login-card { padding-right: 18px !important; padding-left: 18px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -165,4 +378,71 @@ html.omf-login-page .omf-login-panel input[type="checkbox"] {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* The default theme keeps only the fnOS form and a quiet, centered surface. */
+html.omf-login-page[data-omf-theme="minimal"] body {
+  background: #f4f5f3 !important;
+  color: #252a27 !important;
+  font-family: Inter, "Segoe UI", "PingFang SC", sans-serif !important;
+}
+
+html.omf-login-page[data-omf-theme="minimal"] body::before,
+html.omf-login-page[data-omf-theme="minimal"] body::after { content: none !important; }
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] {
+  display: grid !important;
+  width: min(100% - 40px, 420px) !important;
+  min-height: 100vh !important;
+  grid-template-columns: 1fr !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  gap: 0 !important;
+  padding: 32px 0 !important;
+  color: #252a27 !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card {
+  width: 100% !important;
+  padding: 30px !important;
+  border: 1px solid #e5e7e3 !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: 0 8px 28px rgb(30 38 32 / 6%) !important;
+  color: #252a27 !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper {
+  min-height: 46px !important;
+  border-color: #dfe2dd !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper:focus-within {
+  border-color: #747d75 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgb(80 92 82 / 9%) !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper .semi-input,
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+  min-height: 44px !important;
+  color: #282d29 !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"],
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"] {
+  min-height: 46px !important;
+  border-color: #303631 !important;
+  border-radius: 8px !important;
+  background: #303631 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 560px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] { width: min(100% - 28px, 420px) !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding: 24px 20px !important; }
 }

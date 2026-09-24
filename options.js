@@ -5,8 +5,10 @@ const BRAND_KEY = "fnosBrand";
 const DEFAULT_BRAND = {
   title: "我的 NAS",
   favicon: "",
-  enabled: true
+  enabled: true,
+  theme: "minimal"
 };
+const THEME_IDS = new Set(["minimal", "moonlit"]);
 const form = document.getElementById("site-form");
 const siteInput = document.getElementById("site-input");
 const sitePreview = document.getElementById("site-preview");
@@ -19,6 +21,7 @@ const faviconName = document.getElementById("favicon-name");
 const faviconPreview = document.getElementById("favicon-preview");
 const brandMessage = document.getElementById("brand-message");
 const themeEnabled = document.getElementById("theme-enabled");
+const themeChoices = [...document.querySelectorAll('input[name="login-theme"]')];
 let sitesCache = [];
 
 function scriptIdFor(origin) {
@@ -64,7 +67,8 @@ function normalizeBrand(brand = {}) {
   return {
     title: typeof brand.title === "string" ? brand.title : DEFAULT_BRAND.title,
     favicon: typeof brand.favicon === "string" ? brand.favicon : "",
-    enabled: brand.enabled !== false
+    enabled: brand.enabled !== false,
+    theme: THEME_IDS.has(brand.theme) ? brand.theme : DEFAULT_BRAND.theme
   };
 }
 
@@ -194,6 +198,7 @@ async function loadBrand() {
   faviconName.textContent = brand.favicon ? "已使用自定义图标" : "使用默认图标";
   faviconPreview.src = brand.favicon || "assets/icon.svg";
   themeEnabled.checked = brand.enabled !== false;
+  for (const choice of themeChoices) choice.checked = choice.value === brand.theme;
 }
 
 faviconInput.addEventListener("change", async () => {
@@ -240,7 +245,8 @@ document.getElementById("save-brand").addEventListener("click", async () => {
   await saveBrand({
     ...brand,
     title: titleInput.value.trim() || DEFAULT_BRAND.title,
-    enabled: themeEnabled.checked
+    enabled: themeEnabled.checked,
+    theme: themeChoices.find((choice) => choice.checked)?.value || DEFAULT_BRAND.theme
   });
   setMessage(brandMessage, "外观设置已保存，已打开的 fnOS 页面会自动更新。");
 });

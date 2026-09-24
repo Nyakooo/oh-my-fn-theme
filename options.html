@@ -49,6 +49,19 @@
           <span class="preview-tag">预览设置</span>
         </div>
         <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用登录主题</strong><small>在已确认地址自动应用，关闭后恢复原始页面</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
+        <fieldset class="theme-choices">
+          <legend>选择登录页主题</legend>
+          <label class="theme-choice">
+            <input type="radio" name="login-theme" value="minimal" checked>
+            <span class="theme-swatch minimal-swatch" aria-hidden="true"><i></i></span>
+            <span class="theme-choice-copy"><strong>极简</strong><small>干净留白、专注登录，默认主题</small></span>
+          </label>
+          <label class="theme-choice">
+            <input type="radio" name="login-theme" value="moonlit">
+            <span class="theme-swatch moonlit-swatch" aria-hidden="true"><i></i><b></b></span>
+            <span class="theme-choice-copy"><strong>月夜居所</strong><small>深色夜景、暖色卡片与互动插画</small></span>
+          </label>
+        </fieldset>
         <div class="fields">
           <label>浏览器标签标题
             <input id="brand-title" maxlength="40" value="我的 NAS">
@@ -63,7 +76,7 @@
           <button id="reset-brand" class="button secondary" type="button">恢复默认</button>
           <span id="brand-message" class="message" role="status" aria-live="polite"></span>
         </div>
-        <p class="fine-print">仅调整登录页视觉、浏览器标签标题与 favicon；不在表单上方添加额外文案，登录表单和认证请求保持 fnOS 原样。</p>
+        <p class="fine-print">主题只调整登录页视觉。登录表单和认证请求仍由 fnOS 处理。</p>
       </section>
 
       <footer>Oh My fnOS Theme <span>·</span> 本地运行，不连接外部服务</footer>
