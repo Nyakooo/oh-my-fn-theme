@@ -4,41 +4,153 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="application-name" content="fnOS">
+    <meta name="theme-color" content="#182633">
     <title>fnOS · 登录页视觉预览</title>
     <link rel="icon" href="assets/icon.svg">
     <link rel="stylesheet" href="theme.css">
-    <style>
-      body { margin: 0; }
-      .preview-shell { display: grid; min-height: 100vh; place-items: center; padding: 32px 18px; }
-      .preview-card { width: min(100%, 410px); }
-      .demo-fields { display: grid; gap: 15px; }
-      .demo-fields label { display: grid; gap: 7px; color: #b9c5d6; font-size: 12px; }
-      .demo-fields input { width: 100%; padding: 0 13px; }
-      .demo-options { display: flex; align-items: center; justify-content: space-between; color: #9fadc0; font-size: 11px; }
-      .demo-options label { display: flex; align-items: center; gap: 7px; }
-      .demo-options input { accent-color: #82dfcf; }
-      .demo-fields button { width: 100%; margin-top: 3px; }
-      .preview-note { position: fixed; right: 18px; bottom: 16px; color: #76849a; font: 11px/1.5 Inter, "Segoe UI", sans-serif; }
-    </style>
+    <link rel="stylesheet" href="preview.css">
   </head>
   <body class="omf-login-page">
-    <main class="preview-shell">
-      <section class="omf-login-panel preview-card">
-        <form class="demo-fields">
-          <label>账号
-            <input type="text" autocomplete="username" placeholder="输入用户名">
-          </label>
-          <label>密码
-            <input type="password" autocomplete="current-password" placeholder="输入密码">
-          </label>
-          <div class="demo-options">
-            <label><input type="checkbox"> 保持登录</label>
-            <a href="#help">需要帮助？</a>
+    <main class="login-scene">
+      <div class="sky-glow sky-glow--mint" aria-hidden="true"></div>
+      <div class="sky-glow sky-glow--peach" aria-hidden="true"></div>
+
+      <section class="welcome-side" aria-label="fnOS 登录欢迎画面">
+        <div class="brand-lockup">
+          <img src="assets/icon.svg" alt="" class="brand-icon">
+          <span>fnOS <i>HOME</i></span>
+        </div>
+
+        <div class="welcome-copy">
+          <p class="eyebrow"><span></span> YOUR LITTLE CORNER</p>
+          <h1>晚上好，<br><em>欢迎回家。</em></h1>
+          <p class="welcome-description">灯已经为你留好了。<br>登录，回到自己的小小宇宙。</p>
+        </div>
+
+        <div class="room-art" id="room-art" aria-label="可以点击插画里的小饭团和月亮">
+          <svg class="room-svg" viewBox="0 0 680 500" role="img" aria-labelledby="art-title art-description">
+            <title id="art-title">月光下的小小居所</title>
+            <desc id="art-description">一只饭团朋友在窗边守着温暖的家。点击饭团、月亮或盆栽看看会发生什么。</desc>
+            <defs>
+              <linearGradient id="window" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#263f4a"/>
+                <stop offset="1" stop-color="#172735"/>
+              </linearGradient>
+              <linearGradient id="rice" x1=".2" y1="0" x2=".75" y2="1">
+                <stop offset="0" stop-color="#fff9e9"/>
+                <stop offset="1" stop-color="#e7dfc9"/>
+              </linearGradient>
+              <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="180%">
+                <feGaussianBlur stdDeviation="11"/>
+              </filter>
+            </defs>
+            <ellipse cx="350" cy="444" rx="235" ry="24" fill="#08131b" opacity=".25" filter="url(#soft-shadow)"/>
+
+            <!-- window and night sky -->
+            <rect x="218" y="36" width="332" height="304" rx="118" fill="#101b24" opacity=".45"/>
+            <rect x="228" y="25" width="320" height="300" rx="112" fill="#dfb986"/>
+            <rect x="241" y="38" width="294" height="274" rx="100" fill="url(#window)"/>
+            <path d="M242 237c49-44 91-44 139-3 35-61 76-70 154-13v92H242z" fill="#38525a"/>
+            <path d="M242 260c52-27 89-26 132 1 50-49 102-40 161-7v59H242z" fill="#536d69"/>
+            <path d="M241 280c71-16 123-2 174 17 43-31 78-36 120-20v35H241z" fill="#81907d"/>
+            <path d="M388 39v269M242 175h291" stroke="#d9b986" stroke-width="8" opacity=".85"/>
+            <g fill="#e7ca96" opacity=".78">
+              <circle cx="288" cy="96" r="2.3"/><circle cx="329" cy="70" r="1.7"/><circle cx="473" cy="92" r="2"/>
+              <circle cx="451" cy="145" r="1.5"/><circle cx="293" cy="154" r="1.7"/><circle cx="507" cy="65" r="1.4"/>
+            </g>
+            <g class="moon-hit" tabindex="0" role="button" aria-label="轻轻点亮月亮">
+              <circle class="moon-halo" cx="465" cy="106" r="40" fill="#f2d9a8" opacity=".12"/>
+              <path d="M466 75a31 31 0 1 0 28 46 26 26 0 0 1-28-46z" fill="#f6dfac"/>
+              <path d="M466 75a31 31 0 1 0 28 46 26 26 0 0 1-28-46z" fill="transparent"/>
+            </g>
+
+            <!-- sill -->
+            <path d="M194 319h372l28 24H171z" fill="#d4a875"/>
+            <path d="M204 344h375l-23 23H225z" fill="#b9865e"/>
+
+            <!-- plant -->
+            <g class="plant-hit" tabindex="0" role="button" aria-label="摸摸窗边的小盆栽">
+              <path d="M153 310c-24-39-17-65-5-81 19 19 20 45 5 81zm6 1c-3-40 9-67 33-78 5 30-6 57-33 78zm-12-1c-25-20-34-41-30-64 25 13 37 36 30 64z" fill="#89a987"/>
+              <path d="M123 307h74l-8 47c-2 11-56 11-58 0z" fill="#c58567"/>
+              <ellipse cx="160" cy="307" rx="37" ry="9" fill="#d8a07b"/>
+              <path d="M134 320h52" stroke="#edc19a" stroke-width="3" opacity=".7"/>
+            </g>
+
+            <!-- table -->
+            <path d="M86 376c68-38 420-40 514 0l-26 29c-100-27-360-27-463 0z" fill="#af7958"/>
+            <path d="M111 402h449l-22 16H131z" fill="#815943"/>
+            <path d="M144 416l-17 70h21l23-67m315-2 19 69h-22l-24-66" fill="#855e47"/>
+            <path d="M88 376c62-31 410-34 512 0" fill="none" stroke="#e0ad7d" stroke-width="5" opacity=".8"/>
+
+            <!-- bowl -->
+            <ellipse cx="250" cy="376" rx="43" ry="12" fill="#d8c8a9"/>
+            <path d="M207 374c5 42 80 42 86 0z" fill="#e9dfc8"/>
+            <path d="M220 387c17 12 45 11 60-1" fill="none" stroke="#b4a487" stroke-width="3" opacity=".55"/>
+
+            <!-- rice-ball friend -->
+            <g class="rice-hit" tabindex="0" role="button" aria-label="戳一下飯團朋友">
+              <ellipse cx="386" cy="372" rx="57" ry="10" fill="#503d34" opacity=".18"/>
+              <path class="rice-body" d="M331 355c2-37 21-71 52-87 8-4 15-4 23 0 31 16 51 50 53 87-29 19-99 20-128 0z" fill="url(#rice)" stroke="#d9d0bd" stroke-width="3"/>
+              <path d="M374 329c3-7 8-7 11 0l-3 23h-6z" fill="#18232a"/>
+              <path d="M405 329c3-7 8-7 11 0l-3 23h-6z" fill="#18232a"/>
+              <path d="M389 350q5 5 10 0" fill="none" stroke="#b97862" stroke-width="2.5" stroke-linecap="round"/>
+              <ellipse cx="364" cy="347" rx="7" ry="4" fill="#e49a83" opacity=".65"/>
+              <ellipse cx="425" cy="347" rx="7" ry="4" fill="#e49a83" opacity=".65"/>
+              <path d="M373 361v15h38v-15" fill="#243b3a"/>
+              <path d="M376 363h32v11h-32z" fill="#324b44"/>
+              <path d="M385 366h3m8 0h3m-10 4h3m8 0h3" stroke="#e2d3b3" stroke-width="2" stroke-linecap="round"/>
+              <path d="M340 333q-16-17-22-3m138 2q17-17 22-2" fill="none" stroke="#d7cdb9" stroke-width="7" stroke-linecap="round"/>
+              <path class="sparkle sparkle-one" d="m324 285 4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#f3d5a0"/>
+              <path class="sparkle sparkle-two" d="m457 296 3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#a8d6c3"/>
+            </g>
+
+            <!-- chopsticks -->
+            <g class="chopsticks-hit" tabindex="0" role="button" aria-label="碰一下筷子">
+              <path d="m470 363 74-75m-64 82 74-75" stroke="#e1bd85" stroke-width="5" stroke-linecap="round"/>
+              <path d="m470 363 74-75m-64 82 74-75" stroke="#f1d5a5" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+            </g>
+            <text class="art-caption" x="341" y="466">点一点饭团，今晚会有好事发生</text>
+          </svg>
+          <div class="art-message" id="art-message" aria-live="polite">小饭团正在等你回家</div>
+        </div>
+
+        <div class="welcome-footer"><span class="tiny-star">✦</span> 一个温柔、安静的夜晚 <span>·</span> fnOS</div>
+      </section>
+
+      <section class="login-side" aria-label="登录">
+        <div class="login-card">
+          <div class="card-topline"><span class="status-pill"><i></i> HOME SERVER</span><span class="lock-mark" aria-hidden="true">⌑</span></div>
+          <div class="card-heading">
+            <p class="card-kicker">YOUR SPACE IS READY</p>
+            <h2>回到你的空间</h2>
+            <p>输入账户信息，继续今天的故事。</p>
           </div>
-          <button type="submit">登录 fnOS</button>
-        </form>
+          <form id="login-form" class="login-form" autocomplete="on">
+            <label class="field-label" for="account">账户</label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">◌</span>
+              <input id="account" name="username" type="text" autocomplete="username" placeholder="输入账户名称" required>
+            </div>
+            <div class="password-heading"><label class="field-label" for="password">密码</label></div>
+            <div class="input-wrap password-wrap">
+              <span class="input-icon password-icon" aria-hidden="true">⌑</span>
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="输入密码" required>
+              <button class="reveal-button" id="reveal-password" type="button" aria-label="显示密码" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.2-6 9.5-6 9.5 6 9.5 6-3.2 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/></svg>
+              </button>
+            </div>
+            <div class="form-options">
+              <label class="remember-option"><input type="checkbox" name="remember"><span class="custom-check" aria-hidden="true"></span><span>保持登录</span></label>
+              <span class="secure-note"><span>✦</span> 私人空间</span>
+            </div>
+            <button class="submit-button" type="submit"><span>登录 fnOS</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="card-bottom"><span class="key-icon" aria-hidden="true">⌘</span><span>你的数据，只属于你</span><span class="bottom-dot">✦</span></div>
+        </div>
+        <div class="preview-caption"><span class="caption-lock">⌑</span> 概念预览 · 不会连接或登录 NAS</div>
       </section>
     </main>
-    <div class="preview-note">概念预览 · 此页面不会连接或登录 NAS</div>
+    <script src="preview.js"></script>
   </body>
 </html>
