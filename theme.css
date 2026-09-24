@@ -8,9 +8,10 @@ html.omf-login-page body {
   min-height: 100vh !important;
   overflow-x: hidden !important;
   background:
-    radial-gradient(ellipse at 14% 16%, rgb(62 166 157 / 24%), transparent 35%),
-    radial-gradient(ellipse at 88% 84%, rgb(89 109 190 / 24%), transparent 34%),
-    linear-gradient(138deg, #0b1320 0%, #111d2d 52%, #12182a 100%) !important;
+    radial-gradient(ellipse at 18% 12%, rgb(103 230 216 / 27%), transparent 38%),
+    radial-gradient(ellipse at 86% 82%, rgb(113 135 255 / 31%), transparent 42%),
+    radial-gradient(ellipse at 55% 48%, rgb(73 103 170 / 20%), transparent 52%),
+    linear-gradient(145deg, #080d18 0%, #111a2b 48%, #080e1b 100%) !important;
   color: #f4f7fc !important;
   font-family: Inter, "SF Pro Display", "Segoe UI", "PingFang SC", sans-serif !important;
 }
@@ -24,39 +25,44 @@ html.omf-login-page body::before,
 html.omf-login-page body::after {
   position: fixed;
   z-index: 0;
-  width: 28rem;
-  height: 28rem;
+  width: min(38rem, 78vw);
+  height: min(38rem, 78vw);
   border-radius: 50%;
   content: "";
   pointer-events: none;
-  filter: blur(100px);
-  opacity: 0.18;
+  filter: blur(115px);
+  opacity: 0.24;
 }
 
 html.omf-login-page body::before {
-  top: -16rem;
-  left: -8rem;
-  background: #82dfcf;
+  top: -24rem;
+  left: -15rem;
+  background: radial-gradient(circle, rgb(86 231 216 / 80%), rgb(65 181 198 / 32%) 46%, transparent 72%);
 }
 
 html.omf-login-page body::after {
-  right: -14rem;
-  bottom: -17rem;
-  background: #7b91f4;
+  right: -22rem;
+  bottom: -25rem;
+  background: radial-gradient(circle, rgb(122 139 255 / 88%), rgb(98 94 207 / 35%) 48%, transparent 72%);
 }
 
 html.omf-login-page .omf-login-panel {
   position: relative !important;
   z-index: 1 !important;
+  isolation: isolate !important;
   box-sizing: border-box !important;
-  padding: clamp(2rem, 5vw, 3.1rem) !important;
-  border: 1px solid rgb(255 255 255 / 12%) !important;
-  border-radius: 26px !important;
-  background: rgb(17 28 44 / 80%) !important;
-  box-shadow: 0 28px 90px rgb(0 0 0 / 34%), inset 0 1px rgb(255 255 255 / 7%) !important;
+  padding: clamp(2rem, 5vw, 2.8rem) !important;
+  border: 1px solid rgb(255 255 255 / 25%) !important;
+  border-radius: 30px !important;
+  background: linear-gradient(145deg, rgb(255 255 255 / 16%), rgb(255 255 255 / 7%) 42%, rgb(255 255 255 / 4%)) !important;
+  box-shadow:
+    0 32px 90px rgb(0 0 0 / 42%),
+    0 8px 28px rgb(53 89 151 / 15%),
+    inset 0 1px rgb(255 255 255 / 42%),
+    inset 0 -1px rgb(255 255 255 / 6%) !important;
   color: #f4f7fc !important;
-  backdrop-filter: blur(25px) saturate(125%) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(125%) !important;
+  backdrop-filter: blur(34px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(34px) saturate(165%) !important;
 }
 
 html.omf-login-page .omf-login-panel > img,
@@ -66,43 +72,59 @@ html.omf-login-page .omf-login-panel > p.mt-5.select-none {
 
 html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]) {
   box-sizing: border-box !important;
-  min-height: 46px !important;
-  border: 1px solid rgb(255 255 255 / 14%) !important;
-  border-radius: 11px !important;
-  background: rgb(7 14 25 / 45%) !important;
+  min-height: 48px !important;
+  border: 1px solid rgb(255 255 255 / 17%) !important;
+  border-radius: 13px !important;
+  background: rgb(5 12 24 / 24%) !important;
   color: #f7f9ff !important;
   font: inherit !important;
+  box-shadow: inset 0 1px rgb(255 255 255 / 7%) !important;
 }
 
 html.omf-login-page .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):focus {
-  border-color: #82dfcf !important;
-  outline: 3px solid rgb(130 223 207 / 22%) !important;
+  border-color: rgb(182 236 255 / 76%) !important;
+  outline: 3px solid rgb(139 210 255 / 22%) !important;
+  box-shadow: inset 0 1px rgb(255 255 255 / 12%), 0 0 22px rgb(113 191 255 / 16%) !important;
 }
 
 html.omf-login-page .omf-login-panel button[type="submit"],
 html.omf-login-page .omf-login-panel input[type="submit"] {
-  min-height: 46px !important;
+  min-height: 48px !important;
   border: 0 !important;
-  border-radius: 11px !important;
-  background: linear-gradient(110deg, #82dfcf, #91a9ff) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(112deg, #9be9df 0%, #8acaf4 48%, #9faeff 100%) !important;
   color: #101d2b !important;
   font: inherit !important;
   font-weight: 700 !important;
-  box-shadow: 0 9px 24px rgb(70 153 151 / 20%) !important;
+  box-shadow: 0 10px 28px rgb(94 165 242 / 26%), inset 0 1px rgb(255 255 255 / 62%) !important;
   cursor: pointer !important;
+  transition: filter 180ms ease, transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+html.omf-login-page .omf-login-panel button[type="submit"]:hover,
+html.omf-login-page .omf-login-panel input[type="submit"]:hover {
+  filter: brightness(1.06) saturate(1.06) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 14px 32px rgb(94 165 242 / 32%), inset 0 1px rgb(255 255 255 / 68%) !important;
 }
 
 html.omf-login-page .omf-login-panel label,
 html.omf-login-page .omf-login-panel a {
-  color: #c2ccdc !important;
+  color: rgb(238 244 255 / 84%) !important;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.omf-login-page .omf-login-panel {
+    background: rgb(20 30 49 / 94%) !important;
+  }
 }
 
 @media (max-width: 600px) {
   html.omf-login-page .omf-login-panel {
     width: min(100% - 1.5rem, 28rem) !important;
     margin: 0.75rem auto !important;
-    padding: 1.65rem !important;
-    border-radius: 21px !important;
+    padding: 1.4rem !important;
+    border-radius: 25px !important;
   }
 }
 
