@@ -171,7 +171,7 @@ form.addEventListener("submit", async (event) => {
     }
 
     siteInput.value = "";
-    sitePreview.textContent = "已授权。刷新该 NAS 登录页后，主题会自动应用。";
+    sitePreview.textContent = "已授权。刷新 fnOS 页面后，登录外观会自动应用；选择月夜居所时也会调整 Dock。";
     setMessage(siteMessage, "地址已确认，自动应用已启用。");
     await renderSites();
   } catch (error) {

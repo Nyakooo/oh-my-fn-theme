@@ -18,6 +18,72 @@
   let nativePanel = null;
   let themeStage = null;
   let appliedTheme = null;
+  const dockMarks = new Map();
+
+  const hasClassSignature = (element, signature) => signature.every((name) => element.classList.contains(name));
+  const DOCK_ROOT_SIGNATURE = ["h-full", "rounded-md", "border", "backdrop-blur-[20px]"];
+  const DOCK_ITEM_SIGNATURE = ["flex", "h-10", "w-[47px]", "items-center", "justify-center"];
+  const DOCK_HOST_SIGNATURE = ["box-border", "size-full", "py-4", "pl-3.5"];
+  const DOCK_SCROLL_SIGNATURE = ["scrollbar-hidden", "absolute", "inset-0", "flex", "flex-col", "overflow-y-auto"];
+
+  const setDockMark = (element, mark) => {
+    if (!element.classList.contains(mark)) {
+      element.classList.add(mark);
+      const marks = dockMarks.get(element) || new Set();
+      marks.add(mark);
+      dockMarks.set(element, marks);
+    }
+  };
+
+  const clearDockTheme = () => {
+    dockMarks.forEach((marks, element) => marks.forEach((mark) => element.classList.remove(mark)));
+    dockMarks.clear();
+    delete document.documentElement.dataset.omfDock;
+    delete document.documentElement.dataset.omfDockTheme;
+  };
+
+  const applyDockTheme = () => {
+    const roots = [...document.querySelectorAll(".h-full.rounded-md.border")].filter((element) => hasClassSignature(element, DOCK_ROOT_SIGNATURE));
+    const dock = roots.map((root) => ({
+      root,
+      items: [...root.querySelectorAll(".flex.items-center.justify-center")].filter((element) => hasClassSignature(element, DOCK_ITEM_SIGNATURE))
+    })).find((candidate) => candidate.items.length > 0);
+
+    if (!dock) {
+      clearDockTheme();
+      return;
+    }
+
+    document.documentElement.dataset.omfDock = "on";
+    document.documentElement.dataset.omfDockTheme = THEMES.has(currentBrand.theme) ? currentBrand.theme : DEFAULT_BRAND.theme;
+    const activeDockElements = new Set([dock.root]);
+    setDockMark(dock.root, "omf-dock-root");
+    const host = dock.root.parentElement;
+    if (host && hasClassSignature(host, DOCK_HOST_SIGNATURE)) {
+      activeDockElements.add(host);
+      setDockMark(host, "omf-dock-host");
+    }
+
+    dock.items.forEach((item) => {
+      activeDockElements.add(item);
+      setDockMark(item, "omf-dock-item");
+    });
+    [...dock.root.querySelectorAll("*")].forEach((element) => {
+      if (hasClassSignature(element, DOCK_SCROLL_SIGNATURE)) {
+        activeDockElements.add(element);
+        setDockMark(element, "omf-dock-scroll");
+      }
+      else if (element.classList.contains("box-border") && element.classList.contains("flex") && element.classList.contains("flex-col") && element.classList.contains("py-3")) {
+        activeDockElements.add(element);
+        setDockMark(element, "omf-dock-stack");
+      }
+    });
+    dockMarks.forEach((marks, element) => {
+      if (activeDockElements.has(element)) return;
+      marks.forEach((mark) => element.classList.remove(mark));
+      dockMarks.delete(element);
+    });
+  };
 
   const getPasswordField = () =>
     document.querySelector('input[type="password"], input[autocomplete="current-password"]');
@@ -216,12 +282,14 @@
     if (originalIconHref === undefined) originalIconHref = iconCreatedByTheme ? null : icon.getAttribute("href");
     if (icon.getAttribute("href") !== iconHref) icon.setAttribute("href", iconHref);
     applyLoginTheme();
+    applyDockTheme();
   };
 
   const stop = () => {
     observer?.disconnect();
     observer = null;
     restoreNativePanel();
+    clearDockTheme();
     if (originalTitle !== null) document.title = originalTitle;
     const icon = document.querySelector('link[rel~="icon"]');
     if (iconCreatedByTheme) icon?.remove();

@@ -446,3 +446,124 @@ html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel inpu
   html.omf-login-page .omf-login-stage[data-theme="minimal"] { width: min(100% - 28px, 420px) !important; }
   html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding: 24px 20px !important; }
 }
+
+/* fnOS desktop Dock: decorate its native DOM in place and preserve its actions. */
+html[data-omf-dock-theme="moonlit"] .omf-dock-host {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-root {
+  box-sizing: border-box !important;
+  width: 42px !important;
+  max-width: 42px !important;
+  height: auto !important;
+  max-height: calc(100vh - 24px) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgb(255 255 255 / 10%) !important;
+  border-radius: 12px !important;
+  background: rgb(14 16 19 / 96%) !important;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 30%), inset 0 1px rgb(255 255 255 / 5%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+  transition: background .18s ease !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-root:hover {
+  background: rgb(18 20 23 / 97%) !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-stack {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  padding: 6px 2px !important;
+}
+html[data-omf-dock-theme="moonlit"] .omf-dock-root .relative.flex.flex-1.flex-col { min-height: 0 !important; flex: 0 0 auto !important; }
+html[data-omf-dock-theme="moonlit"] .omf-dock-scroll {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  max-height: calc(100vh - 190px) !important;
+  flex: 0 1 auto !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 5px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 0 !important;
+  scrollbar-width: none !important;
+}
+html[data-omf-dock-theme="moonlit"] .omf-dock-scroll::-webkit-scrollbar { display: none !important; }
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  flex: 0 0 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: #c3c8ce !important;
+  cursor: pointer !important;
+  transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s ease, border-color .18s ease, box-shadow .18s ease !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item:hover {
+  z-index: 2 !important;
+  border-color: rgb(255 255 255 / 8%) !important;
+  background: rgb(255 255 255 / 9%) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item:focus-visible {
+  outline: 2px solid #39a8ff !important;
+  outline-offset: 1px !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item.active,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"],
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"],
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"] {
+  border-color: rgb(255 255 255 / 25%) !important;
+  background: linear-gradient(145deg, #f5f6f7, #e8eaed) !important;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 23%), inset 0 1px #fff !important;
+  color: #32383e !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item.active::before,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"]::before,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"]::before,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"]::before {
+  position: absolute !important;
+  top: 50% !important;
+  display: none !important;
+  content: "" !important;
+  transform: translateY(-50%) !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item img,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item svg { max-width: 22px !important; max-height: 22px !important; }
+html[data-omf-dock-theme="moonlit"] .omf-dock-item [aria-label] { color: inherit !important; }
+
+@media (max-width: 620px) {
+  html[data-omf-dock-theme="moonlit"] .omf-dock-root { width: 42px !important; max-width: 42px !important; }
+  html[data-omf-dock-theme="moonlit"] .omf-dock-item { width: 36px !important; min-width: 36px !important; height: 36px !important; min-height: 36px !important; flex-basis: 36px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-omf-dock-theme="moonlit"] .omf-dock-root,
+  html[data-omf-dock-theme="moonlit"] .omf-dock-item { transition-duration: .01ms !important; }
+}

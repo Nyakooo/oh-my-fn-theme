@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#182633">
+    <title>fnOS · 归家桌面</title>
+    <link rel="icon" href="assets/icon.svg">
+    <link rel="stylesheet" href="internal-preview.css">
+    <link rel="stylesheet" href="theme.css">
+  </head>
+  <body>
+    <main class="desktop" id="desktop">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="fnOS 首页"><span class="brand-icon">M</span><span>fnOS</span><small>HOME</small></a>
+        <label class="global-search"><span aria-hidden="true">⌕</span><input id="global-search" type="search" placeholder="搜索文件、应用…" aria-label="搜索文件和应用"><kbd>⌘ K</kbd></label>
+        <div class="top-actions">
+          <span class="server-state"><i></i><span>私有空间在线</span></span>
+          <button class="icon-button notification-button" id="notifications" type="button" aria-label="查看通知" aria-expanded="false"><span aria-hidden="true">♧</span><i></i></button>
+          <button class="user-button" id="user-menu" type="button" aria-label="账户菜单"><span class="avatar">林</span><span class="user-name">林先生</span><span class="chevron">⌄</span></button>
+        </div>
+      </header>
+
+      <aside class="box-border size-full py-4 pl-3.5 dock-preview-host" aria-label="fnOS 桌面 Dock">
+        <div class="h-full rounded-md border border-[rgba(255,255,255,0.20)] bg-[var(--semi-color-fndesktop-navbarBg)] backdrop-blur-[20px]">
+          <div class="box-border flex h-full flex-col py-3">
+            <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="概览" aria-label="fnOS 桌面"><span class="nav-icon icon-home">⌂</span></button>
+            <div class="relative flex flex-1 flex-col">
+              <nav class="scrollbar-hidden absolute inset-0 flex flex-col items-end justify-start gap-2 overflow-y-auto pt-2" aria-label="应用">
+                <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item active" type="button" data-view="概览" aria-label="概览" title="概览"><span class="nav-icon icon-home">⌂</span></button>
+                <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="文件" aria-label="文件" title="文件"><span class="nav-icon icon-files">▤</span><span class="dock-badge">24</span></button>
+                <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="照片" aria-label="照片" title="照片"><span class="nav-icon icon-photos">◉</span></button>
+                <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="媒体" aria-label="媒体" title="媒体"><span class="nav-icon icon-media">▷</span></button>
+                <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="下载" aria-label="下载" title="下载"><span class="nav-icon icon-download">↓</span><i class="download-dot"></i></button>
+              </nav>
+            </div>
+            <div class="dock-bottom">
+              <span class="dock-separator"></span>
+              <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 nav-item" type="button" data-view="设置" aria-label="设置" title="系统设置"><span class="nav-icon">⚙</span></button>
+              <button class="flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="fnOS 在线" title="fnOS 在线"><span class="dock-status"></span></button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="workspace" aria-label="桌面概览">
+        <div class="page-heading">
+          <div><p class="breadcrumb"><span>我的空间</span><b>›</b> 概览</p><h1 id="page-title">晚上好，林先生 <span class="wave">✦</span></h1><p id="page-subtitle">灯为你留着，今天的文件也都安稳到家了。</p></div>
+          <div class="date-chip"><span>☼</span> 9月24日 星期四 <i>·</i> 21:08</div>
+        </div>
+
+        <section class="hero-grid" aria-label="欢迎和存储概况">
+          <article class="welcome-card">
+            <div class="welcome-orb orb-one"></div><div class="welcome-orb orb-two"></div>
+            <div class="hero-copy"><span class="soft-label"><i></i> 一切都很安静</span><h2>把重要的日常，<br><em>都收在这里。</em></h2><p>你的私人空间运行正常，随时可以继续。</p><button class="hero-action" type="button" data-action="browse-files">打开我的文件 <span>→</span></button></div>
+            <button class="mascot-scene" id="mascot" type="button" aria-label="和小饭团打个招呼"><span class="scene-moon"></span><span class="scene-window"><i></i><b></b></span><span class="scene-hill hill-back"></span><span class="scene-hill hill-front"></span><span class="scene-table"></span><span class="scene-mascot"><i class="rice-eyes"></i><b></b></span><span class="scene-plant"><i></i><b></b></span><span class="scene-sparkle sparkle-a">✦</span><span class="scene-sparkle sparkle-b">✧</span></button>
+            <span class="hero-footnote">你的家 · 只属于你 <i>✦</i></span>
+          </article>
+
+          <article class="storage-card">
+            <div class="panel-heading"><div><span class="panel-eyebrow">STORAGE</span><h2>存储空间</h2></div><button class="more-button" type="button" aria-label="存储空间选项">···</button></div>
+            <div class="storage-visual"><div class="storage-ring"><div><strong>38<span>%</span></strong><small>已使用</small></div></div><div class="storage-total"><strong>4.6 <small>TB</small></strong><span>共 12 TB</span></div></div>
+            <div class="storage-bar" role="progressbar" aria-label="存储空间使用量" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+            <div class="storage-legend"><span><i></i>已使用 <b>4.6 TB</b></span><span><i></i>可用 <b>7.4 TB</b></span></div>
+            <div class="pool-status"><span class="pool-icon">⌑</span><span><strong>存储池运行正常</strong><small>2 块硬盘 · SHR 冗余保护</small></span><b>›</b></div>
+          </article>
+        </section>
+
+        <section class="apps-section" aria-labelledby="apps-heading">
+          <div class="section-title"><div><span class="panel-eyebrow">QUICK ACCESS</span><h2 id="apps-heading">常用应用</h2></div><button class="text-action" type="button" data-action="all-apps">全部应用 <span>→</span></button></div>
+          <div class="app-grid">
+            <button class="app-tile" type="button" data-app="文件管理"><span class="app-icon app-files"><i></i><b></b></span><strong>文件管理</strong><small>整理你的文件</small></button>
+            <button class="app-tile" type="button" data-app="相册"><span class="app-icon app-photos"><i></i><b></b></span><strong>相册</strong><small>回看生活片段</small></button>
+            <button class="app-tile" type="button" data-app="媒体库"><span class="app-icon app-media"><i></i><b></b></span><strong>媒体库</strong><small>继续上次播放</small></button>
+            <button class="app-tile" type="button" data-app="下载"><span class="app-icon app-download"><i></i><b></b></span><strong>下载</strong><small>2 个任务进行中</small></button>
+            <button class="app-tile app-add" type="button" data-app="应用中心"><span class="app-icon app-more">＋</span><strong>应用中心</strong><small>发现更多应用</small></button>
+          </div>
+        </section>
+
+        <section class="lower-grid">
+          <article class="recent-panel">
+            <div class="section-title recent-title"><div><span class="panel-eyebrow">RECENTLY OPENED</span><h2 id="recent-heading">最近文件</h2></div><button class="text-action" type="button" data-action="all-files">查看全部 <span>→</span></button></div>
+            <div class="file-list" id="file-list">
+              <button class="file-row" type="button" data-name="周末露营计划.docx"><span class="file-type type-doc">W</span><span class="file-detail"><strong>周末露营计划.docx</strong><small>我的文件 · 今天 20:41</small></span><span class="file-size">2.4 MB</span><span class="file-more">···</span></button>
+              <button class="file-row" type="button" data-name="海边日落 09.jpg"><span class="file-type type-photo">▧</span><span class="file-detail"><strong>海边日落 09.jpg</strong><small>照片备份 · 今天 18:16</small></span><span class="file-size">8.1 MB</span><span class="file-more">···</span></button>
+              <button class="file-row" type="button" data-name="家庭相册.zip"><span class="file-type type-zip">Z</span><span class="file-detail"><strong>家庭相册.zip</strong><small>家庭共享 · 昨天 22:03</small></span><span class="file-size">1.2 GB</span><span class="file-more">···</span></button>
+              <button class="file-row" type="button" data-name="项目素材"><span class="file-type type-folder"><i></i></span><span class="file-detail"><strong>项目素材</strong><small>我的文件 · 昨天 16:28</small></span><span class="file-size">12 个项目</span><span class="file-more">···</span></button>
+              <p class="empty-state" id="empty-state" hidden>没有找到匹配的文件</p>
+            </div>
+          </article>
+          <aside class="activity-panel">
+            <div class="section-title"><div><span class="panel-eyebrow">YOUR HOME</span><h2>空间动态</h2></div><span class="live-indicator"><i></i> 正常</span></div>
+            <div class="activity-list">
+              <div class="activity-item"><span class="activity-symbol activity-photo">▧</span><p><strong>照片备份完成</strong><span>已为 18 张新照片安全存档</span><small>今天 20:32</small></p></div>
+              <div class="activity-item"><span class="activity-symbol activity-download">↓</span><p><strong>下载任务进行中</strong><span>「自然纪录片」已完成 72%</span><small>今天 19:18</small></p></div>
+              <div class="activity-item"><span class="activity-symbol activity-system">✦</span><p><strong>系统状态良好</strong><span>温度与硬盘健康状况正常</span><small>今天 18:00</small></p></div>
+            </div>
+            <div class="temperature"><span>设备温度</span><strong>38°<small>C</small></strong><i>稳定运行</i></div>
+          </aside>
+        </section>
+        <footer class="workspace-footer"><span>我的 fnOS</span><span>·</span><span>把日常好好收着</span><span class="footer-spark">✦</span></footer>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="popover" id="notification-popover" hidden><strong>今晚一切安好</strong><span>照片备份已完成，系统运行正常。</span></div>
+    </main>
+    <script src="dock-preview.js"></script>
+    <script src="content.js"></script>
+    <script src="internal-preview.js"></script>
+  </body>
+</html>

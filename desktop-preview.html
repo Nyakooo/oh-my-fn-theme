@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#414244">
+    <title>fnOS · Desktop Preview</title>
+    <link rel="icon" href="assets/icon.svg">
+    <link rel="stylesheet" href="desktop-preview.css">
+    <link rel="stylesheet" href="theme.css">
+  </head>
+  <body>
+    <main class="fnos-desktop">
+      <aside class="box-border size-full py-4 pl-3.5 dock-preview-host" aria-label="fnOS 系统 Dock">
+        <div class="h-full rounded-md border border-[rgba(255,255,255,0.20)] bg-[var(--semi-color-fndesktop-navbarBg)] backdrop-blur-[20px]">
+          <div class="box-border flex h-full flex-col py-3">
+            <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="桌面" title="桌面" data-dock><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="12" rx="2"/><path d="M8 20h8M12 16.5V20M7 9h10M7 12h6"/></svg></button>
+            <nav class="scrollbar-hidden absolute inset-0 flex flex-col items-end justify-start gap-2 overflow-y-auto pt-2 dock-apps" aria-label="系统应用">
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="应用中心" title="应用中心" data-dock><span class="app-grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="文件管理" title="文件管理" data-dock><span class="mini-app-icon mini-files" aria-hidden="true"></span></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="Edge" title="Edge" data-dock><span class="mini-app-icon mini-edge" aria-hidden="true"></span></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="终端" title="终端" data-dock><span class="mini-app-icon mini-terminal" aria-hidden="true">&gt;_</span></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10 active" type="button" aria-label="ChatGPT" title="ChatGPT" aria-current="page" data-dock><span class="mini-app-icon mini-chat" aria-hidden="true">✳</span></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="媒体中心" title="媒体中心" data-dock><span class="mini-app-icon mini-media" aria-hidden="true">♫</span></button>
+            </nav>
+            <div class="dock-footer">
+              <span class="dock-divider"></span>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="通知" title="通知" data-dock><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg><i class="notification-dot"></i></button>
+              <button class="dock-button flex h-10 w-[47px] items-center justify-center gap-x-2 border-0 !border-l-[3px] border-solid border-transparent hover:bg-white-10" type="button" aria-label="设置" title="设置" data-dock><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.2 13.6 1.1.9-1.8 3.1-1.4-.5a7.9 7.9 0 0 1-1.4.8l-.3 1.5h-3.6l-.3-1.5a7.9 7.9 0 0 1-1.4-.8l-1.4.5-1.8-3.1 1.1-.9a7 7 0 0 1 0-1.6l-1.1-.9 1.8-3.1 1.4.5a7.9 7.9 0 0 1 1.4-.8l.3-1.5h3.6l.3 1.5a7.9 7.9 0 0 1 1.4.8l1.4-.5 1.8 3.1-1.1.9a7 7 0 0 1 0 1.6Z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="desktop-area" aria-label="fnOS 桌面应用">
+        <div class="desktop-icons">
+          <button class="desktop-app" type="button" data-app="文件管理"><span class="app-icon files-icon"><i></i><b></b></span><span>文件管理</span></button>
+          <button class="desktop-app" type="button" data-app="备份"><span class="app-icon backup-icon"><i>↻</i></span><span>备份</span></button>
+          <button class="desktop-app" type="button" data-app="音乐"><span class="app-icon music-icon"><i>♫</i></span><span>音乐</span></button>
+          <button class="desktop-app" type="button" data-app="应用中心"><span class="app-icon store-icon"><i>⌣</i><small>STORE</small></span><span>应用中心</span></button>
+          <button class="desktop-app" type="button" data-app="资源管理"><span class="app-icon monitor-icon"><i></i></span><span>资源管理</span></button>
+          <button class="desktop-app" type="button" data-app="终端"><span class="app-icon terminal-icon"><i>FnTerm</i></span><span>终端</span></button>
+          <button class="desktop-app" type="button" data-app="Docker"><span class="app-icon docker-icon"><i>▰</i></span><span>Docker</span></button>
+          <button class="desktop-app" type="button" data-app="影视"><span class="app-icon video-icon"><i>▶</i></span><span>影视</span></button>
+          <button class="desktop-app" type="button" data-app="Markdown 编辑器"><span class="app-icon markdown-icon"><i>M↓</i></span><span>Markdown 编辑器</span></button>
+          <button class="desktop-app" type="button" data-app="迅雷"><span class="app-icon xunlei-icon"><i>✦</i></span><span>迅雷</span></button>
+          <button class="desktop-app" type="button" data-app="小白搜盘"><span class="app-icon search-icon"><i></i></span><span>小白搜盘</span></button>
+          <button class="desktop-app" type="button" data-app="相册"><span class="app-icon photos-icon"><i>✿</i></span><span>相册</span></button>
+          <button class="desktop-app" type="button" data-app="百度网盘"><span class="app-icon cloud-icon"><i>☁</i><small>飞牛版</small></span><span>百度网盘</span></button>
+        </div>
+        <p class="desktop-hint">双击打开应用 <span>·</span> 桌面文件仅在此处展示</p>
+      </section>
+
+      <aside class="widget-column" aria-label="系统信息">
+        <article class="widget-card system-card">
+          <header class="widget-header"><span class="widget-symbol">☷</span><span class="collapse-mark">⌃</span></header>
+          <div class="system-main"><div><strong>运行状态</strong><b>NucBox G5</b></div><div class="gauges"><div class="gauge cpu"><span>CPU</span><b>100%</b></div><div class="gauge memory"><span>内存</span><b>3.4 GB</b></div></div></div>
+          <div class="system-foot"><div><span>本次运行</span><b>1 天 3 时 28 分 44 秒</b></div><div class="gauge gpu"><span>GPU</span><b>0%</b></div></div>
+        </article>
+        <article class="widget-card network-card">
+          <div class="widget-title"><strong>网络</strong><span><b>↑ 231 B/s</b><i>↓ 174 B/s</i></span></div>
+          <svg class="network-chart" viewBox="0 0 300 100" preserveAspectRatio="none" aria-label="网络流量图"><path class="network-area" d="M0 94H12L17 35 22 94H32l5-14 5 14h10l4-17 5 17h12l5-16 5 16h10l5-14 5 14h10l5-16 5 16h18l5-14 5 14h12l4-18 5 18h15l5-15 5 15h17l5-14 5 14h16l5-17 5 17h28v6H0Z"/><path class="network-line blue-line" d="M0 94H12L17 35 22 94H32l5-14 5 14h10l4-17 5 17h12l5-16 5 16h10l5-14 5 14h10l5-16 5 16h18l5-14 5 14h12l4-18 5 18h15l5-15 5 15h17l5-14 5 14h16l5-17 5 17h28"/><path class="network-line green-line" d="M0 96H300"/></svg>
+        </article>
+        <article class="widget-card storage-card">
+          <h2>存储空间</h2>
+          <div class="volume-row"><span class="volume-icon">⬟<i>✓</i></span><span class="volume-name">存储空间1</span><div class="volume-usage"><span>102.16 GB / 172.26 GB</span><i><b></b></i></div></div>
+        </article>
+      </aside>
+      <div class="preview-toast" id="preview-toast" role="status" aria-live="polite"></div>
+    </main>
+    <script src="dock-preview.js"></script>
+    <script src="content.js"></script>
+    <script src="desktop-preview.js"></script>
+  </body>
+</html>
