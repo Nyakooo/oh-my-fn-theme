@@ -38,6 +38,46 @@
     }
   };
 
+  const getSmallDockIcons = (root) => [...root.querySelectorAll("img, svg")].filter((icon) => {
+    const rect = icon.getBoundingClientRect();
+    return rect.width >= 10 && rect.width <= 64 && rect.height >= 10 && rect.height <= 64 && rect.left < 100;
+  });
+
+  const getDockItems = (root) => {
+    const items = new Set();
+    for (const icon of getSmallDockIcons(root)) {
+      let node = icon;
+      for (let depth = 0; node && node !== root; depth += 1, node = node.parentElement) {
+        const rect = node.getBoundingClientRect();
+        if (rect.width >= 26 && rect.width <= 72 && rect.height >= 26 && rect.height <= 72) {
+          items.add(node);
+          break;
+        }
+      }
+    }
+    return [...items];
+  };
+
+  const findDockByGeometry = () => {
+    const iconNodes = [...document.querySelectorAll("img, svg")].filter((icon) => {
+      const rect = icon.getBoundingClientRect();
+      return rect.left >= -2 && rect.left < 100 && rect.width >= 10 && rect.width <= 64 && rect.height >= 10 && rect.height <= 64;
+    });
+    const candidates = new Map();
+    iconNodes.forEach((icon) => {
+      for (let node = icon.parentElement, depth = 0; node && node !== document.body && depth < 9; node = node.parentElement, depth += 1) {
+        const rect = node.getBoundingClientRect();
+        if (rect.left < -2 || rect.left >= 72 || rect.width < 26 || rect.width > 100 || rect.height < 140 || rect.height > innerHeight * 0.82) continue;
+        const icons = getSmallDockIcons(node);
+        if (icons.length >= 4) candidates.set(node, icons.length);
+      }
+    });
+    const root = [...candidates.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+    if (!root) return null;
+    const items = getDockItems(root);
+    return items.length >= 3 ? { root, items } : null;
+  };
+
   const clearDockTheme = () => {
     dockMarks.forEach((marks, element) => {
       marks.forEach((mark) => element.classList.remove(mark));
@@ -89,7 +129,7 @@
     const dock = roots.map((root) => ({
       root,
       items: [...root.querySelectorAll(".flex.items-center.justify-center")].filter((element) => hasClassSignature(element, DOCK_ITEM_SIGNATURE))
-    })).find((candidate) => candidate.items.length > 0);
+    })).find((candidate) => candidate.items.length > 0) || findDockByGeometry();
 
     if (!dock) {
       clearDockTheme();
@@ -102,7 +142,8 @@
     const activeDockElements = new Set([dock.root]);
     setDockMark(dock.root, "omf-dock-root");
     const host = dock.root.parentElement;
-    if (host && hasClassSignature(host, DOCK_HOST_SIGNATURE)) {
+    const hostRect = host?.getBoundingClientRect();
+    if (host && (hasClassSignature(host, DOCK_HOST_SIGNATURE) || (hostRect.width <= 100 && hostRect.height >= innerHeight * 0.7))) {
       activeDockElements.add(host);
       setDockMark(host, "omf-dock-host");
     }
@@ -122,6 +163,10 @@
     });
     [...dock.root.querySelectorAll("*")].forEach((element) => {
       if (hasClassSignature(element, DOCK_SCROLL_SIGNATURE)) {
+        activeDockElements.add(element);
+        setDockMark(element, "omf-dock-scroll");
+      }
+      else if (element.scrollHeight > element.clientHeight + 8 && element.getBoundingClientRect().width <= 100) {
         activeDockElements.add(element);
         setDockMark(element, "omf-dock-scroll");
       }
