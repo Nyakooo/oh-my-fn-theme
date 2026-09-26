@@ -24,6 +24,19 @@ const themeEnabled = document.getElementById("theme-enabled");
 const themeChoices = [...document.querySelectorAll('input[name="login-theme"]')];
 let sitesCache = [];
 
+async function prefillCurrentTabAddress() {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    if (!tab?.url || siteInput.value) return;
+    const url = new URL(tab.url);
+    if (!['http:', 'https:'].includes(url.protocol)) return;
+    siteInput.value = url.origin;
+    siteInput.dispatchEvent(new Event("input", { bubbles: true }));
+  } catch (_) {
+    // Browser-internal pages may not expose their URL to the extension.
+  }
+}
+
 function scriptIdFor(origin) {
   let hash = 2166136261;
   for (const char of origin) {
@@ -261,4 +274,4 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes[SITE_KEY]) renderSites();
 });
 
-Promise.all([renderSites(), loadBrand()]);
+Promise.all([renderSites(), loadBrand(), prefillCurrentTabAddress()]);
