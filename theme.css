@@ -711,6 +711,49 @@ html[data-omf-home-theme="moonlit"] body {
   box-shadow: 0 9px 24px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 4%) !important;
 }
 
+.omf-home-widget-column {
+  position: fixed !important;
+  z-index: 20 !important;
+  top: 12px !important;
+  right: 12px !important;
+  left: auto !important;
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: min(340px, calc(100vw - 82px)) !important;
+  max-width: calc(100vw - 82px) !important;
+  max-height: calc(100vh - 24px) !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 0 !important;
+  scrollbar-width: none !important;
+}
+
+.omf-home-widget-column::-webkit-scrollbar { display: none !important; }
+.omf-home-widget { min-width: 0 !important; max-width: 100% !important; overflow: hidden !important; }
+.omf-home-widget > * { box-sizing: border-box !important; max-width: 100% !important; }
+
+.omf-home-app-icon {
+  border-radius: 15px !important;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 25%), inset 0 0 0 1px rgb(255 255 255 / 18%) !important;
+  filter: saturate(.94) brightness(1.03) !important;
+  transition: filter .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+
+.omf-home-app:hover .omf-home-app-icon {
+  filter: saturate(1.08) brightness(1.08) !important;
+  transform: translateY(-2px) scale(1.035) !important;
+  box-shadow: 0 12px 22px rgb(0 0 0 / 30%), inset 0 0 0 1px rgb(255 255 255 / 25%) !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-home-app-icon { box-shadow: 0 8px 18px rgb(0 0 0 / 26%), inset 0 0 0 1px rgb(231 198 147 / 35%) !important; }
+
+@media (max-width: 860px) {
+  .omf-home-widget-column { width: min(300px, calc(100vw - 72px)) !important; max-width: calc(100vw - 72px) !important; }
+}
+
 /* Both styles use a short, vertically centered Dock with a scrollable app list. */
 html[data-omf-dock="on"] .omf-dock-host {
   display: flex !important;
