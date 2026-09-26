@@ -67,7 +67,6 @@
   const markHomeWidgets = (shell, activeDockElements, theme) => {
     if (!shell) return;
     const labels = new Set(["运行状态", "网络", "存储空间"]);
-    const widgets = [];
     const walker = document.createTreeWalker(shell, NodeFilter.SHOW_TEXT);
     let textNode;
     while ((textNode = walker.nextNode())) {
@@ -79,45 +78,10 @@
         activeDockElements.add(node);
         setDockMark(node, "omf-home-widget");
         node.dataset.omfHomeTheme = theme;
-        widgets.push(node);
         break;
       }
     }
 
-    if (widgets.length < 2) return;
-    for (let column = widgets[0].parentElement; column && column !== shell; column = column.parentElement) {
-      const rect = column.getBoundingClientRect();
-      const containsWidgets = widgets.every((widget) => column.contains(widget));
-      if (!containsWidgets || rect.left < innerWidth * 0.5 || rect.width > innerWidth * 0.5 || rect.height < innerHeight * 0.35) continue;
-      activeDockElements.add(column);
-      setDockMark(column, "omf-home-widget-column");
-      column.dataset.omfHomeTheme = theme;
-      break;
-    }
-  };
-
-  const markHomeAppIcons = (shell, activeDockElements) => {
-    if (!shell) return;
-    const walker = document.createTreeWalker(shell, NodeFilter.SHOW_TEXT);
-    let textNode;
-    while ((textNode = walker.nextNode())) {
-      const label = textNode.textContent.trim();
-      if (!label || label.length > 20 || ["运行状态", "网络", "存储空间"].includes(label)) continue;
-      for (let node = textNode.parentElement, depth = 0; node && node !== shell && depth < 7; node = node.parentElement, depth += 1) {
-        const rect = node.getBoundingClientRect();
-        if (rect.left < 52 || rect.left > innerWidth * 0.76 || rect.width < 50 || rect.width > 180 || rect.height < 64 || rect.height > 180) continue;
-        const icon = [...node.querySelectorAll("img, svg")].find((candidate) => {
-          const iconRect = candidate.getBoundingClientRect();
-          return iconRect.width >= 32 && iconRect.height >= 32 && iconRect.width <= 120 && iconRect.height <= 120;
-        });
-        if (!icon) continue;
-        activeDockElements.add(node);
-        setDockMark(node, "omf-home-app");
-        activeDockElements.add(icon);
-        setDockMark(icon, "omf-home-app-icon");
-        break;
-      }
-    }
   };
 
   const applyDockTheme = () => {
@@ -149,7 +113,6 @@
       setDockMark(homeShell, "omf-home-shell");
       homeShell.dataset.omfHomeTheme = theme;
       markHomeWidgets(homeShell, activeDockElements, theme);
-      markHomeAppIcons(homeShell, activeDockElements);
     }
     document.documentElement.dataset.omfHomeTheme = theme;
 
