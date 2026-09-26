@@ -14,20 +14,20 @@
 
 ## Features
 
-- **Two complete themes:** Minimal and Moonlit Home cover both the login page and desktop home.
-- **Compact Dock:** Both themes shorten the native fnOS Dock; Moonlit Home adds a warm active state.
+- **Two login themes:** Minimal and Moonlit Home are available for the fnOS login page.
+- **Compact Dock:** The desktop keeps its native appearance while the Dock is shortened; Moonlit Home adds a warm active state.
 - **Browser tab branding:** Customize the tab title and favicon.
 - **Explicit site access:** Runs only on fnOS addresses that you add and authorize; it does not scan other sites.
 - **Keeps the native sign-in flow:** Changes presentation without replacing the login form or authentication logic.
 
 ## Previews
 
-| Login themes | fnOS desktop home and Dock |
+| Login themes | fnOS desktop Dock |
 | --- | --- |
 | [Open login preview](preview.html) | [Open desktop preview](desktop-preview.html) |
 | [Open internal desktop preview](internal-preview.html) | Switch between both themes in the desktop preview |
 
-Previews use local sample data and do not connect to a NAS. Check the final layout against your fnOS device.
+Previews use local sample data and do not connect to a NAS. The desktop preview is a Dock design reference; the extension changes only the Dock on the desktop and leaves other elements native.
 
 ## Installation
 
