@@ -14,18 +14,18 @@
 
 ## Features
 
-- **Two login themes:** Minimal and Moonlit Home, with desktop and mobile layouts.
-- **Moonlit Home Dock:** A compact floating style and subtle interaction feedback for the native fnOS Dock.
+- **Two complete themes:** Minimal and Moonlit Home cover both the login page and desktop home.
+- **Compact Dock:** Both themes shorten the native fnOS Dock; Moonlit Home adds a warm active state.
 - **Browser tab branding:** Customize the tab title and favicon.
 - **Explicit site access:** Runs only on fnOS addresses that you add and authorize; it does not scan other sites.
 - **Keeps the native sign-in flow:** Changes presentation without replacing the login form or authentication logic.
 
 ## Previews
 
-| Login themes | fnOS desktop Dock |
+| Login themes | fnOS desktop home and Dock |
 | --- | --- |
 | [Open login preview](preview.html) | [Open desktop preview](desktop-preview.html) |
-| [Open internal desktop preview](internal-preview.html) | Compact Dock is shown with the Moonlit Home theme |
+| [Open internal desktop preview](internal-preview.html) | Switch between both themes in the desktop preview |
 
 Previews use local sample data and do not connect to a NAS. Check the final layout against your fnOS device.
 
@@ -63,7 +63,7 @@ The build checks manifest icon references. Run it again after changing extension
 
 ## Permissions and privacy
 
-The extension declares `scripting`, `storage`, and optional HTTP/HTTPS host permissions. It has no NAS site access after installation. A content script is registered only after you add a site in settings and grant access through the browser prompt. Local extension storage contains only confirmed site addresses, appearance preferences, and the favicon you select. The extension does not read passwords, cookies, or network requests, intercept forms, or connect to external services.
+The extension declares `activeTab`, `scripting`, `storage`, and optional HTTP/HTTPS host permissions. It has no NAS site access after installation. A content script is registered only after you add a site in settings and grant access through the browser prompt. Local extension storage contains only confirmed site addresses, appearance preferences, and the favicon you select. The extension does not read passwords, cookies, or network requests, intercept forms, or connect to external services.
 
 Removing a site unregisters its dynamic content script and revokes its host permission. Removing the extension clears its browser-stored extension data.
 

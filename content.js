@@ -39,10 +39,40 @@
   };
 
   const clearDockTheme = () => {
-    dockMarks.forEach((marks, element) => marks.forEach((mark) => element.classList.remove(mark)));
+    dockMarks.forEach((marks, element) => {
+      marks.forEach((mark) => element.classList.remove(mark));
+      delete element.dataset.omfHomeTheme;
+    });
     dockMarks.clear();
     delete document.documentElement.dataset.omfDock;
     delete document.documentElement.dataset.omfDockTheme;
+  };
+
+  const findHomeShell = (host) => {
+    for (let node = host?.parentElement; node && node !== document.body; node = node.parentElement) {
+      const rect = node.getBoundingClientRect();
+      if (rect.width >= innerWidth * 0.9 && rect.height >= innerHeight * 0.7) return node;
+    }
+    return null;
+  };
+
+  const markHomeWidgets = (shell, activeDockElements, theme) => {
+    if (!shell) return;
+    const labels = new Set(["运行状态", "网络", "存储空间"]);
+    const walker = document.createTreeWalker(shell, NodeFilter.SHOW_TEXT);
+    let textNode;
+    while ((textNode = walker.nextNode())) {
+      if (!labels.has(textNode.textContent.trim())) continue;
+      let node = textNode.parentElement;
+      for (let depth = 0; node && node !== shell && depth < 7; depth += 1, node = node.parentElement) {
+        const rect = node.getBoundingClientRect();
+        if (rect.width < 150 || rect.width > innerWidth * 0.65 || rect.height < 72 || rect.height > innerHeight * 0.7) continue;
+        activeDockElements.add(node);
+        setDockMark(node, "omf-home-widget");
+        node.dataset.omfHomeTheme = theme;
+        break;
+      }
+    }
   };
 
   const applyDockTheme = () => {
@@ -58,13 +88,22 @@
     }
 
     document.documentElement.dataset.omfDock = "on";
-    document.documentElement.dataset.omfDockTheme = THEMES.has(currentBrand.theme) ? currentBrand.theme : DEFAULT_BRAND.theme;
+    const theme = THEMES.has(currentBrand.theme) ? currentBrand.theme : DEFAULT_BRAND.theme;
+    document.documentElement.dataset.omfDockTheme = theme;
     const activeDockElements = new Set([dock.root]);
     setDockMark(dock.root, "omf-dock-root");
     const host = dock.root.parentElement;
     if (host && hasClassSignature(host, DOCK_HOST_SIGNATURE)) {
       activeDockElements.add(host);
       setDockMark(host, "omf-dock-host");
+    }
+
+    const homeShell = findHomeShell(host);
+    if (homeShell) {
+      activeDockElements.add(homeShell);
+      setDockMark(homeShell, "omf-home-shell");
+      homeShell.dataset.omfHomeTheme = theme;
+      markHomeWidgets(homeShell, activeDockElements, theme);
     }
 
     dock.items.forEach((item) => {
@@ -84,6 +123,7 @@
     dockMarks.forEach((marks, element) => {
       if (activeDockElements.has(element)) return;
       marks.forEach((mark) => element.classList.remove(mark));
+      delete element.dataset.omfHomeTheme;
       dockMarks.delete(element);
     });
   };
@@ -149,6 +189,20 @@
     return aside;
   };
 
+  const createMinimalWelcome = () => {
+    const aside = document.createElement("section");
+    aside.className = "omf-minimal-welcome";
+    aside.setAttribute("aria-label", "fnOS 登录欢迎信息");
+    aside.innerHTML = `
+      <div class="omf-minimal-brand"><span aria-hidden="true">M</span><span>fnOS <i>HOME</i></span></div>
+      <div class="omf-minimal-copy">
+        <p>YOUR SPACE, READY</p>
+        <h1>回到自己的<br>数字空间。</h1>
+        <span>私有数据，安心存放。</span>
+      </div>`;
+    return aside;
+  };
+
   const createStage = (theme) => {
     const stage = document.createElement("main");
     stage.className = "omf-login-stage";
@@ -168,6 +222,8 @@
       const side = createWelcomeSide();
       stage.prepend(side);
       bindIllustration(side);
+    } else {
+      stage.prepend(createMinimalWelcome());
     }
     return { stage, card };
   };

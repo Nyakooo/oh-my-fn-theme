@@ -382,8 +382,11 @@ html.omf-login-page .omf-card-bottom > b { color: #c5ae81 !important; font-size:
 
 /* The default theme keeps only the fnOS form and a quiet, centered surface. */
 html.omf-login-page[data-omf-theme="minimal"] body {
-  background: #f4f5f3 !important;
-  color: #252a27 !important;
+  background:
+    radial-gradient(ellipse at 78% 8%, rgb(211 233 226 / 72%), transparent 38%),
+    radial-gradient(ellipse at 8% 85%, rgb(235 221 201 / 42%), transparent 34%),
+    linear-gradient(135deg, #f7f9f6, #e9efec) !important;
+  color: #172832 !important;
   font-family: Inter, "Segoe UI", "PingFang SC", sans-serif !important;
 }
 
@@ -392,24 +395,89 @@ html.omf-login-page[data-omf-theme="minimal"] body::after { content: none !impor
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] {
   display: grid !important;
-  width: min(100% - 40px, 420px) !important;
+  width: min(100% - 72px, 1040px) !important;
   min-height: 100vh !important;
-  grid-template-columns: 1fr !important;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .86fr) !important;
   align-items: center !important;
-  justify-items: stretch !important;
-  gap: 0 !important;
+  justify-items: center !important;
+  gap: clamp(42px, 7vw, 94px) !important;
   padding: 32px 0 !important;
-  color: #252a27 !important;
+  color: #172832 !important;
+}
+
+html.omf-login-page .omf-minimal-welcome {
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding-left: clamp(0px, 3vw, 42px) !important;
+  color: #172832 !important;
+}
+
+html.omf-login-page .omf-minimal-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  color: #33464c !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+}
+
+html.omf-login-page .omf-minimal-brand > span:first-child {
+  display: grid !important;
+  width: 30px !important;
+  height: 30px !important;
+  place-items: center !important;
+  border-radius: 9px !important;
+  background: linear-gradient(145deg, #4bb49d, #4383a0) !important;
+  color: white !important;
+  font-size: 15px !important;
+}
+
+html.omf-login-page .omf-minimal-brand i {
+  margin-left: 4px !important;
+  color: #778984 !important;
+  font-size: 8px !important;
+  font-style: normal !important;
+  letter-spacing: .17em !important;
+}
+
+html.omf-login-page .omf-minimal-copy { margin: clamp(38px, 7vh, 72px) 0 0 7px !important; }
+html.omf-login-page .omf-minimal-copy > p {
+  margin: 0 0 12px !important;
+  color: #478878 !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .17em !important;
+}
+
+html.omf-login-page .omf-minimal-copy h1 {
+  margin: 0 !important;
+  color: #172832 !important;
+  font-size: clamp(34px, 4.2vw, 52px) !important;
+  font-weight: 550 !important;
+  letter-spacing: -.055em !important;
+  line-height: 1.24 !important;
+}
+
+html.omf-login-page .omf-minimal-copy > span {
+  display: block !important;
+  margin-top: 15px !important;
+  color: #65757a !important;
+  font-size: 13px !important;
 }
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card {
-  width: 100% !important;
-  padding: 30px !important;
-  border: 1px solid #e5e7e3 !important;
-  border-radius: 16px !important;
-  background: #fff !important;
-  box-shadow: 0 8px 28px rgb(30 38 32 / 6%) !important;
-  color: #252a27 !important;
+  width: min(100%, 420px) !important;
+  padding: 28px !important;
+  border: 1px solid rgb(255 255 255 / 82%) !important;
+  border-radius: 14px !important;
+  background: rgb(255 255 255 / 88%) !important;
+  box-shadow: 0 18px 48px rgb(36 67 59 / 11%) !important;
+  color: #172832 !important;
+  backdrop-filter: blur(16px) !important;
 }
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper {
@@ -435,15 +503,38 @@ html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel inpu
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"],
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"] {
   min-height: 46px !important;
-  border-color: #303631 !important;
+  border-color: #398c7d !important;
   border-radius: 8px !important;
-  background: #303631 !important;
+  background: #398c7d !important;
   color: #fff !important;
-  box-shadow: none !important;
+  box-shadow: 0 5px 12px rgb(57 140 125 / 19%) !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"]:hover,
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"]:hover { background: #317c70 !important; }
+
+@media (max-width: 940px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] {
+    width: min(100% - 48px, 820px) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr) !important;
+    gap: 30px !important;
+  }
+  html.omf-login-page .omf-minimal-copy h1 { font-size: clamp(32px, 5vw, 44px) !important; }
 }
 
 @media (max-width: 560px) {
-  html.omf-login-page .omf-login-stage[data-theme="minimal"] { width: min(100% - 28px, 420px) !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] {
+    display: flex !important;
+    width: min(100% - 38px, 460px) !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    padding: 26px 0 22px !important;
+  }
+  html.omf-login-page .omf-minimal-welcome { padding: 0 4px !important; }
+  html.omf-login-page .omf-minimal-copy { margin: 28px 0 20px 4px !important; }
+  html.omf-login-page .omf-minimal-copy h1 { font-size: 35px !important; }
+  html.omf-login-page .omf-minimal-copy > span { margin-top: 8px !important; }
   html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding: 24px 20px !important; }
 }
 
@@ -566,4 +657,156 @@ html[data-omf-dock-theme="moonlit"] .omf-dock-item [aria-label] { color: inherit
 @media (prefers-reduced-motion: reduce) {
   html[data-omf-dock-theme="moonlit"] .omf-dock-root,
   html[data-omf-dock-theme="moonlit"] .omf-dock-item { transition-duration: .01ms !important; }
+}
+
+/* Confirmed fnOS home styling. Keep native applications and actions intact. */
+.omf-home-shell[data-omf-home-theme="minimal"] {
+  background-color: #3c3f41 !important;
+  background-image: radial-gradient(ellipse at 72% 12%, rgb(255 255 255 / 3%), transparent 42%) !important;
+}
+
+.omf-home-shell[data-omf-home-theme="moonlit"] {
+  background-color: #18272b !important;
+  background-image:
+    radial-gradient(ellipse at 78% 12%, rgb(205 174 121 / 12%), transparent 34%),
+    radial-gradient(ellipse at 28% 80%, rgb(77 125 116 / 12%), transparent 42%),
+    linear-gradient(135deg, #18272b, #26383a 56%, #19282e) !important;
+}
+
+.omf-home-widget {
+  box-sizing: border-box !important;
+  border: 1px solid rgb(255 255 255 / 7%) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(145deg, rgb(16 18 20 / 97%), rgb(11 13 15 / 97%)) !important;
+  box-shadow: 0 9px 24px rgb(0 0 0 / 23%), inset 0 1px rgb(255 255 255 / 3%) !important;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease !important;
+}
+
+.omf-home-widget[data-omf-home-theme="moonlit"] {
+  border-color: rgb(220 187 133 / 18%) !important;
+  background: linear-gradient(145deg, rgb(24 38 39 / 96%), rgb(15 26 29 / 97%)) !important;
+  box-shadow: 0 9px 24px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 4%) !important;
+}
+
+/* Both styles use a short, vertically centered Dock with a scrollable app list. */
+html[data-omf-dock="on"] .omf-dock-host {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-root {
+  box-sizing: border-box !important;
+  width: 40px !important;
+  max-width: 40px !important;
+  height: auto !important;
+  max-height: min(290px, calc(100vh - 24px)) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
+  border-radius: 10px !important;
+  background: rgb(19 21 23 / 94%) !important;
+  box-shadow: 0 8px 22px rgb(0 0 0 / 27%), inset 0 1px rgb(255 255 255 / 4%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.04) !important;
+  backdrop-filter: blur(16px) saturate(1.04) !important;
+  transition: background .18s ease, border-color .18s ease !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-root {
+  border-color: rgb(220 187 133 / 20%) !important;
+  background: rgb(18 29 31 / 95%) !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-root .relative.flex.flex-1.flex-col { min-height: 0 !important; flex: 0 0 auto !important; }
+
+html[data-omf-dock="on"] .omf-dock-stack {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  padding: 4px 2px !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-scroll {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  max-height: min(120px, calc(100vh - 190px)) !important;
+  flex: 0 1 auto !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 3px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 0 !important;
+  scrollbar-width: none !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-scroll::-webkit-scrollbar { display: none !important; }
+
+html[data-omf-dock="on"] .omf-dock-item {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  flex: 0 0 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: #c3c8ce !important;
+  cursor: pointer !important;
+  transition: background .16s ease, border-color .16s ease, color .16s ease !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-item:hover {
+  z-index: 2 !important;
+  border-color: rgb(255 255 255 / 8%) !important;
+  background: rgb(255 255 255 / 8%) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-item:focus-visible { outline: 2px solid #76a9d1 !important; outline-offset: 1px !important; }
+
+html[data-omf-dock="on"] .omf-dock-item.active,
+html[data-omf-dock="on"] .omf-dock-item[aria-current="page"],
+html[data-omf-dock="on"] .omf-dock-item[aria-selected="true"],
+html[data-omf-dock="on"] .omf-dock-item[data-selected="true"] {
+  border-color: rgb(130 171 193 / 28%) !important;
+  background: rgb(130 171 193 / 15%) !important;
+  color: #edf4f6 !important;
+}
+
+html[data-omf-dock-theme="moonlit"] .omf-dock-item:hover { border-color: rgb(226 195 145 / 17%) !important; background: rgb(226 195 145 / 8%) !important; }
+html[data-omf-dock-theme="moonlit"] .omf-dock-item:focus-visible { outline-color: #d9b77d !important; }
+html[data-omf-dock-theme="moonlit"] .omf-dock-item.active,
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"],
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"],
+html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"] {
+  border-color: rgb(230 198 147 / 40%) !important;
+  background: linear-gradient(145deg, rgb(225 195 145 / 22%), rgb(199 151 111 / 14%)) !important;
+  color: #f0dfc2 !important;
+}
+
+html[data-omf-dock="on"] .omf-dock-item img,
+html[data-omf-dock="on"] .omf-dock-item svg { max-width: 21px !important; max-height: 21px !important; }
+html[data-omf-dock="on"] .omf-dock-item [aria-label] { color: inherit !important; }
+
+@media (max-width: 620px) {
+  html[data-omf-dock="on"] .omf-dock-root { width: 38px !important; max-width: 38px !important; }
+  html[data-omf-dock="on"] .omf-dock-item { width: 30px !important; min-width: 30px !important; height: 30px !important; min-height: 30px !important; flex-basis: 30px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-omf-dock="on"] .omf-dock-root,
+  html[data-omf-dock="on"] .omf-dock-item,
+  html[data-omf-dock="on"] .omf-home-shell,
+  html[data-omf-dock="on"] .omf-home-widget { transition-duration: .01ms !important; }
 }
