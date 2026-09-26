@@ -736,9 +736,13 @@ html[data-omf-home-theme="moonlit"] body {
 .omf-home-widget > * { box-sizing: border-box !important; max-width: 100% !important; }
 
 .omf-home-app-icon {
+  box-sizing: border-box !important;
+  width: 54px !important;
+  height: 54px !important;
+  border: 1px solid rgb(201 225 221 / 24%) !important;
   border-radius: 15px !important;
-  box-shadow: 0 8px 18px rgb(0 0 0 / 25%), inset 0 0 0 1px rgb(255 255 255 / 18%) !important;
-  filter: saturate(.94) brightness(1.03) !important;
+  box-shadow: 0 0 0 3px rgb(93 139 131 / 10%), 0 8px 18px rgb(0 0 0 / 27%), inset 0 0 0 1px rgb(255 255 255 / 12%) !important;
+  filter: saturate(.92) brightness(1.04) !important;
   transition: filter .18s ease, transform .18s ease, box-shadow .18s ease !important;
 }
 
@@ -748,7 +752,10 @@ html[data-omf-home-theme="moonlit"] body {
   box-shadow: 0 12px 22px rgb(0 0 0 / 30%), inset 0 0 0 1px rgb(255 255 255 / 25%) !important;
 }
 
-html[data-omf-dock-theme="moonlit"] .omf-home-app-icon { box-shadow: 0 8px 18px rgb(0 0 0 / 26%), inset 0 0 0 1px rgb(231 198 147 / 35%) !important; }
+html[data-omf-dock-theme="moonlit"] .omf-home-app-icon {
+  border-color: rgb(231 198 147 / 34%) !important;
+  box-shadow: 0 0 0 3px rgb(204 169 113 / 12%), 0 8px 18px rgb(0 0 0 / 28%), inset 0 0 0 1px rgb(231 198 147 / 18%) !important;
+}
 
 @media (max-width: 860px) {
   .omf-home-widget-column { width: min(300px, calc(100vw - 72px)) !important; max-width: calc(100vw - 72px) !important; }
