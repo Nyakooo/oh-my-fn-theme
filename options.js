@@ -37,6 +37,32 @@ async function prefillCurrentTabAddress() {
   }
 }
 
+async function applyToCurrentFnOSTab(site) {
+  const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+  if (!tab?.id || !tab.url || new URL(tab.url).origin !== site.origin) return "different-page";
+
+  const [detection] = await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => {
+      const pageText = `${document.title} ${document.body?.innerText?.slice(0, 2000) || ""}`;
+      const hasFnOSBrand = /fnOS|飞牛|私有云/i.test(pageText);
+      const hasLoginForm = Boolean(document.querySelector('input[type="password"], input[autocomplete="current-password"]'));
+      const hasDock = [...document.querySelectorAll(".h-full.rounded-md.border")].some((element) =>
+        ["h-full", "rounded-md", "border", "backdrop-blur-[20px]"].every((name) => element.classList.contains(name)) &&
+        [...element.querySelectorAll(".flex.items-center.justify-center")].some((item) =>
+          ["flex", "h-10", "w-[47px]", "items-center", "justify-center"].every((name) => item.classList.contains(name))
+        )
+      );
+      return (hasLoginForm && hasFnOSBrand) || hasDock;
+    }
+  });
+  if (!detection?.result) return "not-fnos";
+
+  await chrome.scripting.insertCSS({ target: { tabId: tab.id }, files: ["theme.css"] });
+  await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["content.js"] });
+  return "applied";
+}
+
 function scriptIdFor(origin) {
   let hash = 2166136261;
   for (const char of origin) {
@@ -158,7 +184,12 @@ form.addEventListener("submit", async (event) => {
   try {
     const site = parseSite(siteInput.value);
     if (sitesCache.some((entry) => entry.origin === site.origin)) {
-      setMessage(siteMessage, "这个地址已经添加。");
+      const result = await applyToCurrentFnOSTab(site).catch(() => "unavailable");
+      setMessage(siteMessage, result === "applied"
+        ? "当前页面识别为 fnOS，主题已立即应用。"
+        : result === "not-fnos"
+          ? "这个地址已经添加；当前页面暂未识别为 fnOS。"
+          : "这个地址已经添加。");
       return;
     }
 
@@ -183,9 +214,14 @@ form.addEventListener("submit", async (event) => {
       throw error;
     }
 
+    const applyResult = await applyToCurrentFnOSTab(site).catch(() => "unavailable");
     siteInput.value = "";
-    sitePreview.textContent = "已授权。刷新 fnOS 页面后，登录外观会自动应用；选择月夜居所时也会调整 Dock。";
-    setMessage(siteMessage, "地址已确认，自动应用已启用。");
+    sitePreview.textContent = "已授权。主题会在当前 fnOS 页面立即应用，并在后续访问时自动应用。";
+    setMessage(siteMessage, applyResult === "applied"
+      ? "地址已确认，当前页面识别为 fnOS，主题已立即应用。"
+      : applyResult === "not-fnos"
+        ? "地址已确认，但当前页面暂未识别为 fnOS；之后进入 fnOS 页面时会自动应用。"
+        : "地址已确认，之后进入该地址时会自动应用主题。");
     await renderSites();
   } catch (error) {
     setMessage(siteMessage, error?.message || "添加地址失败，请检查浏览器是否允许扩展。", true);

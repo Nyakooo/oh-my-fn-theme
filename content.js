@@ -1,6 +1,9 @@
 (() => {
   "use strict";
 
+  if (window.__ohMyFnOSThemeLoaded) return;
+  window.__ohMyFnOSThemeLoaded = true;
+
   const DEFAULT_BRAND = { title: "我的 NAS", favicon: "", enabled: true, theme: "minimal" };
   const THEMES = new Set(["minimal", "moonlit"]);
   const DEFAULT_FAVICON =
