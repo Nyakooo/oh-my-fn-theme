@@ -660,6 +660,25 @@ html[data-omf-dock-theme="moonlit"] .omf-dock-item [aria-label] { color: inherit
 }
 
 /* Confirmed fnOS home styling. Keep native applications and actions intact. */
+html[data-omf-home-theme="minimal"],
+html[data-omf-home-theme="minimal"] body {
+  background-color: #20292d !important;
+  background-image:
+    radial-gradient(ellipse at 18% 14%, rgb(119 160 153 / 11%), transparent 38%),
+    radial-gradient(ellipse at 81% 12%, rgb(112 141 164 / 9%), transparent 34%),
+    radial-gradient(ellipse at 57% 92%, rgb(124 148 134 / 6%), transparent 44%),
+    linear-gradient(132deg, #1c2529, #283337 52%, #202a2e) !important;
+}
+
+html[data-omf-home-theme="moonlit"],
+html[data-omf-home-theme="moonlit"] body {
+  background-color: #18272b !important;
+  background-image:
+    radial-gradient(ellipse at 78% 12%, rgb(205 174 121 / 12%), transparent 34%),
+    radial-gradient(ellipse at 28% 80%, rgb(77 125 116 / 12%), transparent 42%),
+    linear-gradient(135deg, #18272b, #26383a 56%, #19282e) !important;
+}
+
 .omf-home-shell[data-omf-home-theme="minimal"] {
   background-color: #20292d !important;
   background-image:

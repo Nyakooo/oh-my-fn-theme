@@ -46,14 +46,22 @@
     dockMarks.clear();
     delete document.documentElement.dataset.omfDock;
     delete document.documentElement.dataset.omfDockTheme;
+    delete document.documentElement.dataset.omfHomeTheme;
   };
 
-  const findHomeShell = (host) => {
-    for (let node = host?.parentElement; node && node !== document.body; node = node.parentElement) {
+  const findHomeShell = (dockRoot) => {
+    let best = null;
+    let bestArea = 0;
+    for (let node = dockRoot?.parentElement; node; node = node.parentElement) {
       const rect = node.getBoundingClientRect();
-      if (rect.width >= innerWidth * 0.9 && rect.height >= innerHeight * 0.7) return node;
+      const largeEnough = rect.width >= innerWidth * 0.68 && rect.height >= innerHeight * 0.6;
+      if (largeEnough && rect.width * rect.height > bestArea) {
+        best = node;
+        bestArea = rect.width * rect.height;
+      }
+      if (node === document.body) break;
     }
-    return null;
+    return best;
   };
 
   const markHomeWidgets = (shell, activeDockElements, theme) => {
@@ -98,13 +106,14 @@
       setDockMark(host, "omf-dock-host");
     }
 
-    const homeShell = findHomeShell(host);
+    const homeShell = findHomeShell(dock.root);
     if (homeShell) {
       activeDockElements.add(homeShell);
       setDockMark(homeShell, "omf-home-shell");
       homeShell.dataset.omfHomeTheme = theme;
       markHomeWidgets(homeShell, activeDockElements, theme);
     }
+    document.documentElement.dataset.omfHomeTheme = theme;
 
     dock.items.forEach((item) => {
       activeDockElements.add(item);
