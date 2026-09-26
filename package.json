@@ -1,0 +1,9 @@
+{
+  "name": "oh-my-fn-theme",
+  "version": "0.1.10",
+  "private": true,
+  "description": "Chromium extension themes for fnOS login and desktop Dock",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  }
+}

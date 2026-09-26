@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="560" viewBox="0 0 1440 560" role="img" aria-labelledby="title desc">
+  <title id="title">Oh My fnOS Theme</title>
+  <desc id="desc">fnOS 登录页与 Dock 的轻量主题扩展，提供极简与月夜居所两种风格。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101b28"/><stop offset=".58" stop-color="#203b43"/><stop offset="1" stop-color="#4c5c51"/></linearGradient>
+    <linearGradient id="moon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7e8bd"/><stop offset="1" stop-color="#d4ad7c"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf6"/><stop offset="1" stop-color="#e8e9dc"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1440" height="560" rx="32" fill="url(#bg)"/>
+  <circle cx="1110" cy="142" r="96" fill="#e7d5a8" opacity=".11"/>
+  <circle cx="1110" cy="142" r="66" fill="url(#moon)"/>
+  <circle cx="1135" cy="125" r="62" fill="#263d42"/>
+  <g fill="#e7d6ac" opacity=".7"><circle cx="970" cy="95" r="3"/><circle cx="1240" cy="214" r="2.5"/><circle cx="1030" cy="248" r="2"/><circle cx="1290" cy="78" r="2"/><path d="M1215 100h18m-9-9v18" stroke="#e7d6ac" stroke-width="2"/></g>
+  <path d="M0 455c180-85 325-7 475-66s304-50 457 4 312 19 508-55v222H0Z" fill="#192c32" opacity=".75"/>
+  <path d="M0 492c220-53 357 24 557-17s309-40 477 9 279 23 406-17v93H0Z" fill="#111f28" opacity=".8"/>
+  <g transform="translate(94 78)">
+    <rect width="66" height="66" rx="21" fill="#101b2b" stroke="#ffffff" stroke-opacity=".2"/>
+    <path d="M13 47V19h9l11 14 11-14h9v28h-9V33L33 43 22 33v14z" fill="#a9d8bd"/>
+  </g>
+  <text x="183" y="111" fill="#e7d7b8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" font-weight="700" letter-spacing="3">A LITTLE MORE YOU</text>
+  <text x="90" y="224" fill="#fffaf0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="60" font-weight="700">Oh My fnOS Theme</text>
+  <text x="94" y="278" fill="#d5e0d4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="25">给 fnOS 登录页与桌面 Dock 一点自己的风格</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="600">
+    <rect x="94" y="320" width="112" height="38" rx="19" fill="#e7d9b9"/><text x="122" y="345" fill="#33433e">极简</text>
+    <rect x="220" y="320" width="150" height="38" rx="19" fill="#d2dfcc"/><text x="246" y="345" fill="#33433e">月夜居所</text>
+    <rect x="384" y="320" width="157" height="38" rx="19" fill="#ffffff" fill-opacity=".1" stroke="#ffffff" stroke-opacity=".22"/><text x="409" y="345" fill="#f4f3e9">按站点授权</text>
+  </g>
+  <text x="96" y="433" fill="#bac9c1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17">轻量 · 本地保存 · 保留原生登录流程</text>
+  <g transform="translate(748 275) rotate(-5)">
+    <ellipse cx="252" cy="220" rx="252" ry="26" fill="#061218" opacity=".5" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="245" rx="24" fill="url(#card)"/>
+    <rect x="18" y="18" width="444" height="209" rx="16" fill="#f7f6ed" stroke="#d9ddcf"/>
+    <text x="43" y="57" fill="#829084" font-family="sans-serif" font-size="11" letter-spacing="2">YOUR LITTLE CORNER</text>
+    <text x="42" y="105" fill="#293a37" font-family="serif" font-size="31">晚上好，欢迎回家。</text>
+    <text x="43" y="133" fill="#75847a" font-family="sans-serif" font-size="12">登录，回到自己的小小宇宙。</text>
+    <rect x="251" y="44" width="176" height="151" rx="16" fill="#fffefa" stroke="#e3e0d3"/>
+    <text x="274" y="78" fill="#a19a81" font-family="sans-serif" font-size="9" letter-spacing="2">WELCOME BACK</text>
+    <text x="274" y="107" fill="#354541" font-family="serif" font-size="19">登录 fnOS</text>
+    <rect x="274" y="120" width="130" height="22" rx="6" fill="#f2f2e9" stroke="#e0e2d8"/>
+    <rect x="274" y="150" width="130" height="26" rx="8" fill="#819b85"/>
+    <text x="319" y="168" fill="#fffdf5" font-family="sans-serif" font-size="10">登 录</text>
+    <g transform="translate(59 153)"><rect width="143" height="12" rx="6" fill="#354a4a" opacity=".13"/><path d="M0 6h143" stroke="#354a4a" stroke-opacity=".12"/></g>
+  </g>
+  <g transform="translate(1250 286)">
+    <rect x="0" y="0" width="76" height="226" rx="23" fill="#e7e6d7" fill-opacity=".12" stroke="#fff" stroke-opacity=".27"/>
+    <g fill="#f2ead6"><rect x="20" y="19" width="36" height="36" rx="12"/><rect x="20" y="68" width="36" height="36" rx="12"/><rect x="20" y="117" width="36" height="36" rx="12"/><rect x="20" y="177" width="36" height="30" rx="10"/></g>
+    <g fill="#52675d"><circle cx="38" cy="37" r="8"/><path d="M29 88h18v8H29zM31 132h14v6H31zM32 184h12v12H32z"/></g>
+    <rect x="4" y="66" width="3" height="39" rx="2" fill="#e8d5a6"/>
+  </g>
+  <text x="1273" y="535" fill="#c3d0c4" font-family="sans-serif" font-size="12">MOONLIT DOCK</text>
+</svg>
