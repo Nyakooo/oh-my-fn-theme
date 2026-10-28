@@ -1,5 +1,7 @@
 "use strict";
 
+importScripts("theme-settings.js", "theme-sync.js");
+
 const SITE_KEY = "fnosSites";
 let registrationSync = Promise.resolve();
 
@@ -36,7 +38,7 @@ async function syncRegisteredScripts() {
     const script = {
       id,
       matches: [site.matchPattern],
-      js: ["content.js"],
+      js: ["theme-settings.js", "content.js"],
       css: ["theme.css"],
       runAt: "document_start",
       persistAcrossSessions: true
@@ -68,11 +70,47 @@ function scheduleRegistrationSync() {
 chrome.runtime.onInstalled.addListener(scheduleRegistrationSync);
 chrome.runtime.onStartup.addListener(scheduleRegistrationSync);
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === "local" && changes[SITE_KEY]) scheduleRegistrationSync();
+  if (area === "local" && (changes[SITE_KEY] || changes.fnosBrand)) {
+    void scheduleRegistrationSync().then(() => refreshAuthorizedTabs());
+  }
 });
 
 // Dynamic registrations can be lost or retain an old definition after an extension reload.
 void scheduleRegistrationSync();
+
+// Saving is also a recovery path for tabs that missed dynamic injection.
+// Recheck stored origins and host permissions before touching an open tab.
+async function refreshAuthorizedTabs(onlyTab) {
+  const { fnosSites = [] } = await chrome.storage.local.get(SITE_KEY);
+  if (!Array.isArray(fnosSites) || !fnosSites.length) return;
+  const tabs = onlyTab ? [onlyTab] : await chrome.tabs.query({});
+  await Promise.all(tabs.map(async tab => {
+    if (!tab.id || !tab.url) return;
+    let origin;
+    try { origin = new URL(tab.url).origin; } catch { return; }
+    const site = fnosSites.find(site => site.origin === origin);
+    if (!site?.matchPattern || !await chrome.permissions.contains({ origins: [site.matchPattern] })) return;
+    try {
+      const [existing] = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: async () => {
+          if (typeof window.__ohMyFnOSThemeRefresh !== "function") return false;
+          await window.__ohMyFnOSThemeRefresh();
+          return true;
+        }
+      });
+      if (existing?.result) return;
+      await chrome.scripting.insertCSS({ target: { tabId: tab.id }, files: ["theme.css"] });
+      await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["theme-settings.js", "content.js"] });
+    } catch (error) {
+      // A tab can navigate or close while a save is being applied.
+      console.warn("Unable to refresh fnOS theme:", error.message);
+    }
+  }));
+}
+chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+  if (change.status === "complete") void refreshAuthorizedTabs({ id: tabId, url: tab.url });
+});
 
 chrome.permissions.onRemoved.addListener(async (removed) => {
   const { [SITE_KEY]: sites = [] } = await chrome.storage.local.get(SITE_KEY);
@@ -85,4 +123,30 @@ chrome.permissions.onRemoved.addListener(async (removed) => {
     if (!removedOrigins.has(site.matchPattern)) continue;
     await chrome.scripting.unregisterContentScripts({ ids: [scriptIdFor(site.origin)] }).catch(() => {});
   }
+});
+
+
+// Local edits stay immediate. Debounce browser-account writes and retain an alarm
+// so a suspended service worker can resume pending uploads.
+let syncTimer;
+const SYNC_ALARM = "fnos-theme-sync";
+function scheduleThemeSync(retry = false) {
+  clearTimeout(syncTimer);
+  void chrome.alarms.create(SYNC_ALARM, { delayInMinutes: retry ? 1 : 0.5 });
+  syncTimer = setTimeout(() => void themeSync.flush(), retry ? 60000 : 2500);
+}
+const themeSync = FnOSThemeSync.create(chrome, scheduleThemeSync);
+void themeSync.initialize();
+chrome.alarms.onAlarm.addListener(alarm => {
+  if (alarm.name === SYNC_ALARM) void themeSync.flush();
+});
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && changes.fnosBrand && !FnOSThemeSync.equal(changes.fnosBrand.oldValue?.minimal, changes.fnosBrand.newValue?.minimal)) void themeSync.localChanged();
+  if (area === "sync" && Object.keys(changes).some(key => key.startsWith(FnOSThemeSync.PREFIX))) void themeSync.remoteChanged();
+});
+
+chrome.runtime.onMessage.addListener((message, sender, respond) => {
+  if (message?.type !== "fnos-theme-sync-now") return;
+  themeSync.localChanged().then(() => themeSync.flush()).then(() => respond({ ok: true }), () => respond({ ok: false }));
+  return true;
 });

@@ -47,19 +47,13 @@ async function applyToCurrentFnOSTab(site) {
       const pageText = `${document.title} ${document.body?.innerText?.slice(0, 2000) || ""}`;
       const hasFnOSBrand = /fnOS|飞牛|私有云/i.test(pageText);
       const hasLoginForm = Boolean(document.querySelector('input[type="password"], input[autocomplete="current-password"]'));
-      const hasDock = [...document.querySelectorAll(".h-full.rounded-md.border")].some((element) =>
-        ["h-full", "rounded-md", "border", "backdrop-blur-[20px]"].every((name) => element.classList.contains(name)) &&
-        [...element.querySelectorAll(".flex.items-center.justify-center")].some((item) =>
-          ["flex", "h-10", "w-[47px]", "items-center", "justify-center"].every((name) => item.classList.contains(name))
-        )
-      );
-      return (hasLoginForm && hasFnOSBrand) || hasDock;
+      return hasLoginForm && hasFnOSBrand;
     }
   });
   if (!detection?.result) return "not-fnos";
 
   await chrome.scripting.insertCSS({ target: { tabId: tab.id }, files: ["theme.css"] });
-  await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["content.js"] });
+  await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["theme-settings.js", "content.js"] });
   return "applied";
 }
 
@@ -107,7 +101,8 @@ function normalizeBrand(brand = {}) {
     title: typeof brand.title === "string" ? brand.title : DEFAULT_BRAND.title,
     favicon: typeof brand.favicon === "string" ? brand.favicon : "",
     enabled: brand.enabled !== false,
-    theme: THEME_IDS.has(brand.theme) ? brand.theme : DEFAULT_BRAND.theme
+    theme: THEME_IDS.has(brand.theme) ? brand.theme : DEFAULT_BRAND.theme,
+    minimal: FnOSTheme.normalize(brand.minimal)
   };
 }
 
@@ -130,7 +125,7 @@ async function registerSiteScript(site) {
   const script = {
     id,
     matches: [site.matchPattern],
-    js: ["content.js"],
+    js: ["theme-settings.js", "content.js"],
     css: ["theme.css"],
     runAt: "document_start",
     persistAcrossSessions: true

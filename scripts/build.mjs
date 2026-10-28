@@ -9,7 +9,8 @@ const dist = resolve(root, 'dist');
 const packageDir = join(dist, `oh-my-fn-theme-${version}`);
 const files = [
   'manifest.json', 'background.js', 'content.js', 'theme.css',
-  'options.html', 'options.js', 'options.css', 'assets'
+  'options.html', 'options.js', 'options.css', 'theme-settings.js', 'theme-sync.js',
+  'editor.html', 'editor.css', 'editor.js', 'preview.html', 'preview.css', 'preview.js', 'assets'
 ];
 
 if (!version || !Array.isArray(manifest.permissions)) throw new Error('manifest.json 缺少版本或权限定义');

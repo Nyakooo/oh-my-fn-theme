@@ -380,402 +380,306 @@ html.omf-login-page .omf-card-bottom > b { color: #c5ae81 !important; font-size:
   }
 }
 
-/* The default theme keeps only the fnOS form and a quiet, centered surface. */
+/* Minimal: warm paper, one continuous surface. */
+html.omf-login-page[data-omf-theme="minimal"] .login-form { display: flow-root !important; }
 html.omf-login-page[data-omf-theme="minimal"] body {
-  background:
-    radial-gradient(ellipse at 78% 8%, rgb(211 233 226 / 72%), transparent 38%),
-    radial-gradient(ellipse at 8% 85%, rgb(235 221 201 / 42%), transparent 34%),
-    linear-gradient(135deg, #f7f9f6, #e9efec) !important;
-  color: #172832 !important;
-  font-family: Inter, "Segoe UI", "PingFang SC", sans-serif !important;
+  margin:0 !important;
+  background:#f3f2ee !important;
+  color:#30332e !important;
+  font-family:"Segoe UI","PingFang SC",sans-serif !important;
 }
 
-html.omf-login-page[data-omf-theme="minimal"] body::before,
-html.omf-login-page[data-omf-theme="minimal"] body::after { content: none !important; }
+html.omf-login-page[data-omf-theme="minimal"] body::before,html.omf-login-page[data-omf-theme="minimal"] body::after {
+  content:none !important;
+}
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] {
-  display: grid !important;
-  width: min(100% - 72px, 1040px) !important;
-  min-height: 100vh !important;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, .86fr) !important;
-  align-items: center !important;
-  justify-items: center !important;
-  gap: clamp(42px, 7vw, 94px) !important;
-  padding: 32px 0 !important;
-  color: #172832 !important;
+  width:min(960px,calc(100% - 96px)) !important;
+  min-height:600px !important;
+  grid-template-columns:1fr 1fr !important;
+  align-items:stretch !important;
+  gap:0 !important;
+  padding:0 !important;
+  margin: max(56px,calc((100vh - 600px)/2)) auto !important;
+  background:#fff !important;
+  border:1px solid #e5e4de !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 20px 70px #30332e08 !important;
+  color:#30332e !important;
 }
 
 html.omf-login-page .omf-minimal-welcome {
-  display: flex !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  padding-left: clamp(0px, 3vw, 42px) !important;
-  color: #172832 !important;
+  position:relative !important;
+  display:flex !important;
+  flex-direction:column !important;
+  padding:44px !important;
+  background:#eaece5 !important;
+  min-width:0 !important;
 }
 
 html.omf-login-page .omf-minimal-brand {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 9px !important;
-  color: #33464c !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  letter-spacing: .08em !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  font-size:18px !important;
+  font-weight:650 !important;
+  letter-spacing:-.03em !important;
 }
 
 html.omf-login-page .omf-minimal-brand > span:first-child {
-  display: grid !important;
-  width: 30px !important;
-  height: 30px !important;
-  place-items: center !important;
-  border-radius: 9px !important;
-  background: linear-gradient(145deg, #4bb49d, #4383a0) !important;
-  color: white !important;
-  font-size: 15px !important;
+  display:grid !important;
+  place-items:center !important;
+  width:32px !important;
+  height:32px !important;
+  background:#36433a !important;
+  border-radius:10px !important;
+  color:#fff !important;
+  font-size:23px !important;
+  font-weight:400 !important;
 }
 
 html.omf-login-page .omf-minimal-brand i {
-  margin-left: 4px !important;
-  color: #778984 !important;
-  font-size: 8px !important;
-  font-style: normal !important;
-  letter-spacing: .17em !important;
+  display:block !important;
+  margin-top:3px !important;
+  color:#7b8276 !important;
+  font-size:8px !important;
+  letter-spacing:.16em !important;
+  font-weight:500 !important;
+  font-style:normal !important;
 }
 
-html.omf-login-page .omf-minimal-copy { margin: clamp(38px, 7vh, 72px) 0 0 7px !important; }
+html.omf-login-page .omf-minimal-copy {
+  margin-top:64px !important;
+}
+
 html.omf-login-page .omf-minimal-copy > p {
-  margin: 0 0 12px !important;
-  color: #478878 !important;
-  font-size: 9px !important;
-  font-weight: 700 !important;
-  letter-spacing: .17em !important;
+  margin:0 0 20px !important;
+  font-size:9px !important;
+  letter-spacing:.16em !important;
+  color:#74816c !important;
+  font-weight:600 !important;
 }
 
 html.omf-login-page .omf-minimal-copy h1 {
-  margin: 0 !important;
-  color: #172832 !important;
-  font-size: clamp(34px, 4.2vw, 52px) !important;
-  font-weight: 550 !important;
-  letter-spacing: -.055em !important;
-  line-height: 1.24 !important;
+  margin:0 !important;
+  font-size:38px !important;
+  line-height:1.5 !important;
+  letter-spacing:-.04em !important;
+  font-weight:500 !important;
+  color:#354033 !important;
 }
 
 html.omf-login-page .omf-minimal-copy > span {
-  display: block !important;
-  margin-top: 15px !important;
-  color: #65757a !important;
-  font-size: 13px !important;
+  display:block !important;
+  margin-top:18px !important;
+  font-size:12px !important;
+  line-height:1.9 !important;
+  color:#7b8175 !important;
+}
+
+html.omf-login-page .omf-minimal-orbit {
+  margin-top:auto !important;
+  padding-top:32px !important;
+}
+
+html.omf-login-page .omf-minimal-orbit > div {
+  width:94px !important;
+  height:58px !important;
+  border:1px solid #a6b09c !important;
+  border-radius:50% !important;
+  transform:rotate(-25deg) !important;
+  position:relative !important;
+  margin:0 0 30px 6px !important;
+}
+
+html.omf-login-page .omf-minimal-orbit > div::before {
+  content:"" !important;
+  position:absolute !important;
+  inset:-18px 19px !important;
+  border:1px solid #a6b09c !important;
+  border-radius:50% !important;
+  transform:rotate(-30deg) !important;
+}
+
+html.omf-login-page .omf-minimal-orbit > div::after {
+  content:"" !important;
+  position:absolute !important;
+  width:10px !important;
+  height:10px !important;
+  border-radius:50% !important;
+  background:#78866d !important;
+  top:4px !important;
+  right:8px !important;
+  box-shadow:0 0 0 5px #eaece5 !important;
+}
+
+html.omf-login-page .omf-minimal-orbit > span {
+  font-size:10px !important;
+  color:#8a9083 !important;
+  letter-spacing:.08em !important;
 }
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card {
-  width: min(100%, 420px) !important;
-  padding: 28px !important;
-  border: 1px solid rgb(255 255 255 / 82%) !important;
-  border-radius: 14px !important;
-  background: rgb(255 255 255 / 88%) !important;
-  box-shadow: 0 18px 48px rgb(36 67 59 / 11%) !important;
-  color: #172832 !important;
-  backdrop-filter: blur(16px) !important;
+  width:100% !important;
+  padding:64px 48px 32px !important;
+  background:#fff !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  color:#30332e !important;
+}
+
+html.omf-login-page .omf-minimal-heading {
+  margin-bottom:30px !important;
+}
+
+html.omf-login-page .omf-minimal-heading > p {
+  margin:0 0 12px !important;
+  color:#9a9d94 !important;
+  font-size:9px !important;
+  letter-spacing:.15em !important;
+}
+
+html.omf-login-page .omf-minimal-heading h2 {
+  margin:0 0 10px !important;
+  font-size:26px !important;
+  font-weight:550 !important;
+  letter-spacing:-.03em !important;
+  color:#30332e !important;
+}
+
+html.omf-login-page .omf-minimal-heading > span {
+  color:#92958d !important;
+  font-size:12px !important;
+}
+
+html.omf-login-page .omf-minimal-footer {
+  margin-top:26px !important;
+  padding-top:21px !important;
+  border-top:1px solid #efefe9 !important;
+  color:#a0a298 !important;
+  font-size:10px !important;
+  text-align:center !important;
+  letter-spacing:.05em !important;
+}
+
+html.omf-login-page .omf-minimal-footer > span {
+  margin-right:5px !important;
+  color:#7e8b73 !important;
 }
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper {
-  min-height: 46px !important;
-  border-color: #dfe2dd !important;
-  border-radius: 8px !important;
-  background: #fff !important;
-  box-shadow: none !important;
+  min-height:46px !important;
+  border:1px solid #e5e5de !important;
+  border-radius:7px !important;
+  background:#fafaf7 !important;
+  box-shadow:none !important;
 }
 
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper:focus-within {
-  border-color: #747d75 !important;
-  background: #fff !important;
-  box-shadow: 0 0 0 3px rgb(80 92 82 / 9%) !important;
+  border-color:#87947e !important;
+  box-shadow:0 0 0 3px #87947e14 !important;
+  background:#fff !important;
 }
 
-html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper .semi-input,
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
-  min-height: 44px !important;
-  color: #282d29 !important;
+  min-height:44px !important;
+  color:#30332e !important;
+  font-size:13px !important;
 }
 
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel label {
+  color:#72766c !important;
+  font-size:12px !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input::placeholder {
+  color:#b0b2a9 !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"],html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"] {
+  min-height:46px !important;
+  border:1px solid #343e32 !important;
+  border-radius:7px !important;
+  background:#343e32 !important;
+  color:#fff !important;
+  box-shadow:none !important;
+  font-size:13px !important;
+  font-weight:500 !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"]:not(:disabled):hover {
+  background:#47533f !important;
+  box-shadow:none !important;
+  transform:none !important;
+}
+
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"]:disabled {
+  background:#b6bdaf !important;
+  border-color:#b6bdaf !important;
+  box-shadow:none !important;
+}
+
+@media (max-width: 760px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] { width:min(440px,calc(100% - 32px)) !important; margin:64px auto 32px !important; min-height:0 !important; grid-template-columns:1fr !important; }
+  html.omf-login-page .omf-minimal-welcome { padding:28px !important; }
+  html.omf-login-page .omf-minimal-copy { margin-top:28px !important; }
+  html.omf-login-page .omf-minimal-copy h1 { font-size:28px !important; }
+  html.omf-login-page .omf-minimal-copy h1 br { display:none !important; }
+  html.omf-login-page .omf-minimal-copy > span { margin-top:12px !important; }
+  html.omf-login-page .omf-minimal-orbit { display:none !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding:30px 28px 24px !important; }
+}
+
+/* Shared customizable minimal theme; used by the live page and editor preview. */
+html.omf-login-page[data-omf-theme="minimal"] body { background: var(--omf-page-bg, #f3f2ee) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] {
+  width: min(var(--omf-width, 960px), calc(100% - 48px)) !important;
+  background: var(--omf-card, #fff) !important;
+  border-color: var(--omf-border, #e5e5de) !important;
+  border-radius: var(--omf-radius, 20px) !important;
+  color: var(--omf-text, #354033) !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-shadow="false"] { box-shadow: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="reverse"] .omf-minimal-welcome { order: 1 !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="stack"] { grid-template-columns: 1fr !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="stack"] .omf-minimal-orbit { display: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-ornament="false"] .omf-minimal-orbit > div { display: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-welcome { background: var(--omf-side) !important; padding: var(--omf-padding) !important; color: var(--omf-text) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { background: var(--omf-card) !important; padding: calc(var(--omf-padding) + 20px) var(--omf-padding) 32px !important; color: var(--omf-text) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-brand { color: var(--omf-text) !important; font-size: calc(18px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-brand strong { font-weight: var(--omf-weight) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-brand i { display: block !important; margin-left: 0 !important; font-size: calc(8px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-brand > span:first-child { background: var(--omf-accent) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] [data-omf-text] { white-space: pre-wrap !important; overflow-wrap: anywhere !important; font-family: var(--omf-font) !important; letter-spacing: var(--omf-spacing) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-copy h1 { color: var(--omf-text) !important; font-size: calc(38px * var(--omf-scale)) !important; font-weight: var(--omf-weight) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-copy > p { color: var(--omf-muted) !important; font-size: calc(9px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-copy > span { color: var(--omf-muted) !important; font-size: calc(12px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-orbit > span { color: var(--omf-muted) !important; font-size: calc(10px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-orbit > div { border-color: var(--omf-muted) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-heading h2 { color: var(--omf-text) !important; font-size: calc(26px * var(--omf-scale)) !important; font-weight: var(--omf-weight) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-heading > p { color: var(--omf-muted) !important; font-size: calc(9px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-heading > span { color: var(--omf-muted) !important; font-size: calc(12px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-footer { color: var(--omf-muted) !important; font-size: calc(10px * var(--omf-scale)) !important; border-color: var(--omf-border) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-footer .omf-footer-copy { color: inherit !important; font-size: inherit !important; margin: 0 !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-native-slot { font-family: var(--omf-font) !important; font-size: calc(13px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper { background: var(--omf-input) !important; border-color: var(--omf-border) !important; border-radius: var(--omf-inputRadius) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel .semi-input-wrapper:focus-within { border-color: var(--omf-accent) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) { color: var(--omf-text) !important; font-size: calc(13px * var(--omf-scale)) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel label { color: var(--omf-muted) !important; font-size: calc(12px * var(--omf-scale)) !important; font-family: var(--omf-font) !important; }
 html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"],
-html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"] {
-  min-height: 46px !important;
-  border-color: #398c7d !important;
-  border-radius: 8px !important;
-  background: #398c7d !important;
-  color: #fff !important;
-  box-shadow: 0 5px 12px rgb(57 140 125 / 19%) !important;
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"] { background: var(--omf-accent) !important; border-color: var(--omf-accent) !important; border-radius: var(--omf-buttonRadius) !important; font-size: calc(13px * var(--omf-scale)) !important; font-family: var(--omf-font) !important; font-weight: var(--omf-weight) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"]:disabled { opacity: .5 !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="checkbox"] { accent-color: var(--omf-accent) !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-module-hidden { display: none !important; }
+@media (max-width: 760px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] { width: min(440px, calc(100% - 32px)) !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-welcome { padding: min(var(--omf-padding), 28px) !important; order: 0 !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding: 30px min(var(--omf-padding), 28px) 24px !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-minimal-copy h1 { font-size: calc(28px * var(--omf-scale)) !important; }
 }
 
-html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel button[type="submit"]:hover,
-html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-panel input[type="submit"]:hover { background: #317c70 !important; }
-
-@media (max-width: 940px) {
-  html.omf-login-page .omf-login-stage[data-theme="minimal"] {
-    width: min(100% - 48px, 820px) !important;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr) !important;
-    gap: 30px !important;
-  }
-  html.omf-login-page .omf-minimal-copy h1 { font-size: clamp(32px, 5vw, 44px) !important; }
-}
-
-@media (max-width: 560px) {
-  html.omf-login-page .omf-login-stage[data-theme="minimal"] {
-    display: flex !important;
-    width: min(100% - 38px, 460px) !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0 !important;
-    padding: 26px 0 22px !important;
-  }
-  html.omf-login-page .omf-minimal-welcome { padding: 0 4px !important; }
-  html.omf-login-page .omf-minimal-copy { margin: 28px 0 20px 4px !important; }
-  html.omf-login-page .omf-minimal-copy h1 { font-size: 35px !important; }
-  html.omf-login-page .omf-minimal-copy > span { margin-top: 8px !important; }
-  html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-login-card { padding: 24px 20px !important; }
-}
-
-/* fnOS desktop Dock: decorate its native DOM in place and preserve its actions. */
-html[data-omf-dock-theme="moonlit"] .omf-dock-host {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-root {
-  box-sizing: border-box !important;
-  width: 42px !important;
-  max-width: 42px !important;
-  height: auto !important;
-  max-height: calc(100vh - 24px) !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  border: 1px solid rgb(255 255 255 / 10%) !important;
-  border-radius: 12px !important;
-  background: rgb(14 16 19 / 96%) !important;
-  box-shadow: 0 10px 24px rgb(0 0 0 / 30%), inset 0 1px rgb(255 255 255 / 5%) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
-  backdrop-filter: blur(18px) saturate(1.08) !important;
-  transition: background .18s ease !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-root:hover {
-  background: rgb(18 20 23 / 97%) !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-stack {
-  display: flex !important;
-  height: auto !important;
-  min-height: 0 !important;
-  flex: 0 0 auto !important;
-  flex-direction: column !important;
-  gap: 5px !important;
-  padding: 6px 2px !important;
-}
-html[data-omf-dock-theme="moonlit"] .omf-dock-root .relative.flex.flex-1.flex-col { min-height: 0 !important; flex: 0 0 auto !important; }
-html[data-omf-dock-theme="moonlit"] .omf-dock-scroll {
-  position: relative !important;
-  inset: auto !important;
-  display: flex !important;
-  max-height: calc(100vh - 190px) !important;
-  flex: 0 1 auto !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 5px !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0 !important;
-  scrollbar-width: none !important;
-}
-html[data-omf-dock-theme="moonlit"] .omf-dock-scroll::-webkit-scrollbar { display: none !important; }
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item {
-  position: relative !important;
-  box-sizing: border-box !important;
-  width: 36px !important;
-  min-width: 36px !important;
-  height: 36px !important;
-  min-height: 36px !important;
-  flex: 0 0 36px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 1px solid transparent !important;
-  border-radius: 9px !important;
-  background: transparent !important;
-  color: #c3c8ce !important;
-  cursor: pointer !important;
-  transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s ease, border-color .18s ease, box-shadow .18s ease !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item:hover {
-  z-index: 2 !important;
-  border-color: rgb(255 255 255 / 8%) !important;
-  background: rgb(255 255 255 / 9%) !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item:focus-visible {
-  outline: 2px solid #39a8ff !important;
-  outline-offset: 1px !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item.active,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"],
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"],
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"] {
-  border-color: rgb(255 255 255 / 25%) !important;
-  background: linear-gradient(145deg, #f5f6f7, #e8eaed) !important;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 23%), inset 0 1px #fff !important;
-  color: #32383e !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item.active::before,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"]::before,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"]::before,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"]::before {
-  position: absolute !important;
-  top: 50% !important;
-  display: none !important;
-  content: "" !important;
-  transform: translateY(-50%) !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item img,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item svg { max-width: 22px !important; max-height: 22px !important; }
-html[data-omf-dock-theme="moonlit"] .omf-dock-item [aria-label] { color: inherit !important; }
-
-@media (max-width: 620px) {
-  html[data-omf-dock-theme="moonlit"] .omf-dock-root { width: 42px !important; max-width: 42px !important; }
-  html[data-omf-dock-theme="moonlit"] .omf-dock-item { width: 36px !important; min-width: 36px !important; height: 36px !important; min-height: 36px !important; flex-basis: 36px !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html[data-omf-dock-theme="moonlit"] .omf-dock-root,
-  html[data-omf-dock-theme="moonlit"] .omf-dock-item { transition-duration: .01ms !important; }
-}
-
-/* Both styles use a short, vertically centered Dock with a scrollable app list. */
-html[data-omf-dock="on"] .omf-dock-host {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-root {
-  box-sizing: border-box !important;
-  width: 40px !important;
-  max-width: 40px !important;
-  height: auto !important;
-  max-height: min(260px, calc(100vh - 24px)) !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  border: 1px solid rgb(255 255 255 / 8%) !important;
-  border-radius: 10px !important;
-  background: rgb(19 21 23 / 94%) !important;
-  box-shadow: 0 8px 22px rgb(0 0 0 / 27%), inset 0 1px rgb(255 255 255 / 4%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(1.04) !important;
-  backdrop-filter: blur(16px) saturate(1.04) !important;
-  transition: background .18s ease, border-color .18s ease !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-root {
-  border-color: rgb(220 187 133 / 20%) !important;
-  background: rgb(18 29 31 / 95%) !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-root .relative.flex.flex-1.flex-col { min-height: 0 !important; flex: 0 0 auto !important; }
-
-html[data-omf-dock="on"] .omf-dock-stack {
-  display: flex !important;
-  height: auto !important;
-  min-height: 0 !important;
-  flex: 0 0 auto !important;
-  flex-direction: column !important;
-  gap: 3px !important;
-  padding: 4px 2px !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-scroll {
-  position: relative !important;
-  inset: auto !important;
-  display: flex !important;
-  max-height: min(102px, calc(100vh - 190px)) !important;
-  flex: 0 1 auto !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 3px !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0 !important;
-  scrollbar-width: none !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-scroll::-webkit-scrollbar { display: none !important; }
-
-html[data-omf-dock="on"] .omf-dock-item {
-  position: relative !important;
-  box-sizing: border-box !important;
-  width: 32px !important;
-  min-width: 32px !important;
-  height: 32px !important;
-  min-height: 32px !important;
-  flex: 0 0 32px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 1px solid transparent !important;
-  border-radius: 7px !important;
-  background: transparent !important;
-  color: #c3c8ce !important;
-  cursor: pointer !important;
-  transition: background .16s ease, border-color .16s ease, color .16s ease !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-item:hover {
-  z-index: 2 !important;
-  border-color: rgb(255 255 255 / 8%) !important;
-  background: rgb(255 255 255 / 8%) !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-item:focus-visible { outline: 2px solid #76a9d1 !important; outline-offset: 1px !important; }
-
-html[data-omf-dock="on"] .omf-dock-item.active,
-html[data-omf-dock="on"] .omf-dock-item[aria-current="page"],
-html[data-omf-dock="on"] .omf-dock-item[aria-selected="true"],
-html[data-omf-dock="on"] .omf-dock-item[data-selected="true"] {
-  border-color: rgb(130 171 193 / 28%) !important;
-  background: rgb(130 171 193 / 15%) !important;
-  color: #edf4f6 !important;
-}
-
-html[data-omf-dock-theme="moonlit"] .omf-dock-item:hover { border-color: rgb(226 195 145 / 17%) !important; background: rgb(226 195 145 / 8%) !important; }
-html[data-omf-dock-theme="moonlit"] .omf-dock-item:focus-visible { outline-color: #d9b77d !important; }
-html[data-omf-dock-theme="moonlit"] .omf-dock-item.active,
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-current="page"],
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[aria-selected="true"],
-html[data-omf-dock-theme="moonlit"] .omf-dock-item[data-selected="true"] {
-  border-color: rgb(230 198 147 / 40%) !important;
-  background: linear-gradient(145deg, rgb(225 195 145 / 22%), rgb(199 151 111 / 14%)) !important;
-  color: #f0dfc2 !important;
-}
-
-html[data-omf-dock="on"] .omf-dock-item img,
-html[data-omf-dock="on"] .omf-dock-item svg { max-width: 21px !important; max-height: 21px !important; }
-html[data-omf-dock="on"] .omf-dock-item [aria-label] { color: inherit !important; }
-
-@media (max-width: 620px) {
-  html[data-omf-dock="on"] .omf-dock-root { width: 38px !important; max-width: 38px !important; }
-  html[data-omf-dock="on"] .omf-dock-item { width: 30px !important; min-width: 30px !important; height: 30px !important; min-height: 30px !important; flex-basis: 30px !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-html[data-omf-dock="on"] .omf-dock-root,
-html[data-omf-dock="on"] .omf-dock-item { transition-duration: .01ms !important; }
-}
+html.omf-login-page .omf-brand-icon img,
+html.omf-login-page .omf-minimal-brand > span:first-child img { display:block !important; width:100% !important; height:100% !important; object-fit:contain !important; }

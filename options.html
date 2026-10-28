@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Oh My fnOS Theme</title>
+    <title>飞牛 fnOS 登录页主题</title>
     <link rel="stylesheet" href="options.css">
   </head>
   <body>
     <main class="shell">
       <header class="masthead">
-        <div class="brand-mark" aria-hidden="true">M</div>
+        <img class="brand-mark" src="assets/icon.svg" alt="飞牛 fnOS 登录页主题图标">
         <div>
           <p class="eyebrow">BETA · LOCAL BROWSER THEME</p>
-          <h1>Oh My fnOS</h1>
+          <h1>Fn主题</h1>
           <p class="lede">只在你确认的 fnOS 地址上运行，不修改 NAS 系统。</p>
         </div>
       </header>
@@ -44,17 +44,17 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">FNOS THEME</p>
-            <h2 id="theme-heading">登录页主题与桌面 Dock</h2>
+            <h2 id="theme-heading">登录页主题</h2>
           </div>
           <span class="preview-tag">预览设置</span>
         </div>
-        <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用 fnOS 主题</strong><small>月夜居所同步调整桌面 Dock；极简保留 fnOS 原生外观</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
+        <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用 fnOS 主题</strong><small>选择极简或月夜居所登录页主题</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
         <fieldset class="theme-choices">
           <legend>选择登录页主题</legend>
           <label class="theme-choice">
             <input type="radio" name="login-theme" value="minimal" checked>
             <span class="theme-swatch minimal-swatch" aria-hidden="true"><i></i></span>
-            <span class="theme-choice-copy"><strong>极简</strong><small>干净留白、专注登录，默认主题</small></span>
+            <span class="theme-choice-copy"><strong>极简</strong><small>暖白纸面、灰绿双栏，默认主题</small></span>
           </label>
           <label class="theme-choice">
             <input type="radio" name="login-theme" value="moonlit">
@@ -71,16 +71,18 @@
             <span class="file-field"><img id="favicon-preview" src="assets/icon.svg" alt="图标预览"><input id="brand-favicon" type="file" accept="image/png,image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/webp"><span id="favicon-name">使用默认图标</span><button id="choose-favicon" class="text-button" type="button">选择文件</button><button id="reset-favicon" class="text-button" type="button">恢复默认</button></span>
           </label>
         </div>
+        <p><a class="button primary" href="editor.html" target="_blank">打开主题编辑器 ↗</a></p>
         <div class="actions">
           <button id="save-brand" class="button primary" type="button">保存外观</button>
           <button id="reset-brand" class="button secondary" type="button">恢复默认</button>
           <span id="brand-message" class="message" role="status" aria-live="polite"></span>
         </div>
-        <p class="fine-print">“月夜居所”会同步调整桌面 Dock；登录表单与认证请求仍由 fnOS 处理。</p>
+        <p class="fine-print">登录表单与认证请求仍由 fnOS 处理。</p>
       </section>
 
-      <footer>Oh My fnOS Theme <span>·</span> 本地运行，不连接外部服务</footer>
+      <footer>飞牛 fnOS 登录页主题 <span>·</span> 极简配置支持浏览器账户同步</footer>
     </main>
+    <script src="theme-settings.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

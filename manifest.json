@@ -1,25 +1,38 @@
 {
   "manifest_version": 3,
-  "name": "Oh My fnOS Theme",
-  "version": "0.1.10",
-  "description": "为你手动确认的 fnOS 地址应用登录与桌面 Dock 主题。",
+  "name": "飞牛 fnOS 登录页主题",
+  "version": "0.1.12",
+  "description": "为飞牛 fnOS 登录页换上喜欢的风格，支持极简主题文案、配色与布局自定义，实时预览。",
   "icons": {
     "16": "assets/icon16.png",
     "32": "assets/icon32.png",
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
   },
-  "permissions": ["activeTab", "scripting", "storage"],
-  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "alarms"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
+  "options_ui": {
+    "page": "editor.html",
+    "open_in_tab": true
+  },
   "action": {
-    "default_title": "Oh My fnOS Theme",
+    "default_title": "飞牛 fnOS 登录页主题",
     "default_icon": {
       "16": "assets/icon16.png",
       "32": "assets/icon32.png"
     },
     "default_popup": "options.html"
-  }
+  },
+  "short_name": "Fn主题"
 }
