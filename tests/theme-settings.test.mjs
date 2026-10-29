@@ -50,3 +50,13 @@ test('reapplying settings does not retrigger the document style observer', () =>
   apply(stage, { colors: { bg: '#112233' } });
   assert.equal(writes, 2);
 });
+
+test('cat nest layout and illustration survive export/import while unknown values are rejected', () => {
+  const cat = normalize(JSON.parse(JSON.stringify(context.FnOSTheme.cat)));
+  assert.equal(cat.layout.direction, 'nest');
+  assert.equal(cat.layout.illustration, 'cat');
+  assert.equal(cat.visible.form, true);
+  const invalid = normalize({ layout: { direction: 'unknown', illustration: 'https://example.com/cat.svg' } });
+  assert.equal(invalid.layout.direction, defaults.layout.direction);
+  assert.equal(invalid.layout.illustration, defaults.layout.illustration);
+});

@@ -683,3 +683,132 @@ html.omf-login-page .omf-login-stage[data-theme="minimal"] .omf-module-hidden { 
 
 html.omf-login-page .omf-brand-icon img,
 html.omf-login-page .omf-minimal-brand > span:first-child img { display:block !important; width:100% !important; height:100% !important; object-fit:contain !important; }
+
+/* Sakura soda: a local cartoon illustration for the cute editor preset. */
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="bunny"] .omf-minimal-orbit > div {
+  width: min(300px, 100%) !important;
+  height: 180px !important;
+  margin: 0 auto 12px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20300%20180%22%3E%3Cg%20stroke%3D%22%23b56c8c%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M42%20139c-20-1-24-26-5-33%201-21%2032-27%2042-8%2018-7%2034%205%2030%2021h103c-3-19%2021-29%2034-16%2020-6%2034%2023%2014%2033%22%20fill%3D%22%23fff9fc%22%20stroke%3D%22%23e7b8d0%22%2F%3E%3Cellipse%20cx%3D%22150%22%20cy%3D%22154%22%20rx%3D%2281%22%20ry%3D%2210%22%20fill%3D%22%23edc4d7%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M113%2084c-29-49-15-81-2-70%2012%2010%2018%2046%2019%2064m39%200c2-36%2011-68%2024-65%2018%205%209%2049-8%2075%22%20fill%3D%22%23fffdfd%22%2F%3E%3Cpath%20d%3D%22m111%2032%208%2034m68-33-10%2034%22%20stroke%3D%22%23f2b4ce%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22M102%20139c-18-8-17-43%202-56%2023-18%2066-18%2091%201%2018%2014%2016%2045-1%2055-23%2014-68%2015-92%200Z%22%20fill%3D%22%23fffdfd%22%2F%3E%3Cellipse%20cx%3D%22117%22%20cy%3D%22116%22%20rx%3D%2212%22%20ry%3D%226%22%20fill%3D%22%23f4b8ce%22%20stroke%3D%22none%22%2F%3E%3Cellipse%20cx%3D%22182%22%20cy%3D%22116%22%20rx%3D%2212%22%20ry%3D%226%22%20fill%3D%22%23f4b8ce%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M127%20103v6m45-6v6m-29%209%207%205%207-5m-7%205v4%22%20fill%3D%22none%22%20stroke%3D%22%2371445b%22%2F%3E%3Cpath%20d%3D%22m73%2045%203-10%204%2010%2010%204-10%204-4%2010-3-10-10-4Z%22%20fill%3D%22%23ffe6a2%22%20stroke%3D%22%23d6ac60%22%2F%3E%3Cpath%20d%3D%22M228%2069c-17-9-13-24-3-20l5%205%205-5c12-3%2013%2013-7%2020Z%22%20fill%3D%22%23f3a7c7%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center / contain no-repeat !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="bunny"] .omf-minimal-orbit > div::before,
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="bunny"] .omf-minimal-orbit > div::after {
+  content: none !important;
+}
+
+/* Cream cat: self-contained artwork, also available on NAS login pages. */
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="cat"] .omf-minimal-orbit > div {
+  width: min(360px, 100%) !important;
+  height: 210px !important;
+  margin: 0 auto 8px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20360%20210%22%3E%3Cg%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%22180%22%20cy%3D%22182%22%20rx%3D%22137%22%20ry%3D%2212%22%20fill%3D%22%23ddc7a3%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M47%20171c-32-7-26-40%201-42-4-26%2035-39%2051-17%2016-15%2045-5%2044%2013h98c8-23%2042-25%2052-4%2034-7%2048%2036%2015%2049Z%22%20fill%3D%22%23fffdf7%22%20stroke%3D%22%23dfcaa7%22%20stroke-width%3D%222.5%22%2F%3E%3Cpath%20d%3D%22M255%20145c52%2010%2064-14%2048-31-9-9-20-2-14%208%22%20fill%3D%22none%22%20stroke%3D%22%2398643c%22%20stroke-width%3D%2219%22%2F%3E%3Cpath%20d%3D%22M137%20146c-7-65%2047-92%2096-66%2036%2019%2045%2067%208%2078Z%22%20fill%3D%22%23e7b473%22%20stroke%3D%22%2398643c%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22m201%2088%201%2018m19-10%202%2015m19-3-2%2013%22%20fill%3D%22none%22%20stroke%3D%22%23c58b50%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22m75%20109-3-55%2037%2024c17-6%2032-6%2048%200l32-24%201%2058c13%2030-7%2051-52%2052-50%201-78-20-63-55Z%22%20fill%3D%22%23edc48e%22%20stroke%3D%22%2398643c%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22m82%2070%203%2023%2014-8m77-15-15%2015%2015%208%22%20fill%3D%22%23d69a84%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22m123%2083%201%2012m13-14v12m13-10-1%2012%22%20stroke%3D%22%23c58b50%22%20stroke-width%3D%225%22%2F%3E%3Cpath%20d%3D%22M96%20118q8-10%2016%200m44%200q8-10%2016%200%22%20fill%3D%22none%22%20stroke%3D%22%2365462f%22%20stroke-width%3D%223.5%22%2F%3E%3Cpath%20d%3D%22m128%20125%206%205%206-5Z%22%20fill%3D%22%23a96c61%22%2F%3E%3Cpath%20d%3D%22M134%20130q-7%2011-13%203m13-3q6%2011%2013%203%22%20fill%3D%22none%22%20stroke%3D%22%2365462f%22%20stroke-width%3D%222.5%22%2F%3E%3Cellipse%20cx%3D%22100%22%20cy%3D%22132%22%20rx%3D%2212%22%20ry%3D%225%22%20fill%3D%22%23dca48a%22%2F%3E%3Cellipse%20cx%3D%22165%22%20cy%3D%22132%22%20rx%3D%2212%22%20ry%3D%225%22%20fill%3D%22%23dca48a%22%2F%3E%3Cpath%20d%3D%22m79%20124-17-3m17%2012-18%203m128-12%2017-3m-17%2012%2018%203%22%20stroke%3D%22%2398643c%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M105%20155c-9-17%2021-22%2023-6v9m26-3c-3-15%2023-20%2025-4v9%22%20fill%3D%22%23f5d8b1%22%20stroke%3D%22%2398643c%22%20stroke-width%3D%222.5%22%2F%3E%3Cpath%20d%3D%22m267%2053%2010-1-10%2014%2012-1m10-27%2015-1-15%2019%2017-1%22%20fill%3D%22none%22%20stroke%3D%22%23a68a61%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M43%2068c-13-10-3-20%204-11%207-11%2019-1%208%209l-7%206Z%22%20fill%3D%22%23ce9a7c%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center / contain no-repeat !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="cat"] .omf-minimal-orbit > div::before,
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="cat"] .omf-minimal-orbit > div::after { content: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="cat"] .omf-minimal-copy { margin-top: 32px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-illustration="cat"] .omf-minimal-orbit { padding-top: 12px !important; }
+
+/* Cat nest composition: floating login card, perched mascot and a small paper note. */
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] {
+  display: block !important;
+  width: min(440px, calc(100% - 40px)) !important;
+  min-height: 0 !important;
+  margin: 210px auto 70px !important;
+  background: transparent !important;
+  border: 0 !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-welcome { display: contents !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-brand {
+  position: absolute !important;
+  top: -155px !important;
+  left: 0 !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-brand i { letter-spacing: .1em !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-login-card {
+  position: relative !important;
+  z-index: 1 !important;
+  padding: 42px 40px 26px !important;
+  border: 1px solid var(--omf-border) !important;
+  border-radius: var(--omf-radius) !important;
+  box-shadow: 0 24px 60px #68492b12, 0 4px 0 #e8dcc6 !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"][data-shadow="false"] .omf-login-card { box-shadow: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-orbit {
+  display: block !important;
+  position: absolute !important;
+  z-index: 2 !important;
+  width: 280px !important;
+  top: -157px !important;
+  right: -28px !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"][data-illustration="cat"] .omf-minimal-orbit > div { height: 175px !important; margin: 0 !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-orbit > span { display: none !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy {
+  position: absolute !important;
+  top: 70px !important;
+  left: -270px !important;
+  width: 215px !important;
+  margin: 0 !important;
+  padding: 30px 22px !important;
+  background: #f2e5c8 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 12px 22px #68492b0b !important;
+  transform: rotate(-7deg) !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 72px !important;
+  height: 25px !important;
+  top: -12px !important;
+  left: 72px !important;
+  background: #d2b38b70 !important;
+  transform: rotate(3deg) !important;
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy > p { font-size: 8px !important; line-height: 1.7 !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy h1 { font-size: 26px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy > span { font-size: 11px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"]::after {
+  content: "✧  meow, make yourself at home." !important;
+  display: block !important;
+  margin-top: 30px !important;
+  text-align: center !important;
+  color: var(--omf-muted) !important;
+  font-size: 11px !important;
+  letter-spacing: .06em !important;
+}
+@media (max-width: 1060px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-copy { display: none !important; }
+}
+@media (max-width: 520px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] { margin-top: 195px !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-login-card { padding: 36px 26px 24px !important; }
+  html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-orbit { width: 230px !important; top: -145px !important; right: -5px !important; }
+}
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] { margin-top: 170px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-brand { top: -130px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-heading { margin-bottom: 22px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"] .omf-minimal-footer { margin-top: 12px !important; padding-top: 16px !important; }
+html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"]::before {
+  content: "🐾" !important;
+  position: absolute !important;
+  top: 235px !important;
+  right: -125px !important;
+  font-size: 44px !important;
+  opacity: .18 !important;
+  transform: rotate(-20deg) !important;
+  pointer-events: none !important;
+}
+@media (max-width: 760px) {
+  html.omf-login-page .omf-login-stage[data-theme="minimal"][data-direction="nest"]::before { content: none !important; }
+}

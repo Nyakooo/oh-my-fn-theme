@@ -9,7 +9,10 @@ const brand = {
   enabled: true,
   theme: new URLSearchParams(window.location.search).get("theme") === "moonlit" ? "moonlit" : "minimal"
 };
-previewTheme.value = brand.theme;
+const previewPresets = { cat: FnOSTheme.cat, business: FnOSTheme.business, kawaii: FnOSTheme.kawaii };
+const requestedTheme = new URLSearchParams(location.search).get("theme");
+if (Object.hasOwn(previewPresets, requestedTheme)) brand.minimal = FnOSTheme.normalize(previewPresets[requestedTheme]);
+previewTheme.value = Object.hasOwn(previewPresets, requestedTheme) ? requestedTheme : brand.theme;
 
 window.chrome = {
   storage: {
@@ -24,7 +27,8 @@ window.chrome = {
 };
 
 previewTheme.addEventListener("change", () => {
-  brand.theme = previewTheme.value;
+  brand.theme = previewTheme.value === "moonlit" ? "moonlit" : "minimal";
+  brand.minimal = FnOSTheme.normalize(Object.hasOwn(previewPresets, previewTheme.value) ? previewPresets[previewTheme.value] : undefined);
   for (const listener of listeners) listener({ fnosBrand: { newValue: { ...brand } } }, "local");
 });
 

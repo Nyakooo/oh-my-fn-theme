@@ -172,6 +172,21 @@ $$("[data-align]").forEach(button => button.addEventListener("click", () => { co
 for (const key of ["direction", "ornament", "shadow"]) $("#" + key).addEventListener("change", event => {
   config.layout[key] = event.target.type === "checkbox" ? event.target.checked : event.target.value; changed(); schedulePreviewFit();
 });
+for (const [name, settings] of [["奶油猫窝", FnOSTheme.cat], ["商务蓝", FnOSTheme.business], ["樱桃汽水", FnOSTheme.kawaii]]) {
+  const button = document.createElement("button");
+  button.className = "palette";
+  button.title = `应用${name}完整主题：文案、配色与布局`;
+  const strip = document.createElement("span");
+  for (const key of ["bg", "side", "accent", "text"]) {
+    const chip = document.createElement("i"); chip.style.background = settings.colors[key]; strip.append(chip);
+  }
+  button.append(strip, document.createTextNode(`${name} · 完整主题`));
+  button.addEventListener("click", () => {
+    config = FnOSTheme.normalize(settings); renderAll(); changed();
+    toast(`已应用${name}主题，文案、配色与布局已更新`);
+  });
+  $("#palettes").append(button);
+}
 for (const preset of presets) {
   const button = document.createElement("button"); button.className = "palette";
   const strip = document.createElement("span");

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "飞牛 fnOS 登录页主题",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "为飞牛 fnOS 登录页换上喜欢的风格，支持极简主题文案、配色与布局自定义，实时预览。",
   "icons": {
     "16": "assets/icon16.png",
