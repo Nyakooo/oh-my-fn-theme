@@ -48,7 +48,7 @@
           </div>
           <span class="preview-tag">预览设置</span>
         </div>
-        <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用 fnOS 主题</strong><small>选择极简或月夜居所登录页主题</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
+        <label class="theme-toggle"><input id="theme-enabled" type="checkbox" checked><span class="toggle-copy"><strong>启用 fnOS 主题</strong><small>选择登录页主题</small></span><span class="toggle-switch" aria-hidden="true"></span></label>
         <fieldset class="theme-choices">
           <legend>选择登录页主题</legend>
           <label class="theme-choice">
@@ -59,7 +59,12 @@
           <label class="theme-choice">
             <input type="radio" name="login-theme" value="moonlit">
             <span class="theme-swatch moonlit-swatch" aria-hidden="true"><i></i><b></b></span>
-            <span class="theme-choice-copy"><strong>月夜居所</strong><small>深色夜景、暖色卡片与互动插画</small></span>
+            <span class="theme-choice-copy"><strong>月夜居所</strong><small>深色夜景、暖色卡片与互动插画 · 暂不支持自定义</small></span>
+          </label>
+          <label class="theme-choice">
+            <input type="radio" name="login-theme" value="cat">
+            <span class="theme-swatch cat-swatch" aria-hidden="true"></span>
+            <span class="theme-choice-copy"><strong>奶油猫窝</strong><small>橘猫、悬浮卡片与温暖便签</small></span>
           </label>
         </fieldset>
         <div class="fields">
@@ -71,7 +76,8 @@
             <span class="file-field"><img id="favicon-preview" src="assets/icon.svg" alt="图标预览"><input id="brand-favicon" type="file" accept="image/png,image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/webp"><span id="favicon-name">使用默认图标</span><button id="choose-favicon" class="text-button" type="button">选择文件</button><button id="reset-favicon" class="text-button" type="button">恢复默认</button></span>
           </label>
         </div>
-        <p><a class="button primary" href="editor.html" target="_blank">打开主题编辑器 ↗</a></p>
+        <p><a id="open-editor" class="button primary" href="editor.html" target="_blank">编辑极简主题 ↗</a></p>
+        <p id="editor-hint" class="fine-print" role="status" hidden>月夜居所暂不支持自定义文案、配色与布局。仍可修改上方的浏览器标签标题和图标，点击“保存外观”应用。</p>
         <div class="actions">
           <button id="save-brand" class="button primary" type="button">保存外观</button>
           <button id="reset-brand" class="button secondary" type="button">恢复默认</button>
@@ -80,7 +86,7 @@
         <p class="fine-print">登录表单与认证请求仍由 fnOS 处理。</p>
       </section>
 
-      <footer>飞牛 fnOS 登录页主题 <span>·</span> 极简配置支持浏览器账户同步</footer>
+      <footer>飞牛 fnOS 登录页主题 <span>·</span> 极简与奶油猫窝配置支持浏览器账户同步</footer>
     </main>
     <script src="theme-settings.js"></script>
     <script src="options.js"></script>

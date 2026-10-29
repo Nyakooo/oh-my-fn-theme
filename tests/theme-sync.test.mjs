@@ -68,3 +68,22 @@ test('a newer pending local change survives initialization with older remote set
   await local.controller.flush();
   assert.equal(unpack(cloud.data).config.texts.title, 'new');
 });
+
+test('cat and minimal settings sync independently and retain existing local configurations', async () => {
+  const cloud = area();
+  const local = area({ fnosBrand: { theme: 'cat', minimal: { texts: { title: '旧极简配置' } }, cat: { ...structuredClone(context.FnOSTheme.cat), texts: { ...structuredClone(context.FnOSTheme.cat.texts), title: '猫窝修改' } } } });
+  const minimal = create({ storage: { local, sync: cloud } }, () => {});
+  const cat = create({ storage: { local, sync: cloud } }, () => {}, { key: 'cat', prefix: 'fnosCatTheme.v1.', status: 'fnosCatThemeSync' });
+  await Promise.all([minimal.initialize(), cat.initialize()]);
+  await Promise.all([minimal.flush(), cat.flush()]);
+  assert.equal(unpack(cloud.data).config.texts.title, '旧极简配置');
+  assert.equal(unpack(cloud.data, 'fnosCatTheme.v1.').config.texts.title, '猫窝修改');
+  const other = area({ fnosBrand: { theme: 'moonlit', favicon: 'keep' } });
+  const min2 = create({ storage: { local: other, sync: cloud } }, () => {});
+  const cat2 = create({ storage: { local: other, sync: cloud } }, () => {}, { key: 'cat', prefix: 'fnosCatTheme.v1.', status: 'fnosCatThemeSync' });
+  await Promise.all([min2.initialize(), cat2.initialize()]);
+  assert.equal(other.data.fnosBrand.minimal.texts.title, '旧极简配置');
+  assert.equal(other.data.fnosBrand.cat.texts.title, '猫窝修改');
+  assert.equal(other.data.fnosBrand.theme, 'moonlit');
+  assert.equal(other.data.fnosBrand.favicon, 'keep');
+});

@@ -8,7 +8,7 @@ const DEFAULT_BRAND = {
   enabled: true,
   theme: "minimal"
 };
-const THEME_IDS = new Set(["minimal", "moonlit"]);
+const THEME_IDS = new Set(["minimal", "moonlit", "cat"]);
 const form = document.getElementById("site-form");
 const siteInput = document.getElementById("site-input");
 const sitePreview = document.getElementById("site-preview");
@@ -102,7 +102,8 @@ function normalizeBrand(brand = {}) {
     favicon: typeof brand.favicon === "string" ? brand.favicon : "",
     enabled: brand.enabled !== false,
     theme: THEME_IDS.has(brand.theme) ? brand.theme : DEFAULT_BRAND.theme,
-    minimal: FnOSTheme.normalize(brand.minimal)
+    minimal: FnOSTheme.normalize(brand.minimal),
+    ...(brand.cat ? { cat: FnOSTheme.normalizeCat(brand.cat) } : {})
   };
 }
 
@@ -236,6 +237,17 @@ siteInput.addEventListener("input", () => {
   }
 });
 
+function updateEditorLink() {
+  const theme = themeChoices.find(choice => choice.checked)?.value;
+  const editor = document.getElementById("open-editor");
+  const supported = theme !== "moonlit";
+  editor.hidden = !supported;
+  document.getElementById("editor-hint").hidden = supported;
+  if (!supported) { editor.removeAttribute("href"); return; }
+  editor.href = theme === "cat" ? "editor.html?theme=cat" : "editor.html?theme=minimal";
+  editor.textContent = theme === "cat" ? "编辑奶油猫窝主题 ↗" : "编辑极简主题 ↗";
+}
+for (const choice of themeChoices) choice.addEventListener("change", updateEditorLink);
 async function loadBrand() {
   const brand = await getBrand();
   titleInput.value = brand.title;
@@ -243,6 +255,7 @@ async function loadBrand() {
   faviconPreview.src = brand.favicon || "assets/icon.svg";
   themeEnabled.checked = brand.enabled !== false;
   for (const choice of themeChoices) choice.checked = choice.value === brand.theme;
+  updateEditorLink();
 }
 
 faviconInput.addEventListener("change", async () => {
@@ -296,7 +309,8 @@ document.getElementById("save-brand").addEventListener("click", async () => {
 });
 
 document.getElementById("reset-brand").addEventListener("click", async () => {
-  await saveBrand(DEFAULT_BRAND);
+  const brand = await getBrand();
+  await saveBrand({ ...brand, ...DEFAULT_BRAND });
   await loadBrand();
   setMessage(brandMessage, "外观设置已恢复默认。");
 });

@@ -8,7 +8,7 @@
   window.__ohMyFnOSThemeLoaded = true;
 
   const DEFAULT_BRAND = { title: "我的 NAS", favicon: "", enabled: true, theme: "minimal" };
-  const THEMES = new Set(["minimal", "moonlit"]);
+  const THEMES = new Set(["minimal", "moonlit", "cat"]);
   const DEFAULT_FAVICON = "data:image/svg+xml," + encodeURIComponent("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 256 256\"><title>飞牛 fnOS 登录页主题</title><defs><filter id=\"official-mask\" color-interpolation-filters=\"sRGB\"><feColorMatrix type=\"matrix\" values=\"0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.2500000000 0 0 0 -0.2500000000\"/></filter><mask id=\"official-shape\" maskUnits=\"userSpaceOnUse\" x=\"16\" y=\"16\" width=\"224\" height=\"224\"><image x=\"16\" y=\"16\" width=\"224\" height=\"224\" filter=\"url(#official-mask)\" xlink:href=\"data:image/png;base64,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\"/></mask></defs><rect x=\"16\" y=\"16\" width=\"224\" height=\"224\" rx=\"52\" fill=\"#1b2b31\"/><rect x=\"16\" y=\"16\" width=\"224\" height=\"224\" fill=\"#eedab2\" mask=\"url(#official-shape)\"/></svg>");
   let currentBrand = DEFAULT_BRAND;
   let observerQueued = false;
@@ -201,7 +201,7 @@
       if (!document.documentElement.classList.contains("omf-login-page")) document.documentElement.classList.add("omf-login-page");
       if (document.body && !document.body.classList.contains("omf-login-page")) document.body.classList.add("omf-login-page");
       document.documentElement.dataset.omfTheme = theme;
-      FnOSTheme.apply(themeStage, currentBrand.minimal);
+      FnOSTheme.apply(themeStage, theme === "cat" ? FnOSTheme.normalizeCat(currentBrand.cat) : currentBrand.minimal);
       return;
     }
 
@@ -225,7 +225,7 @@
     panelPlaceholder = placeholder;
     themeStage = stage;
     appliedTheme = theme;
-    FnOSTheme.apply(themeStage, currentBrand.minimal);
+    FnOSTheme.apply(themeStage, theme === "cat" ? FnOSTheme.normalizeCat(currentBrand.cat) : currentBrand.minimal);
   };
 
   const applyBranding = () => {

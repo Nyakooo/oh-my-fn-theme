@@ -53,3 +53,4 @@
 @media(max-width:1150px) { .topbar { height:auto; min-height:68px; flex-wrap:wrap; padding:12px 20px; gap:8px; } .topactions { flex-wrap:wrap; } .sync-status { font-size:9px; } }
 
 .identity img.logo { background:transparent; object-fit:contain; border-radius:0; }
+[hidden]{display:none!important}

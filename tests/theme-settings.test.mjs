@@ -60,3 +60,26 @@ test('cat nest layout and illustration survive export/import while unknown value
   assert.equal(invalid.layout.direction, defaults.layout.direction);
   assert.equal(invalid.layout.illustration, defaults.layout.illustration);
 });
+
+test('standalone cat keeps its layout and accepts customized text without altering minimal settings', () => {
+  const legacy = normalize({ texts: { title: '旧配置' }, layout: { direction: 'nest', illustration: 'cat' } });
+  const cat = context.FnOSTheme.normalizeCat({ ...structuredClone(context.FnOSTheme.cat), texts: { title: '我的猫' }, layout: { direction: 'split', illustration: 'orbit' } });
+  assert.equal(cat.texts.title, '我的猫');
+  assert.equal(cat.layout.direction, 'nest');
+  assert.equal(cat.layout.illustration, 'cat');
+  assert.equal(legacy.texts.title, '旧配置');
+  assert.equal(legacy.layout.direction, 'nest');
+});
+
+test('appearance settings retain a standalone cat and the existing minimal configuration', async () => {
+  const source = await readFile(new URL('../options.js', import.meta.url), 'utf8');
+  const start = source.indexOf('function normalizeBrand(');
+  const end = source.indexOf('\nasync function getBrand()', start);
+  const sandbox = vm.createContext({ FnOSTheme: context.FnOSTheme, THEME_IDS: new Set(['minimal', 'moonlit', 'cat']), DEFAULT_BRAND: { title: '我的 NAS', theme: 'minimal' } });
+  vm.runInContext(source.slice(start, end), sandbox);
+  const result = sandbox.normalizeBrand({ theme: 'cat', minimal: { texts: { title: '原来的配置' } }, cat: { ...structuredClone(context.FnOSTheme.cat), texts: { title: '猫窝配置' } } });
+  assert.equal(result.theme, 'cat');
+  assert.equal(result.minimal.texts.title, '原来的配置');
+  assert.equal(result.cat.texts.title, '猫窝配置');
+  assert.equal(result.cat.layout.direction, 'nest');
+});

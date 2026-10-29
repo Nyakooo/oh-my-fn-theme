@@ -42,7 +42,7 @@
     return result;
   }
   function apply(stage, value) {
-    if (!stage || stage.dataset.theme !== "minimal") return;
+    if (!stage || !["minimal", "cat"].includes(stage.dataset.theme)) return;
     const settings = normalize(value);
     const pageStyle = stage.ownerDocument.documentElement.style;
     if (pageStyle.getPropertyValue("--omf-page-bg") !== settings.colors.bg) pageStyle.setProperty("--omf-page-bg", settings.colors.bg);
@@ -90,5 +90,11 @@
     layout: { radius: 28, padding: 40, width: 1040, inputRadius: 14, buttonRadius: 14, direction: "nest", illustration: "cat", ornament: true, shadow: true },
     styles: { welcome: { weight: 700 }, heading: { weight: 600 }, brand: { weight: 700 } }
   });
-  globalThis.FnOSTheme = { defaults, business, kawaii, cat, modules, textSelectors, normalize, apply };
+  function normalizeCat(value) {
+    const result = normalize(value || cat);
+    result.layout.direction = "nest";
+    result.layout.illustration = "cat";
+    return result;
+  }
+  globalThis.FnOSTheme = { defaults, business, kawaii, cat, normalizeCat, modules, textSelectors, normalize, apply };
 })();

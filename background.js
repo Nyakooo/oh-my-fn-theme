@@ -136,17 +136,30 @@ function scheduleThemeSync(retry = false) {
   syncTimer = setTimeout(() => void themeSync.flush(), retry ? 60000 : 2500);
 }
 const themeSync = FnOSThemeSync.create(chrome, scheduleThemeSync);
+let catSyncTimer;
+const CAT_SYNC_ALARM = "fnos-cat-theme-sync";
+function scheduleCatSync(retry = false) {
+  clearTimeout(catSyncTimer);
+  void chrome.alarms.create(CAT_SYNC_ALARM, { delayInMinutes: retry ? 1 : 0.5 });
+  catSyncTimer = setTimeout(() => void catThemeSync.flush(), retry ? 60000 : 2500);
+}
+const catThemeSync = FnOSThemeSync.create(chrome, scheduleCatSync, { key: "cat", prefix: "fnosCatTheme.v1.", status: "fnosCatThemeSync" });
+void catThemeSync.initialize();
 void themeSync.initialize();
 chrome.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === SYNC_ALARM) void themeSync.flush();
+  if (alarm.name === CAT_SYNC_ALARM) void catThemeSync.flush();
 });
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes.fnosBrand && !FnOSThemeSync.equal(changes.fnosBrand.oldValue?.minimal, changes.fnosBrand.newValue?.minimal)) void themeSync.localChanged();
+  if (area === "local" && changes.fnosBrand && !FnOSThemeSync.equal(changes.fnosBrand.oldValue?.cat, changes.fnosBrand.newValue?.cat)) void catThemeSync.localChanged();
   if (area === "sync" && Object.keys(changes).some(key => key.startsWith(FnOSThemeSync.PREFIX))) void themeSync.remoteChanged();
+  if (area === "sync" && Object.keys(changes).some(key => key.startsWith("fnosCatTheme.v1."))) void catThemeSync.remoteChanged();
 });
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
   if (message?.type !== "fnos-theme-sync-now") return;
-  themeSync.localChanged().then(() => themeSync.flush()).then(() => respond({ ok: true }), () => respond({ ok: false }));
+  const controller = message.theme === "cat" ? catThemeSync : themeSync;
+  controller.localChanged().then(() => controller.flush()).then(() => respond({ ok: true }), () => respond({ ok: false }));
   return true;
 });

@@ -8,8 +8,12 @@ const presets = [
   ["奶油可可", "#f7f2ec", "#eee1d2", "#71513f", "#604635"],
   ["柔雾紫", "#f2eff6", "#e8e0ee", "#66516f", "#4c3e56"]
 ];
+const editorTheme = new URLSearchParams(location.search).get("theme") === "cat" ? "cat" : "minimal";
+const themeName = editorTheme === "cat" ? "奶油猫窝" : "极简";
+const syncKey = editorTheme === "cat" ? "fnosCatThemeSync" : "fnosThemeSync";
+const normalizeEditor = value => editorTheme === "cat" ? FnOSTheme.normalizeCat(value) : FnOSTheme.normalize(value);
 const extension = Boolean(globalThis.chrome?.runtime?.id && chrome.storage?.local);
-let config = FnOSTheme.normalize(), selected = "welcome", mobile = false;
+let config = normalizeEditor(), selected = "welcome", mobile = false;
 let loaded = false, revision = 0, savedRevision = 0, saveTimer, saving = false;
 let frameReady = false;
 const frame = $("#theme-preview");
@@ -29,9 +33,9 @@ async function writeBrand(brand) {
   else localStorage.setItem("fnosBrand", JSON.stringify(brand));
 }
 function syncPreview() {
-  if (frameReady) frame.contentWindow.postMessage({ source: "fnos-editor", config, selected }, location.origin);
+  if (frameReady) frame.contentWindow.postMessage({ source: "fnos-editor", config, selected, theme: editorTheme }, location.origin);
   $("#selection-status").textContent = "当前选中：" + definitions[selected].name;
-  $("#change-status").textContent = extension ? "预览已同步 · 自动应用到已启用的极简主题" : "本地预览模式 · 配置仅保存在此浏览器";
+  $("#change-status").textContent = extension ? `预览已同步 · 自动应用到已启用的${themeName}主题` : "本地预览模式 · 配置仅保存在此浏览器";
 }
 function changed() {
   revision += 1;
@@ -48,10 +52,10 @@ async function save() {
   try {
     while (savedRevision !== revision) {
       const targetRevision = revision;
-      const snapshot = FnOSTheme.normalize(config);
+      const snapshot = normalizeEditor(config);
       $("#saved").textContent = "● 正在保存…";
       const brand = await readBrand();
-      await writeBrand({ ...brand, minimal: snapshot });
+      await writeBrand({ ...brand, [editorTheme]: snapshot });
       savedRevision = targetRevision;
     }
     $("#saved").textContent = extension ? "● 已保存到扩展" : "● 已保存到本机预览";
@@ -70,10 +74,19 @@ function field(label, input) {
 function renderText() {
   const root = $("#text-fields"); root.replaceChildren();
   for (const [key, label, type] of definitions[selected].fields) {
+    if (editorTheme === "cat" && key === "caption") continue;
     const input = document.createElement(type === "area" ? "textarea" : "input");
     input.value = config.texts[key]; input.maxLength = 2000;
     input.addEventListener("input", () => { config.texts[key] = input.value; changed(); });
     root.append(field(label, input));
+  }
+  if (editorTheme === "cat" && selected === "decoration") {
+    const note = document.createElement("p"); note.className = "hint";
+    note.textContent = "猫咪插画可显示、隐藏及调整透明度。"; root.append(note);
+  }
+  if (editorTheme === "cat" && selected === "welcome") {
+    const note = document.createElement("p"); note.className = "hint";
+    note.textContent = "便签在窄屏上自动隐藏，文案仍会保存。"; root.append(note);
   }
   if (selected === "form") {
     const note = document.createElement("p"); note.className = "hint";
@@ -97,7 +110,7 @@ function renderModules() {
     const button = document.createElement("button"); button.type = "button"; button.className = "module-select"; button.dataset.select = key;
     const icon = document.createElement("span"); icon.className = "module-icon"; icon.textContent = definition.icon;
     const label = document.createElement("span"); label.textContent = definition.name;
-    const note = document.createElement("small"); note.textContent = definition.note; label.append(note);
+    const note = document.createElement("small"); note.textContent = (editorTheme === "cat" && key === "decoration" ? "猫咪插画" : definition.note); label.append(note);
     button.append(icon, label); button.addEventListener("click", () => select(key));
     const visible = document.createElement("input"); visible.type = "checkbox"; visible.checked = config.visible[key]; visible.disabled = key === "form"; visible.setAttribute("aria-label", "显示" + definition.name);
     visible.addEventListener("change", () => { config.visible[key] = visible.checked; changed(); });
@@ -106,6 +119,11 @@ function renderModules() {
 }
 function renderStyles() {
   const root = $("#style-fields"); root.replaceChildren(); const style = config.styles[selected];
+  const catDecoration = editorTheme === "cat" && selected === "decoration";
+  $("#font").closest("label").hidden = catDecoration;
+  $(".align-group").hidden = catDecoration;
+  $(".align-group").previousElementSibling.hidden = catDecoration;
+  if (catDecoration) { slider(root, "不透明度", "opacity", 20, 100, "%", style); return; }
   slider(root, "字号缩放", "scale", 75, 140, "%", style);
   slider(root, "字重", "weight", 300, 800, "", style);
   if (selected !== "form") { slider(root, "字间距", "spacing", 0, 6, "px", style); slider(root, "不透明度", "opacity", 20, 100, "%", style); }
@@ -132,7 +150,9 @@ function renderColors() {
 }
 function renderLayout() {
   const root = $("#layout-fields"); root.replaceChildren();
-  for (const [label, key, min, max] of [["面板宽度", "width", 640, 1240], ["面板圆角", "radius", 0, 40], ["内部留白", "padding", 16, 64], ["输入框圆角", "inputRadius", 0, 24], ["按钮圆角", "buttonRadius", 0, 24]]) slider(root, label, key, min, max, "px", config.layout);
+  const fields = [["面板宽度", "width", 640, 1240], ["面板圆角", "radius", 0, 40], ["内部留白", "padding", 16, 64], ["输入框圆角", "inputRadius", 0, 24], ["按钮圆角", "buttonRadius", 0, 24]];
+  for (const [label, key, min, max] of fields) if (editorTheme !== "cat" || !["width", "padding"].includes(key)) slider(root, label, key, min, max, "px", config.layout);
+  $("#direction").closest("label").hidden = editorTheme === "cat";
   $("#direction").value = config.layout.direction;
   $("#ornament").checked = config.layout.ornament; $("#shadow").checked = config.layout.shadow;
 }
@@ -172,7 +192,7 @@ $$("[data-align]").forEach(button => button.addEventListener("click", () => { co
 for (const key of ["direction", "ornament", "shadow"]) $("#" + key).addEventListener("change", event => {
   config.layout[key] = event.target.type === "checkbox" ? event.target.checked : event.target.value; changed(); schedulePreviewFit();
 });
-for (const [name, settings] of [["奶油猫窝", FnOSTheme.cat], ["商务蓝", FnOSTheme.business], ["樱桃汽水", FnOSTheme.kawaii]]) {
+for (const [name, settings] of (editorTheme === "cat" ? [] : [["商务蓝", FnOSTheme.business], ["樱桃汽水", FnOSTheme.kawaii], ...presets.map(([name, bg, side, accent, text]) => [name, FnOSTheme.normalize({ colors: { bg, side, accent, text } })])])) {
   const button = document.createElement("button");
   button.className = "palette";
   button.title = `应用${name}完整主题：文案、配色与布局`;
@@ -182,17 +202,10 @@ for (const [name, settings] of [["奶油猫窝", FnOSTheme.cat], ["商务蓝", F
   }
   button.append(strip, document.createTextNode(`${name} · 完整主题`));
   button.addEventListener("click", () => {
+    if (!confirm(`应用${name}会替换当前文案、配色与布局。继续吗？`)) return;
     config = FnOSTheme.normalize(settings); renderAll(); changed();
     toast(`已应用${name}主题，文案、配色与布局已更新`);
   });
-  $("#palettes").append(button);
-}
-for (const preset of presets) {
-  const button = document.createElement("button"); button.className = "palette";
-  const strip = document.createElement("span");
-  for (const color of preset.slice(1)) { const chip = document.createElement("i"); chip.style.background = color; strip.append(chip); }
-  button.append(strip, document.createTextNode(preset[0]));
-  button.addEventListener("click", () => { ["bg", "side", "accent", "text"].forEach((key, index) => config.colors[key] = preset[index + 1]); renderColors(); changed(); });
   $("#palettes").append(button);
 }
 for (const device of ["desktop", "mobile"]) $("#" + device).addEventListener("click", () => {
@@ -201,13 +214,13 @@ for (const device of ["desktop", "mobile"]) $("#" + device).addEventListener("cl
   $("#viewport-label").textContent = mobile ? "375px · 手机" : "自适应画布"; schedulePreviewFit();
 });
 $("#reset").addEventListener("click", () => {
-  if (!confirm("恢复极简主题的默认文案、颜色与布局？")) return;
-  config = FnOSTheme.normalize(); renderAll(); changed(); schedulePreviewFit();
+  if (!confirm(`恢复${themeName}主题的默认文案、颜色与布局？`)) return;
+  config = normalizeEditor(); renderAll(); changed(); schedulePreviewFit();
 });
 $("#save").addEventListener("click", () => void save());
 $("#export").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify({ format: "oh-my-fnos-theme", version: 1, minimal: FnOSTheme.normalize(config) }, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob), link = document.createElement("a"); link.href = url; link.download = "fnos-minimal-theme.json"; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const blob = new Blob([JSON.stringify({ format: "oh-my-fnos-theme", version: 1, theme: editorTheme, [editorTheme]: normalizeEditor(config) }, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob), link = document.createElement("a"); link.href = url; link.download = `fnos-${editorTheme}-theme.json`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 $("#import").addEventListener("click", () => $("#import-file").click());
 $("#import-file").addEventListener("change", async event => {
@@ -216,17 +229,24 @@ $("#import-file").addEventListener("change", async event => {
   try {
     if (file.size > 128 * 1024) throw new Error("配置文件不能超过 128 KB");
     const input = JSON.parse(await file.text());
-    if (input?.format !== "oh-my-fnos-theme" || input.version !== 1 || !input.minimal || typeof input.minimal !== "object" || Array.isArray(input.minimal)) throw new Error("请选择本编辑器导出的主题配置（版本 1）");
-    config = FnOSTheme.normalize(input.minimal); renderAll(); changed(); schedulePreviewFit(); toast("主题配置已导入");
+    const imported = input?.[editorTheme] || (editorTheme === "cat" && !input?.theme && input?.minimal?.layout?.direction === "nest" && input?.minimal?.layout?.illustration === "cat" ? input.minimal : null);
+    if (input?.format !== "oh-my-fnos-theme" || input.version !== 1 || !imported || typeof imported !== "object" || Array.isArray(imported)) throw new Error(`请选择${themeName}主题的配置文件`);
+    config = normalizeEditor(imported); renderAll(); changed(); schedulePreviewFit(); toast("主题配置已导入");
   } catch (error) { toast("导入失败：" + error.message, true); }
 });
 async function init() {
   try {
-    const brand = await readBrand(); config = FnOSTheme.normalize(brand.minimal);
+    const brand = await readBrand(); config = normalizeEditor(brand[editorTheme]);
+    $(".project").firstChild.textContent = `${themeName} · 我的主题 `;
+    $(".tag").textContent = themeName;
+    $(".settings-foot").lastElementChild.textContent = `${themeName}配置随浏览器账户同步`;
+    frame.title = `${themeName}主题实时预览`;
+    if (editorTheme === "cat") $("[data-panel=palette] .hint").textContent = "色彩立即应用到猫窝预览。";
+    if (editorTheme === "cat") $("#palettes").parentElement.querySelector(".section-label").textContent = "奶油猫窝 · 自定义颜色";
     loaded = true; renderAll(); schedulePreviewFit();
     $("#saved").textContent = extension ? "● 已载入扩展配置" : "● 本地预览模式";
     if (!extension) $(".settings-foot").textContent = "网页预览：保存到当前浏览器，不会同步到扩展";
-    if (extension && (brand.theme === "moonlit" || brand.enabled === false)) toast("当前扩展未启用极简主题，可在“地址与扩展设置”中切换。");
+    if (extension && (brand.theme !== editorTheme || brand.enabled === false)) toast(`当前扩展未启用${themeName}主题，可在“地址与扩展设置”中切换。`);
   } catch (error) { toast("读取配置失败：" + error.message, true); $("#saved").textContent = "读取失败，请刷新后重试"; }
 }
 void init();
@@ -242,18 +262,18 @@ function showSyncStatus(status = {}) {
   label.title = status.error || "需登录同一浏览器账户并开启扩展同步，使用相同扩展 ID；浏览器离线或未开启同步时仅在本机保存。NAS 授权、favicon 和主题开关不参与同步。";
 }
 $("#retry-sync").addEventListener("click", async () => {
-  try { await chrome.runtime.sendMessage({ type: "fnos-theme-sync-now" }); }
+  try { await chrome.runtime.sendMessage({ type: "fnos-theme-sync-now", theme: editorTheme }); }
   catch (error) { toast("无法发起同步：" + error.message, true); }
 });
 if (extension) {
-  chrome.storage.local.get("fnosThemeSync").then(result => showSyncStatus(result.fnosThemeSync));
+  chrome.storage.local.get(syncKey).then(result => showSyncStatus(result[syncKey]));
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== "local") return;
-    if (changes.fnosThemeSync) showSyncStatus(changes.fnosThemeSync.newValue);
+    if (changes[syncKey]) showSyncStatus(changes[syncKey].newValue);
     if (loaded && changes.fnosBrand && revision === savedRevision && !saving) {
-      const next = FnOSTheme.normalize(changes.fnosBrand.newValue?.minimal);
-      if (JSON.stringify(next) !== JSON.stringify(FnOSTheme.normalize(config))) {
-        config = next; renderAll(); schedulePreviewFit(); toast("已加载浏览器同步的极简主题配置");
+      const next = normalizeEditor(changes.fnosBrand.newValue?.[editorTheme]);
+      if (JSON.stringify(next) !== JSON.stringify(normalizeEditor(config))) {
+        config = next; renderAll(); schedulePreviewFit(); toast(`已加载浏览器同步的${themeName}主题配置`);
       }
     }
   });

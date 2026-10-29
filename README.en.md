@@ -14,14 +14,14 @@
 
 ## Features
 
-- **Two login themes:** Minimal and Moonlit Home are available for the fnOS login page. Minimal uses a warm white background, a sage split panel, and a dark login button.
+- **Three login themes:** Minimal, Moonlit Home, and Cream Cat Nest are available for the fnOS login page. Minimal uses a warm white background, a sage split panel, and a dark login button.
 - **Browser tab branding:** Customize the tab title and favicon.
 - **Explicit site access:** Runs only on fnOS addresses that you add and authorize; it does not scan other sites.
 - **Keeps the native sign-in flow:** Changes presentation without replacing the login form or authentication logic.
 
 ## New theme presets
 
-The editor's Color panel includes Business Blue, Cherry Soda, and Cream Cat Nest complete presets. Cream Cat Nest uses a centered floating login card, a sleeping orange cat above the card, and a tilted paper note on wide screens. Presets support the existing editing, import/export, and browser sync workflow.
+The editor’s Color panel includes Business Blue and Cherry Soda presets. Cream Cat Nest is a separately selectable theme with its own settings and sync state. Existing minimal settings are preserved on upgrade. Cream Cat Nest uses a centered floating login card, a sleeping orange cat above the card, and a tilted paper note on wide screens. Presets support the existing editing, import/export, and browser sync workflow.
 
 ## Previews
 
@@ -39,11 +39,11 @@ Previews use local sample data and do not connect to a NAS. The desktop preview 
 1. Download or clone this repository.
 2. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
 3. Enable **Developer mode** and choose **Load unpacked**.
-4. Select `dist/oh-my-fn-theme-0.1.13`. If it does not exist yet, run `npm run build` from the repository root first.
+4. Select `dist/oh-my-fn-theme-0.1.14`. If it does not exist yet, run `npm run build` from the repository root first.
 5. Open the extension settings, enter the fnOS root URL (for example, `http://192.168.1.20:5666`), review it, and grant access in the browser prompt.
 6. Refresh the fnOS page to apply the appearance.
 
-Alternatively, extract `dist/oh-my-fn-theme-0.1.13.zip` and load the extracted directory. The ZIP is an unsigned developer-mode package, not a Chrome Web Store installer.
+Alternatively, extract `dist/oh-my-fn-theme-0.1.14.zip` and load the extracted directory. The ZIP is an unsigned developer-mode package, not a Chrome Web Store installer.
 
 ### URL rules
 

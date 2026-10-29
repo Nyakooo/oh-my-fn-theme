@@ -11,7 +11,8 @@ const brand = {
 };
 const previewPresets = { cat: FnOSTheme.cat, business: FnOSTheme.business, kawaii: FnOSTheme.kawaii };
 const requestedTheme = new URLSearchParams(location.search).get("theme");
-if (Object.hasOwn(previewPresets, requestedTheme)) brand.minimal = FnOSTheme.normalize(previewPresets[requestedTheme]);
+if (requestedTheme === "cat") { brand.theme = "cat"; brand.cat = FnOSTheme.normalize(FnOSTheme.cat); }
+else if (Object.hasOwn(previewPresets, requestedTheme)) brand.minimal = FnOSTheme.normalize(previewPresets[requestedTheme]);
 previewTheme.value = Object.hasOwn(previewPresets, requestedTheme) ? requestedTheme : brand.theme;
 
 window.chrome = {
@@ -27,7 +28,7 @@ window.chrome = {
 };
 
 previewTheme.addEventListener("change", () => {
-  brand.theme = previewTheme.value === "moonlit" ? "moonlit" : "minimal";
+  brand.theme = ["moonlit", "cat"].includes(previewTheme.value) ? previewTheme.value : "minimal";
   brand.minimal = FnOSTheme.normalize(Object.hasOwn(previewPresets, previewTheme.value) ? previewPresets[previewTheme.value] : undefined);
   for (const listener of listeners) listener({ fnosBrand: { newValue: { ...brand } } }, "local");
 });
@@ -49,8 +50,8 @@ if (new URLSearchParams(location.search).get("editor") === "1" && parent !== win
   window.addEventListener("message", event => {
     if (event.source !== parent || event.origin !== location.origin || event.data?.source !== "fnos-editor") return;
     const config = FnOSTheme.normalize(event.data.config);
-    brand.minimal = config;
-    brand.theme = "minimal";
+    brand.theme = event.data.theme === "cat" ? "cat" : "minimal";
+    brand[brand.theme] = config;
     for (const listener of listeners) listener({ fnosBrand: { newValue: { ...brand } } }, "local");
     requestAnimationFrame(() => select(event.data.selected || selected));
   });

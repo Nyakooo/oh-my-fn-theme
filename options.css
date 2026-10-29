@@ -116,3 +116,8 @@ footer span { padding: 0 4px; color: #8adbcf; }
 }
 
 img.brand-mark { padding:0; border:0; background:transparent; border-radius:0; box-shadow:none; object-fit:contain; }
+
+.cat-swatch { background: #f7f3eb url("assets/cat-theme-swatch.svg") center / cover no-repeat; }
+.cat-swatch::after { content: none; }
+
+#open-editor[hidden] { display: none; }

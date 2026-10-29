@@ -21,11 +21,11 @@ body { min-width: 320px; margin: 0; }
 }
 html.omf-editor-preview .preview-theme-picker,
 html.omf-editor-preview .preview-note { display:none; }
-html.omf-editor-preview .omf-login-stage[data-theme="minimal"] { margin:48px auto !important; min-height:600px !important; }
+html.omf-editor-preview .omf-login-stage:is([data-theme="minimal"], [data-theme="cat"]) { margin:48px auto !important; min-height:600px !important; }
 html.omf-editor-preview [data-omf-module] { position:relative; cursor:pointer; outline-offset:7px; }
 html.omf-editor-preview [data-omf-module]:hover { outline:1px dashed #9aad8d; }
 html.omf-editor-preview [data-omf-module].omf-selected { outline:1px dashed #839b70; }
 html.omf-editor-preview [data-omf-text] { cursor:text; }
 html.omf-editor-preview [contenteditable="plaintext-only"] { outline:2px solid #839b70 !important; background:#ffffff70; }
-@media(max-width:760px) { html.omf-editor-preview .omf-login-stage[data-theme="minimal"] { margin:24px auto !important; min-height:0 !important; } }
-html.omf-editor-preview .omf-login-stage[data-theme="minimal"][data-direction="nest"] { margin:170px auto 48px !important; min-height:0 !important; }
+@media(max-width:760px) { html.omf-editor-preview .omf-login-stage:is([data-theme="minimal"], [data-theme="cat"]) { margin:24px auto !important; min-height:0 !important; } }
+html.omf-editor-preview .omf-login-stage:is([data-theme="minimal"], [data-theme="cat"])[data-direction="nest"] { margin:170px auto 48px !important; min-height:0 !important; }
